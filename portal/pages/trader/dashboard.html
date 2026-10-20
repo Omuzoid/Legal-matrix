@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trader Workspace: Legal Matrix</title>
+  <link rel="icon" type="image/svg+xml" href="../../assets/icons/favicon.svg">
+  <link rel="stylesheet" href="../../css/variables.css">
+  <link rel="stylesheet" href="../../css/base.css">
+  <link rel="stylesheet" href="../../css/layout.css">
+  <link rel="stylesheet" href="../../components/button.css">
+  <link rel="stylesheet" href="../../components/card.css">
+  <link rel="stylesheet" href="../../components/timeline.css">
+  <style>
+    .workspace-banner {
+      background: var(--color-bg-surface);
+      border: 1px solid var(--color-border-medium);
+      border-radius: var(--radius-sm);
+      padding: var(--space-5);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--space-6);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .action-grid-gov {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-4);
+    }
+    @media (min-width: 600px) {
+      .action-grid-gov {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (min-width: 900px) and (max-width: 1023px) {
+      .action-grid-gov {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    .trader-action-block {
+      background: var(--color-bg-surface);
+      border: 1px solid var(--color-border-medium);
+      border-radius: var(--radius-sm);
+      padding: var(--space-5);
+      text-decoration: none;
+      color: var(--color-text-main);
+      display: flex;
+      flex-direction: column;
+      transition: all var(--transition-fast);
+    }
+    .trader-action-block:hover {
+      border-color: var(--color-primary);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+    .action-icon-wrap {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-sm);
+      background: var(--color-primary-light);
+      color: var(--color-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: var(--space-3);
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <div id="app-sidebar-container"></div>
+
+    <div class="app-main">
+      <div id="app-header-container"></div>
+
+      <div class="content-body">
+        <!-- Top Institutional Greeting -->
+        <div class="workspace-banner">
+          <div>
+            <div style="font-size: 11px; text-transform: uppercase; color: var(--color-text-muted); font-weight: 600;" data-i18n="trader.merchant_account">
+              Registered Merchant Account
+            </div>
+            <h1 style="font-size: var(--font-size-2xl); margin: 2px 0 0 0;" id="trader-name-heading" data-i18n="trader.workspace">
+              Trader Workspace
+            </h1>
+            <p style="margin: 2px 0 0 0; color: var(--color-text-secondary); font-size: 13px;" id="trader-establishment-sub" data-i18n="trader.sub">
+              Legal Metrology Compliance & Stamping Services
+            </p>
+          </div>
+          <div>
+            <a href="/portal/pages/trader/register-instrument.html" class="btn btn-primary btn-sm" data-i18n="trader.btn_register_new">
+              + Register New Instrument
+            </a>
+          </div>
+        </div>
+
+        <!-- Split Grid -->
+        <div style="display: grid; grid-template-columns: 1fr; gap: var(--space-6);">
+          <!-- Quick Action Blocks -->
+          <div>
+            <h2 style="font-size: var(--font-size-lg); color: var(--color-primary); margin-bottom: var(--space-3);" data-i18n="trader.services_heading">
+              Commercial Stamping Services
+            </h2>
+            <div class="action-grid-gov">
+              <a href="/portal/pages/trader/register-instrument.html" class="trader-action-block">
+                <div class="action-icon-wrap">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/></svg>
+                </div>
+                <div style="font-weight: 700; font-size: 15px; color: var(--color-primary); margin-bottom: 4px;" data-i18n="trader.act_register">
+                  Register Instrument
+                </div>
+                <p style="margin: 0; font-size: 13px; color: var(--color-text-secondary); line-height: 1.4;" data-i18n="trader.act_register_desc">
+                  Submit a weighing scale, meter, or pump for initial or periodic verification.
+                </p>
+              </a>
+
+              <a href="/portal/pages/trader/applications.html" class="trader-action-block">
+                <div class="action-icon-wrap" style="background: #f0fdf4; color: #15803d;">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z"/></svg>
+                </div>
+                <div style="font-weight: 700; font-size: 15px; color: var(--color-primary); margin-bottom: 4px;" data-i18n="trader.act_apps">
+                  My Applications
+                </div>
+                <p style="margin: 0; font-size: 13px; color: var(--color-text-secondary); line-height: 1.4;" data-i18n="trader.act_apps_desc">
+                  Inspect active submissions, fee payment receipts, and inspection dates.
+                </p>
+              </a>
+
+              <a href="/portal/pages/trader/certificates.html" class="trader-action-block">
+                <div class="action-icon-wrap" style="background: #fffbeb; color: #b45309;">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="m15.48 13.93 2.52 7.07-6-3-6 3 2.52-7.07"/></svg>
+                </div>
+                <div style="font-weight: 700; font-size: 15px; color: var(--color-primary); margin-bottom: 4px;" data-i18n="trader.act_certs">
+                  Verification Certificates
+                </div>
+                <p style="margin: 0; font-size: 13px; color: var(--color-text-secondary); line-height: 1.4;" data-i18n="trader.act_certs_desc">
+                  View, print, and download stamped legal metrology certificates with QR tokens.
+                </p>
+              </a>
+
+              <a href="/portal/pages/public/track.html" class="trader-action-block">
+                <div class="action-icon-wrap" style="background: #f0f9ff; color: #0369a1;">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                </div>
+                <div style="font-weight: 700; font-size: 15px; color: var(--color-primary); margin-bottom: 4px;" data-i18n="trader.act_track">
+                  Track Specific Application
+                </div>
+                <p style="margin: 0; font-size: 13px; color: var(--color-text-secondary); line-height: 1.4;" data-i18n="trader.act_track_desc">
+                  Query direct status using the government application reference number.
+                </p>
+              </a>
+            </div>
+          </div>
+
+          <!-- Active Applications Ledger / Proper Empty State -->
+          <div>
+            <h2 style="font-size: var(--font-size-lg); color: var(--color-primary); margin-bottom: var(--space-3);" data-i18n="trader.recent_status">
+              Recent Applications Status
+            </h2>
+            <div id="trader-apps-container">
+              <!-- Dynamically populated from backend or shown as empty state -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { injectHeader } from '../../layouts/header.js';
+    import { injectSidebar } from '../../layouts/sidebar.js';
+    import { applicationService } from '../../services/applicationService.js';
+    import { authService } from '../../services/authService.js';
+    import { t, applyLanguageToDOM, onLanguageChange } from '../../i18n/i18n.js';
+
+    injectHeader('app-header-container');
+    injectSidebar('app-sidebar-container', 'trader', window.location.pathname);
+
+    applyLanguageToDOM();
+    onLanguageChange(() => {
+      applyLanguageToDOM();
+      loadTraderApplications();
+    });
+
+    const user = authService.getCurrentUser();
+    if (user && user.establishment) {
+      document.getElementById('trader-name-heading').textContent = user.name || 'Merchant';
+      document.getElementById('trader-establishment-sub').textContent = `${user.establishment} | ${user.location || 'Registered Establishment'}`;
+    }
+
+    const appsContainer = document.getElementById('trader-apps-container');
+
+    async function loadTraderApplications() {
+      try {
+        const apps = await applicationService.getApplications();
+        if (!apps || apps.length === 0) {
+          showEmptyState();
+          return;
+        }
+
+        const latestApp = apps[0];
+        appsContainer.innerHTML = `
+          <div class="card" style="border-top: 3px solid var(--color-primary);">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; border-bottom: 1px solid var(--color-border-subtle); padding-bottom: 10px; flex-wrap: wrap; gap: 8px;">
+              <div>
+                <span class="badge badge-info">${latestApp.statusTitle}</span>
+                <div style="font-weight: 700; font-size: 16px; color: var(--color-primary); margin-top: 4px;">
+                  ${t('form.app_no', 'Application Reference')}: ${latestApp.applicationNumber}
+                </div>
+                <div style="font-size: 13px; color: var(--color-text-secondary);">
+                  ${t('form.instrument_type', 'Instrument')}: ${latestApp.instrumentTypeName} (${latestApp.model || 'Standard'})
+                </div>
+              </div>
+              <a href="/portal/pages/public/track.html?app=${latestApp.applicationNumber}" class="btn btn-outline btn-sm">
+                ${t('btn.track', 'View Live Timeline')} &rarr;
+              </a>
+            </div>
+
+            <p style="font-size: 13px; color: var(--color-text-secondary); margin: 0;">
+              ${latestApp.statusMessage}
+            </p>
+          </div>
+        `;
+      } catch {
+        showEmptyState();
+      }
+    }
+
+    function showEmptyState() {
+      appsContainer.innerHTML = `
+        <div class="card" style="text-align: center; padding: 36px 20px; border: 1px dashed var(--color-border-medium);">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="1.5" style="margin-bottom: 8px;" aria-hidden="true">
+            <path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z"/>
+          </svg>
+          <h3 style="font-size: 15px; color: var(--color-text-main); margin-bottom: 4px;">${t('empty.no_apps', 'No Applications Registered Yet')}</h3>
+          <p style="font-size: 13px; color: var(--color-text-muted); max-width: 400px; margin: 0 auto 16px auto;">
+            ${t('carousel.slide1.desc', 'Traders can register their weighing and measuring instruments online without unnecessary paperwork.')}
+          </p>
+          <a href="/portal/pages/trader/register-instrument.html" class="btn btn-primary btn-sm">
+            ${t('carousel.slide1.cta', 'Register an Instrument')}
+          </a>
+        </div>
+      `;
+    }
+
+    loadTraderApplications();
+  </script>
+</body>
+</html>

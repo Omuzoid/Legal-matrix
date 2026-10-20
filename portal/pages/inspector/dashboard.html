@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inspector Workspace: Legal Matrix</title>
+  <link rel="icon" type="image/svg+xml" href="../../assets/icons/favicon.svg">
+  <link rel="stylesheet" href="../../css/variables.css">
+  <link rel="stylesheet" href="../../css/base.css">
+  <link rel="stylesheet" href="../../css/layout.css">
+  <link rel="stylesheet" href="../../components/button.css">
+  <link rel="stylesheet" href="../../components/card.css">
+  <link rel="stylesheet" href="../../components/dataTable.css">
+  <style>
+    .inspector-banner {
+      background: var(--color-bg-surface);
+      border: 1px solid var(--color-border-medium);
+      border-radius: var(--radius-sm);
+      padding: var(--space-5);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--space-6);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <div id="app-sidebar-container"></div>
+
+    <div class="app-main">
+      <div id="app-header-container"></div>
+
+      <div class="content-body">
+        <div class="inspector-banner">
+          <div>
+            <div style="font-size: 11px; text-transform: uppercase; color: var(--color-text-muted); font-weight: 600;">
+              Enforcement & Calibration Directorate
+            </div>
+            <h1 style="font-size: var(--font-size-2xl); margin: 2px 0 0 0;" id="insp-name-heading">
+              Field Inspector Workspace
+            </h1>
+            <p style="margin: 2px 0 0 0; color: var(--color-text-secondary); font-size: 13px;">
+              State Legal Metrology Enforcement Cell
+            </p>
+          </div>
+          <div>
+            <a href="/portal/pages/inspector/inspect.html" class="btn btn-primary btn-sm">
+              + New Field Calibration Test
+            </a>
+          </div>
+        </div>
+
+        <!-- Schedule / Assigned Inspections Table -->
+        <div class="card">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; border-bottom: 1px solid var(--color-border-subtle); padding-bottom: 10px;">
+            <h2 style="font-size: var(--font-size-lg); color: var(--color-primary); margin: 0;">
+              Today's Field Verification Schedule
+            </h2>
+            <span class="badge badge-info" id="insp-badge-count">Assigned Locations</span>
+          </div>
+
+          <div id="schedule-table-mount"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { injectHeader } from '../../layouts/header.js';
+    import { injectSidebar } from '../../layouts/sidebar.js';
+    import { inspectionService } from '../../services/inspectionService.js';
+    import { authService } from '../../services/authService.js';
+    import { renderDataTable } from '../../components/dataTable.js';
+    import { t, applyLanguageToDOM, onLanguageChange } from '../../i18n/i18n.js';
+
+    injectHeader('app-header-container');
+    injectSidebar('app-sidebar-container', 'inspector', window.location.pathname);
+
+    applyLanguageToDOM();
+    onLanguageChange(() => {
+      applyLanguageToDOM();
+      loadSchedule();
+    });
+
+    const user = authService.getCurrentUser();
+    if (user && user.name) {
+      document.getElementById('insp-name-heading').textContent = `Officer: ${user.name}`;
+    }
+
+    const scheduleMount = document.getElementById('schedule-table-mount');
+
+    function getColumns() {
+      return [
+        { label: 'Time Window', key: 'time', render: (val) => `<strong>${val}</strong>` },
+        { label: 'Establishment', key: 'trader', render: (val, row) => `<strong>${val}</strong><br><span style="font-size: 12px; color: var(--color-text-muted);">${row.address || 'Field Location'}</span>` },
+        { label: 'Instrument Category', key: 'instrument' },
+        { label: 'Status', key: 'status', render: (val, row) => `<span class="badge badge-${row.statusBadge || 'warning'}">● ${val}</span>` },
+        {
+          label: 'Action',
+          key: 'appNumber',
+          render: (val, row) => `
+            <a href="/portal/pages/inspector/inspect.html?app=${val}" class="btn btn-primary btn-sm">
+              ${row.status === 'IN_PROGRESS' ? 'Resume Testing' : 'Conduct Test &rarr;'}
+            </a>
+          `
+        }
+      ];
+    }
+
+    async function loadSchedule() {
+      try {
+        const schedule = await inspectionService.getSchedule();
+        if (!schedule || schedule.length === 0) {
+          scheduleMount.innerHTML = `
+            <div style="text-align: center; padding: 36px 20px; border: 1px dashed var(--color-border-medium);">
+              <p style="color: var(--color-text-muted); margin: 0;">No inspections assigned for this date.</p>
+            </div>
+          `;
+          return;
+        }
+
+        renderDataTable(scheduleMount, {
+          columns: getColumns(),
+          rows: schedule,
+          emptyMessage: 'No inspections currently assigned.'
+        });
+      } catch {
+        scheduleMount.innerHTML = `
+          <div style="text-align: center; padding: 36px 20px; border: 1px dashed var(--color-border-medium);">
+            <p style="color: var(--color-text-muted); margin: 0;">No field inspections currently assigned.</p>
+          </div>
+        `;
+      }
+    }
+
+    loadSchedule();
+  </script>
+</body>
+</html>

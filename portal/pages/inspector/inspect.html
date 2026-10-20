@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guided Inspection & MPE Check: Legal Matrix</title>
+  <link rel="stylesheet" href="../../css/variables.css">
+  <link rel="stylesheet" href="../../css/base.css">
+  <link rel="stylesheet" href="../../css/layout.css">
+  <link rel="stylesheet" href="../../components/button.css">
+  <link rel="stylesheet" href="../../components/card.css">
+  <link rel="stylesheet" href="../../components/stepper.css">
+  <link rel="stylesheet" href="../../components/mpeMeter.css">
+  <link rel="stylesheet" href="../../components/modal.css">
+  <style>
+    .inspect-wrapper {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: var(--space-6) var(--space-4);
+      flex-grow: 1;
+    }
+    .checklist-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--space-4);
+      border-bottom: 1px solid var(--color-border-subtle);
+    }
+    .checklist-buttons {
+      display: flex;
+      gap: var(--space-2);
+    }
+    .check-btn {
+      min-width: 80px;
+      min-height: 40px;
+      border: 2px solid var(--color-border-medium);
+      background: var(--color-bg-surface);
+      border-radius: var(--radius-md);
+      font-weight: bold;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+    .check-btn.btn-yes.is-selected {
+      background: var(--color-success);
+      color: #fff;
+      border-color: var(--color-success);
+    }
+    .check-btn.btn-no.is-selected {
+      background: var(--color-danger);
+      color: #fff;
+      border-color: var(--color-danger);
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <div id="app-sidebar-container"></div>
+
+    <div class="app-main">
+      <div id="app-header-container"></div>
+
+      <div class="content-body">
+        <div class="inspect-wrapper">
+          <!-- Multi-Step Stepper -->
+          <div id="inspect-stepper-mount"></div>
+
+          <!-- Wizard Card -->
+          <div class="card" style="padding: var(--space-8);">
+            <!-- Step 1: Trader Details -->
+            <div id="insp-step-1" class="insp-pane" style="display: none;">
+              <span class="badge badge-info">Step 1 of 6</span>
+              <h1 style="font-size: var(--font-size-2xl); margin-top: 4px;">Trader Particulars</h1>
+              <p>Verify trader commercial identity and premises license</p>
+
+              <div style="background: var(--color-bg-subtle); padding: var(--space-5); border-radius: var(--radius-lg); margin-top: var(--space-4);">
+                <div style="font-size: 18px; font-weight: bold; color: var(--color-primary);">Registered Commercial Establishment</div>
+                <div style="color: var(--color-text-secondary); margin-top: 4px;">Proprietor / Signatory: Authorized Business Representative</div>
+                <div style="color: var(--color-text-secondary);">Location: Commercial District, Assigned Zone</div>
+                <div style="color: var(--color-text-secondary);">Trade Registration: TR-REG-2026-0081</div>
+              </div>
+            </div>
+
+            <!-- Step 2: Instrument Details -->
+            <div id="insp-step-2" class="insp-pane" style="display: none;">
+              <span class="badge badge-info">Step 2 of 6</span>
+              <h2 style="font-size: var(--font-size-2xl); margin-top: 4px;">Instrument Details</h2>
+              <p>Cross-check physical machine specifications against manufacturer data</p>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); margin-top: var(--space-4);">
+                <div>
+                  <label>Instrument Type</label>
+                  <input type="text" value="Electronic Counter Scale (Class III)" readonly style="background: var(--color-bg-subtle);">
+                </div>
+                <div>
+                  <label>Serial Number (Stamped)</label>
+                  <input type="text" value="SN-882910-2023" readonly style="background: var(--color-bg-subtle);">
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 3: Visual Checklist -->
+            <div id="insp-step-3" class="insp-pane" style="display: none;">
+              <span class="badge badge-info">Step 3 of 6</span>
+              <h2 style="font-size: var(--font-size-2xl); margin-top: 4px;">Visual Inspection Checklist</h2>
+              <p>Tactile checks for physical integrity, leveling, and sealing</p>
+
+              <div style="margin-top: var(--space-4);">
+                <div class="checklist-row">
+                  <div>
+                    <strong>Is the instrument physically undamaged?</strong>
+                    <div style="font-size: 13px; color: var(--color-text-muted);">No cracks, missing pan, or deformed load cells</div>
+                  </div>
+                  <div class="checklist-buttons">
+                    <button type="button" class="check-btn btn-yes is-selected">YES</button>
+                    <button type="button" class="check-btn btn-no">NO</button>
+                  </div>
+                </div>
+
+                <div class="checklist-row">
+                  <div>
+                    <strong>Is the dual display working and visible to customers?</strong>
+                    <div style="font-size: 13px; color: var(--color-text-muted);">Seven-segment digits clearly legible without flickering</div>
+                  </div>
+                  <div class="checklist-buttons">
+                    <button type="button" class="check-btn btn-yes is-selected">YES</button>
+                    <button type="button" class="check-btn btn-no">NO</button>
+                  </div>
+                </div>
+
+                <div class="checklist-row">
+                  <div>
+                    <strong>Is the spirit level bubble centered?</strong>
+                    <div style="font-size: 13px; color: var(--color-text-muted);">Leveling feet firmly adjusted</div>
+                  </div>
+                  <div class="checklist-buttons">
+                    <button type="button" class="check-btn btn-yes is-selected">YES</button>
+                    <button type="button" class="check-btn btn-no">NO</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 4: Measurement & MPE Check (Panel 10 from Ref Image) -->
+            <div id="insp-step-4" class="insp-pane">
+              <span class="badge badge-info">Step 4 of 6</span>
+              <h2 style="font-size: var(--font-size-2xl); margin-top: 4px;">Measurement & MPE Check</h2>
+              <p>Test with certified standard weights and calculate permissible tolerance</p>
+
+              <!-- MPE Meter Mount Point -->
+              <div id="mpe-meter-mount" style="margin-top: var(--space-6);"></div>
+            </div>
+
+            <!-- Step 5: Evidence & Notes -->
+            <div id="insp-step-5" class="insp-pane" style="display: none;">
+              <span class="badge badge-info">Step 5 of 6</span>
+              <h2 style="font-size: var(--font-size-2xl); margin-top: 4px;">Photographic Evidence</h2>
+              <p>Attach photo of physical device and stamping seal placement</p>
+
+              <div style="border: 2px dashed var(--color-border-medium); border-radius: var(--radius-lg); padding: var(--space-8); text-align: center; background: var(--color-bg-subtle); margin-top: var(--space-4);">
+                <div style="width: 48px; height: 48px; margin: 0 auto 8px auto; color: var(--text-muted); display: flex; align-items: center; justify-content: center;">
+                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                </div>
+                <div style="font-weight: 600;">inspection_evidence_photo.jpg</div>
+                <span class="badge badge-success" style="margin-top: 4px;">Photo Captured & Geotagged</span>
+              </div>
+
+              <div style="margin-top: var(--space-4);">
+                <label for="insp-remarks">Inspector Remarks</label>
+                <textarea id="insp-remarks" rows="2" placeholder="e.g. Tested at standard steps. Within legal tolerance. Standard security seal affixed.">Tested with certified working standards. Calibration conforms to statutory limits.</textarea>
+              </div>
+            </div>
+
+            <!-- Step 6: Final Decision -->
+            <div id="insp-step-6" class="insp-pane" style="display: none; text-align: center;">
+              <span class="badge badge-info">Step 6 of 6</span>
+              <h2 style="font-size: var(--font-size-2xl); margin-top: 4px;">Final Inspection Decision</h2>
+              <p>Select outcome for selected verification application</p>
+
+              <div style="display: flex; gap: var(--space-4); justify-content: center; margin: var(--space-8) 0;">
+                <button class="btn btn-success btn-lg" id="btn-decision-pass" style="min-width: 180px; font-size: 20px;">
+                  PASS & ISSUE STAMP
+                </button>
+                <button class="btn btn-danger btn-lg" id="btn-decision-fail" style="min-width: 180px; font-size: 20px;">
+                  REJECT / NOTICE
+                </button>
+              </div>
+
+              <span class="form-hint">Confirmation will be requested before final recording.</span>
+            </div>
+
+            <!-- Wizard Bottom Actions -->
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: var(--space-8); padding-top: var(--space-4); border-top: 1px solid var(--color-border-subtle);">
+              <button class="btn btn-outline" id="btn-insp-back">
+                &larr; Back
+              </button>
+              <button class="btn btn-primary btn-lg" id="btn-insp-next">
+                Next &rarr;
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { injectHeader } from '../../layouts/header.js';
+    import { injectSidebar } from '../../layouts/sidebar.js';
+    import { renderStepper } from '../../components/stepper.js';
+    import { initMpeGauge } from '../../components/mpeMeter.js';
+    import { openModal } from '../../components/modal.js';
+    import { inspectionService } from '../../services/inspectionService.js';
+    import { applyLanguageToDOM, onLanguageChange } from '../../i18n/i18n.js';
+
+    injectHeader('app-header-container');
+    injectSidebar('app-sidebar-container', 'inspector', window.location.pathname);
+
+    applyLanguageToDOM();
+    onLanguageChange(() => applyLanguageToDOM());
+
+    const steps = [
+      { label: 'Trader Details' },
+      { label: 'Instrument' },
+      { label: 'Inspection' },
+      { label: 'MPE Check' },
+      { label: 'Evidence' },
+      { label: 'Finalize' }
+    ];
+
+    // Default to Step 4 (MPE Check) as shown in the reference image Panel 10
+    let currentStepIndex = 3;
+    const stepperMount = document.getElementById('inspect-stepper-mount');
+    const mpeMount = document.getElementById('mpe-meter-mount');
+    const btnBack = document.getElementById('btn-insp-back');
+    const btnNext = document.getElementById('btn-insp-next');
+
+    renderStepper(stepperMount, steps, currentStepIndex);
+
+    // Initialize interactive MPE Gauge
+    const mpeController = initMpeGauge(mpeMount, {
+      observed: 0.20,
+      mpe: 0.50,
+      unit: 'g'
+    });
+
+    function showStep(idx) {
+      currentStepIndex = idx;
+      renderStepper(stepperMount, steps, currentStepIndex);
+
+      for (let i = 1; i <= 6; i++) {
+        const pane = document.getElementById(`insp-step-${i}`);
+        if (pane) pane.style.display = (i === idx + 1) ? 'block' : 'none';
+      }
+
+      btnBack.style.visibility = idx === 0 ? 'hidden' : 'visible';
+      if (idx === 5) {
+        btnNext.style.display = 'none';
+      } else {
+        btnNext.style.display = 'inline-flex';
+        btnNext.textContent = 'Next →';
+      }
+    }
+
+    btnNext.addEventListener('click', () => {
+      if (currentStepIndex < 5) showStep(currentStepIndex + 1);
+    });
+
+    btnBack.addEventListener('click', () => {
+      if (currentStepIndex > 0) showStep(currentStepIndex - 1);
+    });
+
+    // Final Decision Modals
+    document.getElementById('btn-decision-pass')?.addEventListener('click', () => {
+      openModal({
+        title: 'Approve & Issue Certificate?',
+        content: `
+          <p>You are certifying that this commercial measuring instrument meets all statutory tolerances (+0.20g observed vs &plusmn;0.50g MPE).</p>
+          <p>Upon confirmation, an official QR-verified certificate will be generated and logged in the state ledger.</p>
+        `,
+        confirmText: 'Confirm & Issue Certificate',
+        cancelText: 'Cancel',
+        onConfirm: async () => {
+          await inspectionService.finalizeInspection('insp_101', { decision: 'PASS' });
+          window.location.href = '/portal/pages/trader/certificates.html';
+        }
+      });
+    });
+
+    document.getElementById('btn-decision-fail')?.addEventListener('click', () => {
+      openModal({
+        title: 'Reject & Issue Rectification Notice?',
+        content: `
+          <p>You are recording that this instrument failed metrological tolerances or visual integrity.</p>
+          <p>A formal notice under Section 24 will be issued to the trader requiring calibration within 14 days.</p>
+        `,
+        confirmText: 'Confirm Rejection',
+        cancelText: 'Cancel',
+        isDanger: true,
+        onConfirm: async () => {
+          await inspectionService.finalizeInspection('insp_101', { decision: 'FAIL' });
+          alert('Inspection rejection recorded.');
+          window.location.href = '/portal/pages/inspector/dashboard.html';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

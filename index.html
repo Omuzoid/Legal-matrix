@@ -1,0 +1,2290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Legal Matrix: National Legal Metrology Digital Ecosystem</title>
+  <meta name="description" content="National single-window digital portal for statutory verification and stamping of commercial weights and measures under the Legal Metrology Act, 2009.">
+  <link rel="icon" type="image/svg+xml" href="portal/assets/icons/favicon.svg">
+  <link rel="stylesheet" href="portal/css/variables.css">
+  <link rel="stylesheet" href="portal/css/base.css">
+  <link rel="stylesheet" href="portal/css/layout.css">
+  <link rel="stylesheet" href="portal/components/button.css">
+  <link rel="stylesheet" href="portal/components/card.css">
+  <link rel="stylesheet" href="portal/components/carousel.css">
+  <style>
+    body {
+      background-color: #f8fafc;
+      color: var(--text-secondary);
+      font-family: var(--font-family-base);
+      margin: 0;
+      padding: 0;
+      line-height: 1.5;
+    }
+
+    /* 1. Top Institutional Strip */
+    .gateway-top-bar {
+      background-color: #081c2e;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 11.5px;
+      padding: 7px 0;
+      color: #cbd5e1;
+    }
+    .top-bar-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .gov-flag-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      color: #e2e8f0;
+      letter-spacing: 0.01em;
+    }
+    .top-lang-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: #e2e8f0;
+    }
+    .top-lang-group select {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 4px;
+      padding: 3px 8px;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: #ffffff;
+      cursor: pointer;
+      outline: none;
+    }
+    .top-lang-group select option {
+      background: #081c2e;
+      color: #ffffff;
+    }
+
+    /* 2. Institutional Header */
+    .gateway-header {
+      background-color: #ffffff;
+      border-bottom: 1px solid #e2e8f0;
+      padding: 12px 0;
+    }
+    .header-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+      color: inherit;
+    }
+    .brand-emblem {
+      width: 52px;
+      height: 52px;
+      background: #ffffff;
+      border: 1.5px solid #d4af37;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(11, 53, 88, 0.12);
+      flex-shrink: 0;
+      padding: 3px;
+    }
+    .brand-titles {
+      display: flex;
+      flex-direction: column;
+    }
+    .dept-title {
+      font-size: 10.5px;
+      font-weight: 800;
+      color: #d97706;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .portal-name {
+      font-size: 26px;
+      font-weight: 900;
+      color: #0b2b48;
+      letter-spacing: 0.02em;
+      line-height: 1.1;
+      margin: 2px 0;
+    }
+    .portal-subtitle {
+      font-size: 12px;
+      color: #475569;
+      font-weight: 600;
+    }
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .resizer-group {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid #cbd5e1;
+      border-radius: 4px;
+      overflow: hidden;
+      background: #f8fafc;
+    }
+    .resizer-btn {
+      background: transparent;
+      border: none;
+      padding: 4px 8px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #0b3558;
+      cursor: pointer;
+      transition: background var(--transition-fast);
+    }
+    .resizer-btn:hover {
+      background: #e2e8f0;
+    }
+    .resizer-btn:not(:last-child) {
+      border-right: 1px solid #cbd5e1;
+    }
+    .btn-officer-login {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background-color: #0b3558;
+      color: #ffffff;
+      padding: 9px 18px;
+      border-radius: 6px;
+      font-size: 13.5px;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 2px 6px rgba(11, 53, 88, 0.2);
+      transition: all var(--transition-fast);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    .btn-officer-login:hover {
+      background-color: #082038;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(11, 53, 88, 0.28);
+    }
+    .btn-officer-login:active {
+      transform: translateY(1px) scale(0.99);
+    }
+
+    /* 3. Main Navigation Bar */
+    .gateway-nav {
+      background-color: #0b3558;
+      border-bottom: 2px solid #082842;
+      box-shadow: 0 3px 10px rgba(11, 53, 88, 0.12);
+    }
+    .nav-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+    .nav-list a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 18px;
+      color: #f1f5f9;
+      text-decoration: none;
+      font-size: 13.5px;
+      font-weight: 600;
+      border-radius: 4px;
+      transition: all var(--transition-fast);
+    }
+    .nav-list a:hover {
+      background-color: rgba(255, 255, 255, 0.12);
+      color: #ffffff;
+    }
+    .nav-list a.active {
+      background-color: #ea580c;
+      color: #ffffff;
+      font-weight: 700;
+      box-shadow: 0 2px 8px rgba(234, 88, 12, 0.35);
+    }
+
+    /* 5. Quick Access Card Strip */
+    .section-quick-search {
+      padding: 24px 0 32px 0;
+      background-color: transparent;
+    }
+    .quick-access-card {
+      background: linear-gradient(135deg, #f0f7ff 0%, #ffffff 45%, #f0fdf4 100%);
+      border-radius: 16px;
+      border: 1.5px solid #dbeafe;
+      padding: 24px 32px;
+      box-shadow: 0 4px 20px rgba(11, 53, 88, 0.05);
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      align-items: center;
+      max-width: 1220px;
+      margin: 0 auto;
+    }
+    @media (min-width: 960px) {
+      .quick-access-card {
+        grid-template-columns: 1.35fr 0.65fr;
+        padding: 26px 36px;
+      }
+    }
+    .quick-card-left {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .quick-title-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .quick-search-badge {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #e0f2fe;
+      color: #0284c7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .quick-title {
+      font-size: 19px;
+      font-weight: 800;
+      color: #0b2b48;
+      margin: 0;
+    }
+    .quick-subtext {
+      font-size: 13.5px;
+      color: #64748b;
+      margin: 0 0 10px 0;
+      line-height: 1.5;
+    }
+    .quick-form-row {
+      display: flex;
+      gap: 10px;
+      flex-direction: column;
+    }
+    @media (min-width: 480px) {
+      .quick-form-row {
+        flex-direction: row;
+      }
+    }
+    .quick-input {
+      flex-grow: 1;
+      height: 44px;
+      padding: 0 16px;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 6px;
+      font-size: 14px;
+      box-sizing: border-box;
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+      background: #ffffff;
+    }
+    .quick-input:focus {
+      outline: none;
+      border-color: #0b3558;
+      box-shadow: 0 0 0 3px rgba(11, 53, 88, 0.15);
+    }
+    .quick-submit-btn {
+      height: 44px;
+      padding: 0 24px;
+      background-color: #0b3558;
+      color: #ffffff;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all var(--transition-fast);
+      flex-shrink: 0;
+    }
+    .quick-submit-btn:hover {
+      background-color: #072238;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(11, 53, 88, 0.25);
+    }
+    .quick-card-right-col {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 10px;
+    }
+    .no-login-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #15803d;
+      font-size: 12px;
+      font-weight: 700;
+      background: #f0fdf4;
+      padding: 5px 12px;
+      border-radius: 20px;
+      border: 1px solid #bbf7d0;
+      box-shadow: 0 1px 4px rgba(22, 163, 74, 0.1);
+    }
+    .quick-art-svg {
+      max-width: 200px;
+      width: 100%;
+      height: auto;
+      filter: drop-shadow(0 4px 10px rgba(11, 53, 88, 0.08));
+    }
+
+    /* 6. Service Catalog Grid */
+    .services-catalog {
+      padding: 8px 0 36px 0;
+      max-width: 1220px;
+      margin: 0 auto;
+    }
+    .category-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 10px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .category-section-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: #0b2b48;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .category-icon-badge {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #e0f2fe;
+      color: #0284c7;
+      flex-shrink: 0;
+    }
+    .category-view-all {
+      font-size: 13px;
+      font-weight: 700;
+      color: #0284c7;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: color var(--transition-fast), transform var(--transition-fast);
+    }
+    .category-view-all:hover {
+      color: #ea580c;
+      transform: translateX(4px);
+    }
+
+    .gov-cards-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 22px;
+      margin-bottom: 40px;
+    }
+    @media (min-width: 640px) {
+      .gov-cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (min-width: 980px) {
+      .gov-cards-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    .gov-service-block {
+      background: #ffffff;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 22px 20px;
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: inherit;
+      box-shadow: 0 2px 8px rgba(11, 53, 88, 0.03);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
+                  box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
+                  border-color 0.25s ease;
+      position: relative;
+    }
+    .gov-service-block:hover {
+      border-color: #cbd5e1;
+      box-shadow: 0 12px 28px rgba(11, 53, 88, 0.10);
+      transform: translateY(-4px);
+    }
+
+    /* Dedicated Large Artwork Container matching Reference Image */
+    .service-badge-art-box {
+      width: 100%;
+      height: 92px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      transition: transform 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .gov-service-block:hover .service-badge-art-box {
+      transform: scale(1.02);
+    }
+    .badge-box-mint { background: #ecfdf5; border: 1.5px solid #a7f3d0; }
+    .badge-box-orange { background: #fff7ed; border: 1.5px solid #fed7aa; }
+    .badge-box-coral { background: #fff1f2; border: 1.5px solid #fecdd3; }
+    .badge-box-blue { background: #eff6ff; border: 1.5px solid #bfdbfe; }
+    .badge-box-amber { background: #fffbeb; border: 1.5px solid #fde68a; }
+    .badge-box-emerald { background: #f0fdf4; border: 1.5px solid #bbf7d0; }
+    .badge-box-sky { background: #f0f9ff; border: 1.5px solid #bae6fd; }
+    .badge-box-indigo { background: #eef2ff; border: 1.5px solid #c7d2fe; }
+
+    .block-name {
+      font-size: 16.5px;
+      font-weight: 800;
+      color: #0b2b48;
+      margin: 0 0 8px 0;
+      line-height: 1.3;
+    }
+    .block-desc {
+      font-size: 13.5px;
+      color: #475569;
+      margin: 0 0 16px 0;
+      line-height: 1.5;
+      flex-grow: 1;
+    }
+    .block-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #0284c7;
+      margin-top: auto;
+    }
+    .block-arrow {
+      transition: transform var(--transition-fast), color var(--transition-fast);
+    }
+    .gov-service-block:hover .block-btn {
+      color: #ea580c;
+    }
+    .gov-service-block:hover .block-arrow {
+      transform: translateX(4px);
+    }
+
+    /* 6b. Statutory Governance Banner (Small & Fit Parliament Art) */
+    .statutory-banner-wrap {
+      position: relative;
+      background: #ffffff;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 18px rgba(11, 53, 88, 0.04);
+      margin-bottom: 40px;
+    }
+    .statutory-tricolor-top {
+      height: 4px;
+      background: linear-gradient(90deg, #ea580c 0%, #ea580c 33.3%, #ffffff 33.3%, #ffffff 66.6%, #16a34a 66.6%, #16a34a 100%);
+    }
+    .statutory-card-inner {
+      padding: 24px 28px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      align-items: center;
+    }
+    @media (min-width: 860px) {
+      .statutory-card-inner {
+        grid-template-columns: 1fr 200px;
+      }
+    }
+    .statutory-content-col {
+      min-width: 0;
+    }
+    .statutory-emblem-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      margin-bottom: 10px;
+    }
+    .statutory-heading {
+      font-size: 18px;
+      font-weight: 800;
+      color: #0b2b48;
+      margin: 0 0 8px 0;
+      line-height: 1.35;
+    }
+    .statutory-para {
+      font-size: 13px;
+      line-height: 1.55;
+      color: #475569;
+      margin: 0 0 16px 0;
+    }
+    .strip-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .statutory-visual-col {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .statutory-sansad-svg {
+      width: 100%;
+      max-width: 160px;
+      max-height: 110px;
+      height: auto;
+      filter: drop-shadow(0 4px 10px rgba(11, 53, 88, 0.08));
+    }
+
+    /* 7. Live Government Data / Statistics Section */
+    .section-gov-stats {
+      position: relative;
+      background: linear-gradient(180deg, #ffffff 0%, #fffbf5 50%, #f6fcf8 100%);
+      border-radius: 20px;
+      border: 1.5px solid #e2e8f0;
+      padding: 30px 36px;
+      margin-bottom: 42px;
+      overflow: hidden;
+      box-shadow: 0 6px 24px rgba(11, 53, 88, 0.05);
+    }
+    .stats-tricolor-backdrop {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .stats-saffron-ribbon {
+      position: absolute;
+      top: -40px;
+      left: -20px;
+      width: 440px;
+      height: 160px;
+      background: radial-gradient(circle, rgba(234, 88, 12, 0.16) 0%, transparent 70%);
+      filter: blur(40px);
+    }
+    .stats-green-ribbon {
+      position: absolute;
+      bottom: -40px;
+      left: 10%;
+      width: 480px;
+      height: 160px;
+      background: radial-gradient(circle, rgba(22, 163, 74, 0.14) 0%, transparent 70%);
+      filter: blur(40px);
+    }
+    .stats-grid-wrapper {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 28px;
+      align-items: center;
+    }
+    @media (min-width: 960px) {
+      .stats-grid-wrapper {
+        grid-template-columns: 1fr auto;
+      }
+    }
+    .stats-cards-row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    @media (min-width: 640px) {
+      .stats-cards-row {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+    .stat-badge-card {
+      background: #ffffff;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 16px 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(11, 53, 88, 0.03);
+      transition: all 0.25s ease;
+    }
+    .stat-badge-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 18px rgba(11, 53, 88, 0.08);
+    }
+    .stat-icon-circle {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+    .stat-num {
+      font-size: 24px;
+      font-weight: 800;
+      color: #0b2b48;
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+    .stat-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: #334155;
+      line-height: 1.25;
+      margin-bottom: 4px;
+    }
+    .stat-sub {
+      font-size: 11px;
+      color: #64748b;
+    }
+    .stats-monument-col {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .india-gate-art-svg {
+      max-width: 210px;
+      height: auto;
+      filter: drop-shadow(0 4px 12px rgba(11, 53, 88, 0.08));
+    }
+
+    /* 8. How It Works Section */
+    .section-how-it-works {
+      position: relative;
+      background: linear-gradient(180deg, #fffcf7 0%, #ffffff 40%, #f6fcf8 100%);
+      border-radius: 20px;
+      border: 1.5px solid #e2e8f0;
+      padding: 32px 36px 36px 36px;
+      margin-bottom: 42px;
+      overflow: hidden;
+      box-shadow: 0 6px 24px rgba(11, 53, 88, 0.05);
+    }
+    .how-chakra-watermark {
+      position: absolute;
+      top: 50%;
+      right: 15%;
+      transform: translateY(-50%);
+      width: 240px;
+      height: 240px;
+      opacity: 0.05;
+      pointer-events: none;
+    }
+    .how-header-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .how-saffron-bar {
+      width: 4px;
+      height: 28px;
+      background: #ea580c;
+      border-radius: 2px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .how-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: #0b2b48;
+      margin: 0 0 4px 0;
+    }
+    .how-subtitle {
+      font-size: 13.5px;
+      color: #64748b;
+      margin: 0;
+    }
+    .how-steps-row {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      gap: 14px;
+      position: relative;
+      z-index: 2;
+    }
+    @media (min-width: 768px) {
+      .how-steps-row {
+        grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+        align-items: center;
+      }
+    }
+    .how-step-card {
+      background: #ffffff;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 18px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      box-shadow: 0 2px 8px rgba(11, 53, 88, 0.04);
+      transition: all 0.25s ease;
+    }
+    .how-step-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(11, 53, 88, 0.08);
+      border-color: #cbd5e1;
+    }
+    .how-step-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 4px;
+    }
+    .how-step-name {
+      font-size: 14.5px;
+      font-weight: 800;
+      color: #0b2b48;
+      margin: 0;
+    }
+    .how-step-desc {
+      font-size: 12.5px;
+      color: #64748b;
+      margin: 0;
+      line-height: 1.45;
+    }
+    .how-arrow-divider {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      color: #94a3b8;
+    }
+    @media (min-width: 768px) {
+      .how-arrow-divider {
+        display: flex;
+      }
+    }
+
+    /* 9. Notice / Announcement Ticker */
+    .gateway-ticker {
+      background: #fff7ed;
+      border: 1px solid #fed7aa;
+      border-radius: 12px;
+      padding: 10px 18px;
+      margin: 16px auto 14px auto;
+      max-width: 1220px;
+      font-size: 13px;
+      color: #92400e;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(234, 88, 12, 0.06);
+    }
+    .ticker-inner {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .ticker-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 800;
+      color: #c2410c;
+      white-space: nowrap;
+      flex-shrink: 0;
+      font-size: 12px;
+      background: #ffedd5;
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+    .ticker-viewport {
+      flex-grow: 1;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .ticker-track {
+      display: inline-flex;
+      align-items: center;
+      gap: 24px;
+      animation: tickerMarquee 45s linear infinite;
+      font-weight: 500;
+    }
+    .ticker-track:hover {
+      animation-play-state: paused;
+    }
+    @keyframes tickerMarquee {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+
+    /* 10. Institutional Footer */
+    .gateway-footer {
+      background-color: #081d32;
+      color: #ffffff;
+      padding: 0;
+      font-size: 13px;
+      position: relative;
+    }
+    .footer-inner-content {
+      padding: 52px 0 24px 0;
+      max-width: 1220px;
+      margin: 0 auto;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+      margin-bottom: 36px;
+    }
+    @media (min-width: 900px) {
+      .footer-grid {
+        grid-template-columns: 1.4fr 1fr 1fr 1fr 0.9fr;
+      }
+    }
+    .footer-title {
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #ffffff;
+    }
+    .footer-desc {
+      font-size: 13px;
+      line-height: 1.5;
+      color: #cbd5e1;
+      margin-bottom: 14px;
+    }
+    .footer-dept-list {
+      font-size: 12px;
+      color: #94a3b8;
+      border-left: 2px solid var(--india-saffron);
+      padding-left: 10px;
+      line-height: 1.6;
+    }
+    .footer-heading {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: 0.02em;
+      margin-bottom: 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      padding-bottom: 6px;
+    }
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .footer-links li {
+      margin-bottom: 8px;
+    }
+    .footer-links a {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-size: 13px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: color var(--transition-fast), transform var(--transition-fast);
+    }
+    .footer-links a:hover {
+      color: #ffffff;
+      text-decoration: underline;
+      transform: translateX(3px);
+    }
+    .footer-social-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .footer-social-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .footer-social-btn:hover {
+      background: #ea580c;
+      transform: translateY(-2px);
+    }
+    .footer-bottom {
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 12px;
+      color: #94a3b8;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .btn-scroll-top {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: #0284c7;
+      color: #ffffff;
+      border: none;
+      box-shadow: 0 4px 14px rgba(2, 132, 199, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 99;
+      transition: all 0.25s ease;
+    }
+    .btn-scroll-top:hover {
+      background: #0369a1;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 18px rgba(2, 132, 199, 0.5);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .gov-service-block:hover,
+      .btn-officer-login:hover,
+      .quick-submit-btn:hover,
+      .stat-badge-card:hover,
+      .how-step-card:hover,
+      .footer-links a:hover {
+        transform: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Accessible Off-Screen Skip Link -->
+  <a href="#main-catalog" class="sr-only">Skip to Main Content</a>
+
+  <!-- 1. Top Institutional Strip -->
+  <div class="gateway-top-bar" role="region" aria-label="Official Authority Strip">
+    <div class="container">
+      <div class="top-bar-inner">
+        <div class="gov-flag-label">
+          <svg width="20" height="14" viewBox="0 0 30 20" aria-hidden="true" style="border-radius: 2px; box-shadow: 0 0 2px rgba(0,0,0,0.3); flex-shrink: 0;">
+            <rect width="30" height="6.67" fill="#FF9933"/>
+            <rect y="6.67" width="30" height="6.67" fill="#FFFFFF"/>
+            <rect y="13.33" width="30" height="6.67" fill="#138808"/>
+            <circle cx="15" cy="10" r="2.5" fill="none" stroke="#000080" stroke-width="0.7"/>
+          </svg>
+          <span data-i18n="brand.gov">Government of India</span>
+          <span style="color: #64748b;" aria-hidden="true">|</span>
+          <span data-i18n="brand.dept">Department of Consumer Affairs</span>
+        </div>
+
+        <div class="top-lang-group">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          <select id="gateway-lang-select" class="lang-selector-select" aria-label="Change language / भाषा बदलें" style="background: transparent; border: 1.5px solid var(--india-blue); border-radius: 4px; padding: 2px 8px; font-size: 12px; font-weight: 700; color: var(--india-blue); cursor: pointer; outline: none;">
+            <option value="en">English</option>
+            <option value="hi">हिन्दी</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Institutional Header -->
+  <header class="gateway-header">
+    <div class="container">
+      <div class="header-content">
+        <a href="/" class="brand-wrap">
+          <div class="brand-emblem" title="State Emblem of India">
+            <svg width="40" height="46" viewBox="0 0 100 115" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="State Emblem of India">
+              <!-- Central Lion Head -->
+              <path d="M50 8 C42 8 38 14 38 22 C38 27 42 32 46 34 L46 38 C43 38 41 39 40 42 C39 44 41 46 44 46 L46 46 L46 54 L54 54 L54 46 L56 46 C59 46 61 44 60 42 C59 39 57 38 54 38 L54 34 C58 32 62 27 62 22 C62 14 58 8 50 8 Z" fill="#0b3558"/>
+              <!-- Lion Mane curls -->
+              <circle cx="43" cy="18" r="3" fill="#b45309"/>
+              <circle cx="57" cy="18" r="3" fill="#b45309"/>
+              <circle cx="50" cy="14" r="3" fill="#b45309"/>
+              <circle cx="41" cy="26" r="3" fill="#b45309"/>
+              <circle cx="59" cy="26" r="3" fill="#b45309"/>
+              <!-- Central Lion Face Features -->
+              <ellipse cx="46" cy="23" rx="2" ry="1.5" fill="#ffffff"/>
+              <ellipse cx="54" cy="23" rx="2" ry="1.5" fill="#ffffff"/>
+              <circle cx="46" cy="23" r="1" fill="#0b3558"/>
+              <circle cx="54" cy="23" r="1" fill="#0b3558"/>
+              <path d="M48 26 L52 26 L50 29 Z" fill="#b45309"/>
+              <path d="M47 31 Q50 33 53 31" stroke="#ffffff" stroke-width="1.5" fill="none"/>
+              <!-- Left Lion (Profile) -->
+              <path d="M38 18 C33 18 28 22 28 28 C28 34 32 38 36 40 L36 54 L44 54 L44 44 C40 44 38 40 38 36 Z" fill="#0b3558"/>
+              <circle cx="33" cy="24" r="2.5" fill="#b45309"/>
+              <circle cx="31" cy="30" r="2.5" fill="#b45309"/>
+              <ellipse cx="32" cy="27" rx="1.5" ry="1" fill="#ffffff"/>
+              <!-- Right Lion (Profile) -->
+              <path d="M62 18 C67 18 72 22 72 28 C72 34 68 38 64 40 L64 54 L56 54 L56 44 C60 44 62 40 62 36 Z" fill="#0b3558"/>
+              <circle cx="67" cy="24" r="2.5" fill="#b45309"/>
+              <circle cx="69" cy="30" r="2.5" fill="#b45309"/>
+              <ellipse cx="68" cy="27" rx="1.5" ry="1" fill="#ffffff"/>
+              <!-- Abacus Base -->
+              <rect x="20" y="55" width="60" height="18" rx="2" fill="#0b3558"/>
+              <line x1="20" y1="55" x2="80" y2="55" stroke="#d4af37" stroke-width="2"/>
+              <line x1="20" y1="73" x2="80" y2="73" stroke="#d4af37" stroke-width="2"/>
+              <!-- Central Ashoka Chakra on Abacus -->
+              <circle cx="50" cy="64" r="7" fill="#ffffff"/>
+              <circle cx="50" cy="64" r="6" fill="#0b3558"/>
+              <circle cx="50" cy="64" r="2" fill="#d4af37"/>
+              <!-- Spokes of Chakra -->
+              <line x1="50" y1="58" x2="50" y2="70" stroke="#ffffff" stroke-width="0.8"/>
+              <line x1="44" y1="64" x2="56" y2="64" stroke="#ffffff" stroke-width="0.8"/>
+              <line x1="46" y1="60" x2="54" y2="68" stroke="#ffffff" stroke-width="0.8"/>
+              <line x1="46" y1="68" x2="54" y2="60" stroke="#ffffff" stroke-width="0.8"/>
+              <!-- Galloping Horse (Left) -->
+              <path d="M26 67 C28 64 30 63 32 63 C34 63 35 65 37 65 C38 65 39 63 40 64 C39 66 38 67 36 67 L34 67 L33 69 L31 69 L32 67 Z" fill="#d4af37"/>
+              <!-- Bull (Right) -->
+              <path d="M63 67 C64 64 66 63 68 64 C70 64 71 66 73 66 C74 65 75 64 76 65 C75 67 74 68 72 68 L70 68 L69 70 L67 70 L68 67 Z" fill="#d4af37"/>
+              <!-- Lotus Base -->
+              <path d="M26 74 Q50 82 74 74 L70 82 Q50 88 30 82 Z" fill="#0b3558"/>
+              <!-- Pedestal with Satyameva Jayate -->
+              <rect x="18" y="86" width="64" height="18" rx="2" fill="#ffffff" stroke="#0b3558" stroke-width="1.5"/>
+              <text x="50" y="99" fill="#0b3558" font-family="'Noto Sans Devanagari', sans-serif" font-size="8.5" font-weight="800" text-anchor="middle" letter-spacing="0.5">सत्यमेव जयते</text>
+            </svg>
+          </div>
+          <div class="brand-titles">
+            <span class="dept-title" data-i18n="brand.ministry">Ministry of Consumer Affairs, Food & Public Distribution</span>
+            <span class="portal-name" data-i18n="brand.title">LEGAL MATRIX</span>
+            <span class="portal-subtitle" data-i18n="brand.portal_name">National Legal Metrology Digital Services</span>
+          </div>
+        </a>
+
+        <div class="header-actions">
+          <div class="resizer-group" title="Text Size">
+            <button type="button" class="resizer-btn" id="btn-text-decrease" aria-label="Decrease text size">A-</button>
+            <button type="button" class="resizer-btn" id="btn-text-reset" aria-label="Default text size">A</button>
+            <button type="button" class="resizer-btn" id="btn-text-increase" aria-label="Increase text size">A+</button>
+          </div>
+          <a href="portal/pages/auth/login.html" class="btn-officer-login">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <span data-i18n="nav.login">Officer & Trader Login</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 3. Navigation Bar -->
+  <nav class="gateway-nav" aria-label="Main Navigation">
+    <div class="container">
+      <ul class="nav-list">
+        <li>
+          <a href="/" class="active">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            <span data-i18n="nav.home">Home</span>
+          </a>
+        </li>
+        <li>
+          <a href="landing/dist/index.html">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            <span data-i18n="nav.public_portal">Public Portal</span>
+          </a>
+        </li>
+        <li>
+          <a href="portal/pages/public/services.html">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
+            <span data-i18n="nav.services">Services Directory</span>
+          </a>
+        </li>
+        <li>
+          <a href="portal/pages/public/verify-qr.html">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><path d="M21 16h-3a2 2 0 0 0-2 2v3"/><path d="M21 21v.01"/><path d="M12 7v3a2 2 0 0 1-2 2H7"/><path d="M3 12h.01"/><path d="M12 3h.01"/><path d="M12 16v.01"/><path d="M16 12h1"/><path d="M21 12v.01"/><path d="M12 21v-1"/></svg>
+            <span data-i18n="nav.verify">Verify Certificate</span>
+          </a>
+        </li>
+        <li>
+          <a href="portal/pages/public/track.html">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/><path d="M11 8v6"/><path d="M8 11h6"/></svg>
+            <span data-i18n="nav.track">Track Application</span>
+          </a>
+        </li>
+        <li>
+          <a href="portal/pages/citizen/complaint.html">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            <span data-i18n="nav.grievance">Consumer Grievance</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Tricolor Accent Stripe beneath Header -->
+  <div class="tricolor-stripe" aria-hidden="true"></div>
+
+  <!-- Moving Announcement Marquee Ticker (Top Placement) -->
+  <div class="gateway-ticker" role="region" aria-label="Official Service Announcements">
+    <div class="container">
+      <div class="ticker-inner">
+        <span class="ticker-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <span data-i18n="ticker.label">SERVICE NOTICE</span>
+        </span>
+        <div class="ticker-viewport">
+          <div class="ticker-track">
+            <span data-i18n="ticker.item1">Mandatory periodic verification and stamping for all commercial weighing instruments and retail scales under Section 24 of the Legal Metrology Act, 2009.</span>
+            <span style="color: var(--india-saffron);">&bull;</span>
+            <span data-i18n="ticker.item2">Verify commercial instrument stamping certificates online instantly using the public QR Verification tool.</span>
+            <span style="color: var(--india-saffron);">&bull;</span>
+            <span data-i18n="ticker.item3">Traders can submit Form V e-applications for initial, annual, or biennial calibration online.</span>
+            <span style="color: var(--india-saffron);">&bull;</span>
+            <span data-i18n="ticker.item4">Ensure all retail pre-packaged goods declare net quantity, MRP, and packer information under Packaged Commodities Rules, 2011.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. HERO VISUAL STORY CAROUSEL (5 SLIDES) -->
+  <div id="hero-carousel-root"></div>
+
+  <!-- QUICK ACCESS CARD STRIP -->
+  <section class="section-quick-search">
+    <div class="container">
+      <div class="quick-access-card reveal-on-scroll">
+        <div class="quick-card-left">
+          <div class="quick-title-row">
+            <div class="quick-search-badge">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            </div>
+            <h2 class="quick-title" data-i18n="quicksearch.title">Quick Service Access</h2>
+            <span class="quick-no-login-badge">
+              <span class="check-icon">&#x2713;</span>
+              <span data-i18n="quicksearch.no_login_badge">No Login Required for Public Verification</span>
+            </span>
+          </div>
+          <p class="quick-subtext" data-i18n="quicksearch.subtitle">
+            Instant status check and certificate verification under the Legal Metrology Act, 2009
+          </p>
+          <form action="portal/pages/public/track.html" method="GET" class="quick-form-row">
+            <input 
+              type="text" 
+              name="app" 
+              placeholder="Enter Application No. (e.g. LM-2026-9041)" 
+              data-i18n-placeholder="quicksearch.placeholder_app"
+              class="quick-input" 
+              required
+              aria-label="Application Number"
+            >
+            <button type="submit" class="quick-submit-btn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+              <span data-i18n="btn.search">Search</span>
+            </button>
+          </form>
+          <div class="quick-popular-row">
+            <span style="font-weight: 700; color: #475569;">Popular:</span>
+            <a href="portal/pages/public/track.html">Track Application</a>
+            <span>&bull;</span>
+            <a href="portal/pages/public/verify-qr.html">Verify Certificate</a>
+            <span>&bull;</span>
+            <a href="portal/pages/trader/register-instrument.html">Form V Registration</a>
+          </div>
+        </div>
+
+        <div class="quick-card-right">
+          <svg viewBox="0 0 240 160" fill="none" xmlns="http://www.w3.org/2000/svg" class="quick-art-svg" aria-label="Quick Verification Search Graphic">
+            <!-- Background Soft Glow -->
+            <ellipse cx="120" cy="85" rx="90" ry="55" fill="#eff6ff"/>
+            <!-- Certificate Base Sheet -->
+            <rect x="35" y="25" width="130" height="110" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+            <rect x="42" y="32" width="116" height="96" rx="4" fill="#fafafa" stroke="#e2e8f0" stroke-width="1"/>
+            <!-- Tricolor Header Bar on Certificate -->
+            <rect x="42" y="32" width="116" height="6" fill="#ea580c"/>
+            <rect x="42" y="38" width="116" height="3" fill="#ffffff"/>
+            <rect x="42" y="41" width="116" height="4" fill="#16a34a"/>
+            <!-- Certificate Text Lines -->
+            <rect x="52" y="54" width="70" height="6" rx="2" fill="#0b3558"/>
+            <rect x="52" y="66" width="95" height="4" rx="2" fill="#cbd5e1"/>
+            <rect x="52" y="75" width="85" height="4" rx="2" fill="#cbd5e1"/>
+            <rect x="52" y="84" width="60" height="4" rx="2" fill="#cbd5e1"/>
+            <!-- Gold Verification Seal -->
+            <circle cx="125" cy="105" r="14" fill="#fef3c7" stroke="#d4af37" stroke-width="1.5"/>
+            <path d="M120 105 L124 109 L132 101" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- Magnifying Glass with Blue Lens -->
+            <circle cx="145" cy="65" r="26" fill="#eff6ff" stroke="#0b3558" stroke-width="3" fill-opacity="0.8"/>
+            <circle cx="145" cy="65" r="21" fill="#38bdf8" fill-opacity="0.2" stroke="#0284c7" stroke-width="1" stroke-dasharray="3 3"/>
+            <!-- Magnifying Glass Handle -->
+            <path d="M164 84 L190 110" stroke="#0b3558" stroke-width="6" stroke-linecap="round"/>
+            <path d="M164 84 L190 110" stroke="#d4af37" stroke-width="2.5" stroke-linecap="round"/>
+            <!-- Checkmark inside lens -->
+            <circle cx="145" cy="65" r="10" fill="#22c55e"/>
+            <path d="M141 65 L144 68 L150 62" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- Floating Sparkles -->
+            <path d="M185 45 L188 40 L191 45 L196 48 L191 51 L188 56 L185 51 L180 48 Z" fill="#ea580c"/>
+            <circle cx="75" cy="115" r="3" fill="#38bdf8"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. National E-Services Directory (3x3 Grid) -->
+  <main id="main-catalog" class="container services-catalog">
+    <!-- Category Filter Strip -->
+    <div class="category-filter-strip reveal-on-scroll" role="tablist" style="display: flex; gap: 8px; margin-bottom: 28px; flex-wrap: wrap; align-items: center;">
+      <span style="font-size: 13px; font-weight: 700; color: var(--india-blue); margin-right: 4px;">Service Filter:</span>
+      <button type="button" class="category-pill-btn active" data-filter="all" style="padding: 6px 14px; font-size: 12.5px; font-weight: 700; border-radius: 20px; cursor: pointer; border: 1.5px solid var(--india-blue); background: var(--india-blue); color: #ffffff; transition: all 0.2s ease;">
+        All Services (9)
+      </button>
+      <button type="button" class="category-pill-btn" data-filter="citizen" style="padding: 6px 14px; font-size: 12.5px; font-weight: 700; border-radius: 20px; cursor: pointer; border: 1.5px solid #cbd5e1; background: #ffffff; color: var(--india-blue); transition: all 0.2s ease;">
+        Citizen & Consumer
+      </button>
+      <button type="button" class="category-pill-btn" data-filter="trader" style="padding: 6px 14px; font-size: 12.5px; font-weight: 700; border-radius: 20px; cursor: pointer; border: 1.5px solid #cbd5e1; background: #ffffff; color: var(--india-blue); transition: all 0.2s ease;">
+        Traders & Manufacturers
+      </button>
+      <button type="button" class="category-pill-btn" data-filter="dept" style="padding: 6px 14px; font-size: 12.5px; font-weight: 700; border-radius: 20px; cursor: pointer; border: 1.5px solid #cbd5e1; background: #ffffff; color: var(--india-blue); transition: all 0.2s ease;">
+        Departmental Enforcement
+      </button>
+    </div>
+
+    <!-- Citizen & Public Verification Services -->
+    <div class="reveal-on-scroll" id="sec-cat-citizen">
+      <div class="category-header-row">
+        <h2 class="category-section-title">
+          <span class="category-icon-badge">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </span>
+          <span data-i18n="gateway.sec_citizen">Citizen & Consumer Services</span>
+        </h2>
+        <a href="portal/pages/public/services.html" class="category-view-all">
+          <span data-i18n="gateway.view_all_services">View All Services &rarr;</span>
+        </a>
+      </div>
+
+      <div class="gov-cards-grid">
+        <!-- 1. QR Certificate Verification -->
+        <a href="portal/pages/public/verify-qr.html" class="gov-service-block">
+          <div class="block-top-row">
+            <span class="block-tag tag-citizen" data-i18n="gateway.tag_public_verify">Public Verification</span>
+          </div>
+          <div class="service-badge-art-box art-box-green">
+            <svg width="140" height="74" viewBox="0 0 140 74" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <!-- Soft Glow Circle -->
+              <circle cx="70" cy="37" r="32" fill="#bbf7d0" opacity="0.4"/>
+              <!-- Certificate Base Document -->
+              <rect x="22" y="10" width="46" height="54" rx="4" fill="#ffffff" stroke="#16a34a" stroke-width="1.5"/>
+              <rect x="26" y="14" width="38" height="6" rx="1.5" fill="#16a34a" opacity="0.15"/>
+              <line x1="28" y1="26" x2="48" y2="26" stroke="#94a3b8" stroke-width="1.8" stroke-linecap="round"/>
+              <line x1="28" y1="32" x2="56" y2="32" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round"/>
+              <line x1="28" y1="38" x2="52" y2="38" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round"/>
+              <circle cx="56" cy="52" r="5" fill="#fef3c7" stroke="#d4af37" stroke-width="1"/>
+              <!-- Smartphone Scanning Device -->
+              <rect x="72" y="8" width="44" height="58" rx="6" fill="#0b3558" stroke="#0284c7" stroke-width="1.5"/>
+              <rect x="76" y="14" width="36" height="46" rx="3" fill="#ffffff"/>
+              <!-- QR Code on Screen -->
+              <rect x="82" y="18" width="10" height="10" fill="#0b3558"/>
+              <rect x="84" y="20" width="6" height="6" fill="#ffffff"/>
+              <rect x="85.5" y="21.5" width="3" height="3" fill="#0b3558"/>
+              <rect x="96" y="18" width="10" height="10" fill="#0b3558"/>
+              <rect x="98" y="20" width="6" height="6" fill="#ffffff"/>
+              <rect x="99.5" y="21.5" width="3" height="3" fill="#0b3558"/>
+              <rect x="82" y="32" width="10" height="10" fill="#0b3558"/>
+              <rect x="84" y="34" width="6" height="6" fill="#ffffff"/>
+              <rect x="85.5" y="35.5" width="3" height="3" fill="#0b3558"/>
+              <!-- Green Scanner Laser Beam -->
+              <line x1="76" y1="29" x2="112" y2="29" stroke="#22c55e" stroke-width="2" stroke-linecap="round"/>
+              <!-- Verified Shield Badge -->
+              <circle cx="102" cy="48" r="9" fill="#16a34a"/>
+              <path d="M98 48 L101 51 L106 45" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3 class="block-name" data-i18n="gateway.card_verify_title">Verify Stamping Certificate</h3>
+          <p class="block-desc" data-i18n="gateway.card_verify_desc">
+            Scan instrument QR code or enter certificate registration number to check statutory validity, assigned officer, and stamping expiry date.
+          </p>
+          <span class="block-btn">
+            <span data-i18n="gateway.btn_verify_cert">Verify Certificate</span>
+            <span class="block-arrow">&rarr;</span>
+          </span>
+        </a>
+
+        <!-- 2. Application Tracking -->
+        <a href="portal/pages/public/track.html" class="gov-service-block">
+          <div class="block-top-row">
+            <span class="block-tag tag-citizen" data-i18n="gateway.tag_tracking">Tracking</span>
+          </div>
+          <div class="service-badge-art-box art-box-blue">
+            <svg width="140" height="74" viewBox="0 0 140 74" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <!-- Soft Glow Circle -->
+              <circle cx="70" cy="37" r="32" fill="#bfdbfe" opacity="0.4"/>
+              <!-- Progress Path Line -->
+              <line x1="24" y1="38" x2="116" y2="38" stroke="#93c5fd" stroke-width="3" stroke-linecap="round"/>
+              <line x1="24" y1="38" x2="70" y2="38" stroke="#2563eb" stroke-width="3" stroke-linecap="round"/>
+              <!-- Milestone 1: Done -->
+              <circle cx="32" cy="38" r="10" fill="#22c55e"/>
+              <path d="M28 38 L31 41 L36 35" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <text x="32" y="58" fill="#16a34a" font-family="sans-serif" font-size="8" font-weight="700" text-anchor="middle">Step 1</text>
+              <!-- Milestone 2: Active / Current Stage -->
+              <circle cx="70" cy="38" r="13" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+              <circle cx="70" cy="38" r="6" fill="#1d4ed8"/>
+              <!-- Radar Location Pin Above -->
+              <path d="M64 12 C64 8.7 66.7 6 70 6 C73.3 6 76 8.7 76 12 C76 16.5 70 24 70 24 C70 24 64 16.5 64 12 Z" fill="#ea580c"/>
+              <circle cx="70" cy="12" r="2.5" fill="#ffffff"/>
+              <text x="70" y="60" fill="#1d4ed8" font-family="sans-serif" font-size="8" font-weight="800" text-anchor="middle">In Review</text>
+              <!-- Milestone 3: Pending -->
+              <circle cx="108" cy="38" r="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+              <circle cx="108" cy="38" r="4" fill="#94a3b8"/>
+              <text x="108" y="58" fill="#94a3b8" font-family="sans-serif" font-size="8" font-weight="700" text-anchor="middle">Step 3</text>
+            </svg>
+          </div>
+          <h3 class="block-name" data-i18n="gateway.card_track_title">Track Application Progress</h3>
+          <p class="block-desc" data-i18n="gateway.card_track_desc">
+            Monitor your Form V application stage in real-time, view scheduled inspection date, and verify assigned officer details.
+          </p>
+          <span class="block-btn">
+            <span data-i18n="gateway.btn_track_status">Track Status</span>
+            <span class="block-arrow">&rarr;</span>
+          </span>
+        </a>
+
+        <!-- 3. Consumer Grievance -->
+        <a href="portal/pages/citizen/complaint.html" class="gov-service-block">
+          <div class="block-top-row">
+            <span class="block-tag tag-citizen" data-i18n="gateway.tag_grievance">Consumer Redressal</span>
+          </div>
+          <div class="service-badge-art-box art-box-red">
+            <svg width="140" height="74" viewBox="0 0 140 74" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <!-- Soft Glow Circle -->
+              <circle cx="70" cy="37" r="32" fill="#fecaca" opacity="0.4"/>
+              <!-- Legal Protection Shield -->
+              <path d="M42 12 L68 18 V38 C68 52 56 62 42 66 C28 62 16 52 16 38 V18 L42 12 Z" fill="#ffffff" stroke="#ef4444" stroke-width="2"/>
+              <path d="M42 17 L62 22 V38 C62 49 52 57 42 61 C32 57 22 49 22 38 V22 L42 17 Z" fill="#fef2f2"/>
+              <!-- Balance Scale Symbol inside Shield -->
+              <line x1="42" y1="26" x2="42" y2="48" stroke="#b91c1c" stroke-width="2"/>
+              <line x1="32" y1="31" x2="52" y2="31" stroke="#b91c1c" stroke-width="2"/>
+              <path d="M28 41 C28 45 36 45 36 41 Z" fill="#dc2626"/>
+              <path d="M48 41 C48 45 56 45 56 41 Z" fill="#dc2626"/>
+              <!-- Consumer Alert Megaphone / Loudspeaker -->
+              <path d="M84 32 L106 20 V54 L84 42 H76 V32 H84 Z" fill="#ea580c" stroke="#c2410c" stroke-width="1.5"/>
+              <rect x="72" y="32" width="6" height="10" rx="1.5" fill="#b45309"/>
+              <!-- Sound Waves -->
+              <path d="M112 28 C116 33 116 41 112 46" stroke="#ea580c" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M118 22 C125 30 125 44 118 52" stroke="#ea580c" stroke-width="2" stroke-linecap="round"/>
+              <!-- Warning Exclamation Mark Badge -->
+              <circle cx="98" cy="14" r="9" fill="#dc2626" stroke="#ffffff" stroke-width="1.5"/>
+              <line x1="98" y1="9" x2="98" y2="15" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="98" cy="18.5" r="1.2" fill="#ffffff"/>
+            </svg>
+          </div>
+          <h3 class="block-name" data-i18n="gateway.card_grievance_title">File Consumer Grievance</h3>
+          <p class="block-desc" data-i18n="gateway.card_grievance_desc">
+            Report suspected scale manipulation, missing mandatory declarations on pre-packaged goods, or charging above Maximum Retail Price (MRP).
+          </p>
+          <span class="block-btn">
+            <span data-i18n="gateway.btn_lodge_grievance">Lodge Grievance</span>
+            <span class="block-arrow">&rarr;</span>
+          </span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Commercial Trader & Manufacturer Services -->
+    <div class="reveal-on-scroll" id="sec-cat-trader">
+      <div class="category-header-row">
+        <h2 class="category-section-title">
+          <span class="category-icon-badge" style="background: #eef2ff; color: #4338ca;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/></svg>
+          </span>
+          <span data-i18n="gateway.sec_trader">Commercial Trader & Manufacturer Services</span>
+        </h2>
+        <a href="portal/pages/public/services.html" class="category-view-all">
+          <span data-i18n="gateway.view_all_services">View All Services &rarr;</span>
+        </a>
+      </div>
+
+      <div class="gov-cards-grid">
+        <!-- 4. Register Instrument Form V -->
+        <a href="portal/pages/trader/register-instrument.html" class="gov-service-block">
+          <div class="block-top-row">
+            <span class="block-tag tag-trader" data-i18n="gateway.tag_app_portal">Application Portal</span>
+          </div>
+          <div class="service-badge-art-box art-box-indigo">
+            <svg width="140" height="74" viewBox="0 0 140 74" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <!-- Soft Glow Circle -->
+              <circle cx="70" cy="37" r="32" fill="#c7d2fe" opacity="0.4"/>
+              <!-- Form V Certificate Paper Behind -->
+              <rect x="22" y="10" width="44" height="54" rx="4" fill="#ffffff" stroke="#4338ca" stroke-width="1.5"/>
+              <rect x="27" y="15" width="34" height="6" rx="1.5" fill="#e0e7ff"/>
+              <line x1="28" y1="28" x2="52" y2="28" stroke="#94a3b8" stroke-width="1.8" stroke-linecap="round"/>
+              <line x1="28" y1="34" x2="58" y2="34" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round"/>
+              <line x1="28" y1="40" x2="48" y2="40" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round"/>
+              <!-- Form V Approved Stamp -->
+              <circle cx="54" cy="52" r="7" fill="#4338ca"/>
+              <path d="M50 52 L53 55 L58 49" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              <!-- Commercial Digital Weighing Balance Unit -->
+              <!-- Weighing Pan Platform -->
+              <rect x="68" y="24" width="54" height="8" rx="2" fill="#94a3b8" stroke="#64748b" stroke-width="1.5"/>
+              <!-- Scale Unit Body -->
+              <rect x="74" y="32" width="42" height="30" rx="3" fill="#0b3558" stroke="#1e293b" stroke-width="1.5"/>
+              <!-- Digital Weight Display LED Screen -->
+              <rect x="80" y="38" width="30" height="12" rx="2" fill="#051726"/>
+              <text x="95" y="47" fill="#22c55e" font-family="monospace" font-size="8.5" font-weight="700" text-anchor="middle">15.000</text>
+              <!-- Brass Test Weight on Pan -->
+              <path d="M88 12 C88 9 90 8 92 8 H98 C100 8 102 9 102 12 V24 H88 Z" fill="#d97706" stroke="#b45309" stroke-width="1.2"/>
+              <circle cx="95" cy="6" r="3" fill="#d97706"/>
+            </svg>
+          </div>
+          <h3 class="block-name" data-i18n="gateway.card_formv_title">Instrument Verification (Form V)</h3>
+          <p class="block-desc" data-i18n="gateway.card_formv_desc">
+            Register commercial weighing scales, fuel dispensers, or weighbridges for initial, annual, or biennial verification under statutory rules.
+          </p>
+          <span class="block-btn">
+            <span data-i18n="gateway.btn_submit_app">Submit Application</span>
+            <span class="block-arrow">&rarr;</span>
+          </span>
+        </a>
+
+        <!-- 5. Trader Workspace -->
+        <a href="portal/pages/trader/dashboard.html" class="gov-service-block">
+          <div class="block-top-row">
+            <span class="block-tag tag-trader" data-i18n="gateway.tag_trader_portal">Trader Portal</span>
+          </div>
+          <div class="service-badge-art-box art-box-orange">
+            <svg width="140" height="74" viewBox="0 0 140 74" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <!-- Soft Glow Circle -->
+              <circle cx="70" cy="37" r="32" fill="#fed7aa" opacity="0.4"/>
+              <!-- Retail Store Building -->
+              <rect x="22" y="26" width="52" height="38" rx="2" fill="#ffffff" stroke="#ea580c" stroke-width="1.5"/>
+              <!-- Storefront Striped Awning -->
+              <path d="M18 26 L22 14 H74 L78 26 Z" fill="#ea580c"/>
+              <path d="M18 26 C20 30 24 30 26 26 C28 30 32 30 34 26 C36 30 40 30 42 26 C44 30 48 30 50 26 C52 30 56 30 58 26 C60 30 64 30 66 26 C68 30 72 30 74 26 C76 30 78 28 78 26" fill="#ea580c" stroke="#c2410c" stroke-width="1.5"/>
+              <!-- Shop Glass Window & Door -->
+              <rect x="28" y="36" width="16" height="28" fill="#ffedd5" stroke="#ea580c" stroke-width="1"/>
+              <rect x="50" y="36" width="18" height="16" rx="2" fill="#0b3558"/>
+              <!-- Compliance Analytics Screen Beside Store -->
+              <rect x="80" y="14" width="46" height="48" rx="4" fill="#0b3558" stroke="#38bdf8" stroke-width="1.5"/>
+              <rect x="84" y="18" width="38" height="8" rx="2" fill="#1e3a5f"/>
+              <!-- Growth Chart Bars -->
+              <line x1="88" y1="52" x2="88" y2="42" stroke="#22c55e" stroke-width="3" stroke-linecap="round"/>
+              <line x1="96" y1="52" x2="96" y2="34" stroke="#22c55e" stroke-width="3" stroke-linecap="round"/>
+              <line x1="104" y1="52" x2="104" y2="38" stroke="#38bdf8" stroke-width="3" stroke-linecap="round"/>
+              <line x1="112" y1="52" x2="112" y2="30" stroke="#ea580c" stroke-width="3" stroke-linecap="round"/>
+              <!-- Upward Compliance Arrow -->
+              <path d="M88 42 L96 34 L104 38 L114 28" stroke="#fde047" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3 class="block-name" data-i18n="gateway.card_trader_dash_title">Trader Management Dashboard</h3>
+          <p class="block-desc" data-i18n="gateway.card_trader_dash_desc">
+            View registered commercial establishment profile, monitor upcoming re-stamping deadlines, and view submitted applications.
+          </p>
+          <span class="block-btn">
+            <span data-i18n="gateway.btn_open_dash">Open Dashboard</span>
+            <span class="block-arrow">&rarr;</span>
+          </span>
+        </a>
+
+        <!-- 6. Stamping Certificates Viewer -->
+        <a href="portal/pages/trader/certificates.html" class="gov-service-block">
+          <div class="block-top-row">
+            <span class="block-tag tag-trader" data-i18n="gateway.tag_records">Records</span>
+          </div>
+          <div class="service-badge-art-box art-box-emerald">
+            <svg width="140" height="74" viewBox="0 0 140 74" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <!-- Soft Glow Circle -->
+              <circle cx="70" cy="37" r="32" fill="#a7f3d0" opacity="0.4"/>
+              <!-- Official Certificate Sheet (Tilted Back) -->
+              <rect x="36" y="8" width="58" height="56" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" transform="rotate(-4 65 36)"/>
+              <!-- Main Certificate Sheet (Front) -->
+              <rect x="42" y="10" width="60" height="56" rx="4" fill="#ffffff" stroke="#059669" stroke-width="1.8"/>
+              <!-- Security Guilloche Border -->
+              <rect x="46" y="14" width="52" height="48" rx="2" stroke="#a7f3d0" stroke-width="1.2" stroke-dasharray="3 1.5"/>
+              <!-- Tricolor Emblem Header Band -->
+              <rect x="48" y="16" width="48" height="3" fill="#ea580c"/>
+              <rect x="48" y="19" width="48" height="2" fill="#ffffff"/>
+              <rect x="48" y="21" width="48" height="2" fill="#16a34a"/>
+              <!-- Text Lines -->
+              <line x1="52" y1="28" x2="74" y2="28" stroke="#0b3558" stroke-width="2" stroke-linecap="round"/>
+              <line x1="52" y1="34" x2="88" y2="34" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round"/>
+              <line x1="52" y1="39" x2="82" y2="39" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round"/>
+              <line x1="52" y1="44" x2="70" y2="44" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round"/>
+              <!-- Golden Stamping Wax Seal Ribbon -->
+              <circle cx="84" cy="50" r="9" fill="#fef3c7" stroke="#d4af37" stroke-width="1.8"/>
+              <path d="M81 50 L83.5 52.5 L88 47" stroke="#059669" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              <!-- Ribbon tails -->
+              <path d="M80 58 L82 66 L85 62 L88 66 L89 58" fill="#ea580c"/>
+            </svg>
+          </div>
+          <h3 class="block-name" data-i18n="gateway.card_certs_title">Official Stamping Certificates</h3>
+          <p class="block-desc" data-i18n="gateway.card_certs_desc">
+            Access and print official verification certificates featuring security guilloche border, State emblem, and tamper-proof verification QR code.
+          </p>
+          <span class="block-btn">
+            <span data-i18n="gateway.btn_view_certs">View Certificates</span>
+            <span class="block-arrow">&rarr;</span>
+          </span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Departmental & Enforcement Services -->
+    <div class="reveal-on-scroll" id="sec-cat-dept">
+      <div class="category-header-row">
+        <h2 class="category-section-title">
+          <span class="category-icon-badge" style="background: #f0fdfa; color: #0f766e;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="m9 12 2 2 4-4"/></svg>
+          </span>
+          <span data-i18n="gateway.sec_dept">Departmental & Enforcement Services</span>
+        </h2>
+        <a href="portal/pages/public/services.html" class="category-view-all">
+          <span data-i18n="gateway.view_all_services">View All Services &rarr;</span>
+        </a>
+      </div>
+
+      <div class="gov-cards-grid">
+        <!-- 7. Inspector Dashboard -->
+        <a href="portal/pages/inspector/dashboard.html" class="gov-service-block">
+          <div class="block-top-row">
+            <span class="block-tag tag-officer" data-i18n="gateway.tag_officer_workspace">Officer Workspace</span>
+          </div>
+          <div class="service-badge-art-box art-box-sky">
+            <svg width="140" height="74" viewBox="0 0 140 74" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <!-- Soft Glow Circle -->
+              <circle cx="70" cy="37" r="32" fill="#bae6fd" opacity="0.4"/>
+              <!-- Officer Clipboard Base -->
+              <rect x="28" y="10" width="48" height="56" rx="4" fill="#ffffff" stroke="#0284c7" stroke-width="1.8"/>
+              <!-- Top Metal Clip -->
+              <rect x="42" y="6" width="20" height="8" rx="2.5" fill="#0b3558"/>
+              <circle cx="52" cy="10" r="1.5" fill="#ffffff"/>
+              <!-- Inspection Checklist Items -->
+              <circle cx="38" cy="24" r="3" fill="#22c55e"/>
+              <line x1="45" y1="24" x2="68" y2="24" stroke="#334155" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="38" cy="34" r="3" fill="#22c55e"/>
+              <line x1="45" y1="34" x2="68" y2="34" stroke="#334155" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="38" cy="44" r="3" fill="#22c55e"/>
+              <line x1="45" y1="44" x2="62" y2="44" stroke="#334155" stroke-width="2" stroke-linecap="round"/>
+              <!-- Legal Metrology Officer Gold Star Shield -->
+              <circle cx="96" cy="37" r="22" fill="#0369a1" stroke="#d4af37" stroke-width="2.5"/>
+              <circle cx="96" cy="37" r="18" fill="#0284c7"/>
+              <!-- 5-Pointed Gold Star -->
+              <polygon points="96,24 99.5,32 108,32.5 101,38 103.5,46 96,41.5 88.5,46 91,38 84,32.5 92.5,32" fill="#d4af37" stroke="#b45309" stroke-width="0.8"/>
+              <circle cx="96" cy="37" r="3" fill="#ffffff"/>
+            </svg>
+          </div>
+          <h3 class="block-name" data-i18n="gateway.card_inspector_title">Inspector Field Workspace</h3>
+          <p class="block-desc" data-i18n="gateway.card_inspector_desc">
+            Designated Legal Metrology Officers access assigned field verification schedules, merchant inspections, and compliance logs.
+          </p>
+          <span class="block-btn">
+            <span data-i18n="gateway.btn_open_workspace">Open Workspace</span>
+            <span class="block-arrow">&rarr;</span>
+          </span>
+        </a>
+
+        <!-- 8. MPE Tolerance Inspection Form -->
+        <a href="portal/pages/inspector/inspect.html" class="gov-service-block">
+          <div class="block-top-row">
+            <span class="block-tag tag-officer" data-i18n="gateway.tag_calib_tool">Calibration Tool</span>
+          </div>
+          <div class="service-badge-art-box art-box-teal">
+            <svg width="140" height="74" viewBox="0 0 140 74" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <!-- Soft Glow Circle -->
+              <circle cx="70" cy="37" r="32" fill="#99f6e4" opacity="0.4"/>
+              <!-- Standard Cylindrical Test Weight 1 (10kg) -->
+              <path d="M22 28 C22 22 26 20 30 20 H40 C44 20 48 22 48 28 V56 C48 60 44 62 40 62 H30 C26 62 22 60 22 56 Z" fill="#b45309" stroke="#78350f" stroke-width="1.8"/>
+              <ellipse cx="35" cy="20" rx="8" ry="3" fill="#d97706"/>
+              <circle cx="35" cy="14" r="5" fill="#b45309" stroke="#78350f" stroke-width="1"/>
+              <text x="35" y="44" fill="#ffffff" font-family="sans-serif" font-size="9" font-weight="800" text-anchor="middle">10kg</text>
+              <!-- Smaller Calibration Weight 2 (5kg) -->
+              <path d="M52 34 C52 30 55 28 58 28 H66 C69 28 72 30 72 34 V56 C72 59 69 61 66 61 H58 C55 61 52 59 52 56 Z" fill="#d97706" stroke="#92400e" stroke-width="1.5"/>
+              <circle cx="62" cy="25" r="3.5" fill="#d97706"/>
+              <text x="62" y="48" fill="#ffffff" font-family="sans-serif" font-size="7" font-weight="800" text-anchor="middle">5kg</text>
+              <!-- MPE Tolerance Dial Gauge Meter -->
+              <circle cx="102" cy="37" r="22" fill="#ffffff" stroke="#0f766e" stroke-width="2.5"/>
+              <circle cx="102" cy="37" r="18" fill="#f0fdfa"/>
+              <!-- Dial Tick Marks -->
+              <path d="M90 37 A12 12 0 0 1 114 37" stroke="#0f766e" stroke-width="2" stroke-dasharray="2 3"/>
+              <!-- Center Hub -->
+              <circle cx="102" cy="37" r="3.5" fill="#0f766e"/>
+              <!-- Gauge Needle Indicating Approved Zone -->
+              <line x1="102" y1="37" x2="108" y2="25" stroke="#ef4444" stroke-width="2.5" stroke-linecap="round"/>
+              <text x="102" y="50" fill="#0f766e" font-family="sans-serif" font-size="6.5" font-weight="800" text-anchor="middle">&plusmn;MPE</text>
+            </svg>
+          </div>
+          <h3 class="block-name" data-i18n="gateway.card_mpe_title">MPE Calibration & Stamping Entry</h3>
+          <p class="block-desc" data-i18n="gateway.card_mpe_desc">
+            Record standard weight tests, calculate Maximum Permissible Error tolerances dynamically, and approve or reject instruments for stamping.
+          </p>
+          <span class="block-btn">
+            <span data-i18n="gateway.btn_open_tool">Open Tool</span>
+            <span class="block-arrow">&rarr;</span>
+          </span>
+        </a>
+
+        <!-- 9. State Admin Dashboard -->
+        <a href="portal/pages/admin/dashboard.html" class="gov-service-block">
+          <div class="block-top-row">
+            <span class="block-tag tag-officer" data-i18n="gateway.tag_admin">Administration</span>
+          </div>
+          <div class="service-badge-art-box art-box-purple">
+            <svg width="140" height="74" viewBox="0 0 140 74" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <!-- Soft Glow Circle -->
+              <circle cx="70" cy="37" r="32" fill="#e9d5ff" opacity="0.4"/>
+              <!-- Classical Secretariat Pediment Roof -->
+              <polygon points="56,12 24,26 88,26" fill="#6d28d9"/>
+              <rect x="28" y="26" width="56" height="4" fill="#d4af37"/>
+              <!-- Grand Pillars -->
+              <rect x="32" y="30" width="6" height="26" fill="#6d28d9"/>
+              <rect x="44" y="30" width="6" height="26" fill="#6d28d9"/>
+              <rect x="56" y="30" width="6" height="26" fill="#6d28d9"/>
+              <rect x="68" y="30" width="6" height="26" fill="#6d28d9"/>
+              <rect x="80" y="30" width="6" height="26" fill="#6d28d9"/>
+              <!-- Base Plinth -->
+              <rect x="26" y="56" width="64" height="6" fill="#6d28d9"/>
+              <rect x="22" y="62" width="72" height="4" fill="#d4af37"/>
+              <!-- Central Golden Ashoka Emblem on Pediment -->
+              <circle cx="56" cy="20" r="3.5" fill="#fde68a" stroke="#d4af37" stroke-width="1"/>
+              <!-- Jurisdictional Network Node Hub (Right) -->
+              <circle cx="108" cy="26" r="8" fill="#6d28d9"/>
+              <circle cx="108" cy="26" r="4" fill="#ffffff"/>
+              <circle cx="118" cy="46" r="6" fill="#22c55e"/>
+              <circle cx="98" cy="54" r="5" fill="#38bdf8"/>
+              <line x1="108" y1="26" x2="118" y2="46" stroke="#7c3aed" stroke-width="2"/>
+              <line x1="108" y1="26" x2="98" y2="54" stroke="#7c3aed" stroke-width="2"/>
+            </svg>
+          </div>
+          <h3 class="block-name" data-i18n="gateway.card_admin_title">State Administrative Control Center</h3>
+          <p class="block-desc" data-i18n="gateway.card_admin_desc">
+            Jurisdictional oversight for Controllers of Legal Metrology to monitor officer assignments, inspection volume, and compliance audits.
+          </p>
+          <span class="block-btn">
+            <span data-i18n="gateway.btn_admin_center">Admin Center</span>
+            <span class="block-arrow">&rarr;</span>
+          </span>
+        </a>
+      </div>
+    </div>
+
+    <!-- 6. Statutory Framework Summary Banner -->
+    <div class="statutory-banner-wrap reveal-on-scroll">
+      <div class="statutory-tricolor-top" aria-hidden="true"></div>
+      <div class="statutory-card-inner">
+        <div class="statutory-content-col">
+          <div class="statutory-emblem-badge">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#d4af37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/>
+              <path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/>
+              <path d="M7 21h10"/>
+              <path d="M12 3v18"/>
+              <path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/>
+            </svg>
+          </div>
+          <h3 class="statutory-heading" data-i18n="gateway.statutory_title">Statutory Governance under the Legal Metrology Act, 2009</h3>
+          <p class="statutory-para" data-i18n="gateway.statutory_desc">
+            The Legal Metrology Division operates under the Department of Consumer Affairs, Ministry of Consumer Affairs, Food & Public Distribution. Central legislation governs standard units, model approvals, and national policy, while State and UT Directorates carry out periodic verification, market surveillance, and legal enforcement.
+          </p>
+          <div class="strip-links">
+            <a href="https://consumeraffairs.nic.in/" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm" style="background-color: var(--india-blue); color: #ffffff;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              <span data-i18n="gateway.dept_portal_link">Department of Consumer Affairs Portal</span>
+            </a>
+            <a href="portal/pages/public/privacy-policy.html" class="btn btn-outline btn-sm">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <span data-i18n="gateway.privacy_policy">Privacy Policy</span>
+            </a>
+            <a href="portal/pages/public/terms-and-conditions.html" class="btn btn-outline btn-sm">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg>
+              <span data-i18n="gateway.terms_conditions">Terms and Conditions</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="statutory-visual-col">
+          <svg viewBox="0 0 320 220" fill="none" xmlns="http://www.w3.org/2000/svg" class="statutory-sansad-svg" aria-label="Indian Parliament Sansad Bhavan Art">
+            <!-- Background Sun Glow -->
+            <ellipse cx="160" cy="160" rx="130" ry="60" fill="#f8fafc"/>
+            <!-- Circular Parliament Building Colonnade Base -->
+            <ellipse cx="160" cy="160" rx="125" ry="32" fill="#0b3558"/>
+            <ellipse cx="160" cy="154" rx="125" ry="32" fill="#1e3a5f"/>
+            <!-- Pillars Row -->
+            <g fill="#ffffff">
+              <rect x="52" y="112" width="4" height="42" rx="1"/>
+              <rect x="66" y="114" width="4" height="40" rx="1"/>
+              <rect x="80" y="116" width="4" height="38" rx="1"/>
+              <rect x="94" y="118" width="4" height="36" rx="1"/>
+              <rect x="108" y="119" width="4" height="35" rx="1"/>
+              <rect x="122" y="120" width="4" height="34" rx="1"/>
+              <rect x="136" y="121" width="4" height="33" rx="1"/>
+              <rect x="150" y="121" width="4" height="33" rx="1"/>
+              <rect x="164" y="121" width="4" height="33" rx="1"/>
+              <rect x="178" y="121" width="4" height="33" rx="1"/>
+              <rect x="192" y="120" width="4" height="34" rx="1"/>
+              <rect x="206" y="119" width="4" height="35" rx="1"/>
+              <rect x="220" y="118" width="4" height="36" rx="1"/>
+              <rect x="234" y="116" width="4" height="38" rx="1"/>
+              <rect x="248" y="114" width="4" height="40" rx="1"/>
+              <rect x="262" y="112" width="4" height="42" rx="1"/>
+            </g>
+            <!-- Entablature Roof Band -->
+            <ellipse cx="160" cy="112" rx="116" ry="24" fill="#0b3558"/>
+            <ellipse cx="160" cy="108" rx="116" ry="24" fill="#d4af37"/>
+            <!-- Central Grand Dome -->
+            <path d="M125 106 C125 72 195 72 195 106 Z" fill="#0b3558"/>
+            <path d="M130 106 C130 76 190 76 190 106 Z" fill="#1e3a5f"/>
+            <!-- Dome Ribs -->
+            <line x1="160" y1="74" x2="160" y2="106" stroke="#d4af37" stroke-width="1.5"/>
+            <line x1="145" y1="78" x2="148" y2="106" stroke="#d4af37" stroke-width="1"/>
+            <line x1="175" y1="78" x2="172" y2="106" stroke="#d4af37" stroke-width="1"/>
+            <!-- Finial / Dome Cupola -->
+            <rect x="157" y="66" width="6" height="8" fill="#d4af37"/>
+            <!-- Flagstaff -->
+            <line x1="160" y1="36" x2="160" y2="66" stroke="#71717a" stroke-width="2"/>
+            <circle cx="160" cy="36" r="2" fill="#d4af37"/>
+            <!-- Indian National Tricolor Flag Fluttering -->
+            <path d="M160 38 Q174 34 188 38 L188 44 Q174 40 160 44 Z" fill="#ea580c"/>
+            <path d="M160 44 Q174 40 188 44 L188 50 Q174 46 160 50 Z" fill="#ffffff"/>
+            <circle cx="174" cy="47" r="2" fill="#0b3558"/>
+            <path d="M160 50 Q174 46 188 50 L188 56 Q174 52 160 56 Z" fill="#16a34a"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- 7. Live Government Data / Statistics Section -->
+  <section class="container section-gov-stats reveal-on-scroll">
+    <div class="stats-tricolor-backdrop" aria-hidden="true">
+      <div class="stats-saffron-ribbon"></div>
+      <div class="stats-green-ribbon"></div>
+    </div>
+
+    <div class="stats-grid-wrapper">
+      <div>
+        <div style="margin-bottom: 20px;">
+          <h2 style="font-size: 22px; font-weight: 800; color: #0b2b48; margin: 0 0 4px 0;" data-i18n="stats.title">
+            Live Government Data & Statutory Records
+          </h2>
+          <p style="font-size: 13.5px; color: #64748b; margin: 0;" data-i18n="stats.subtitle">
+            Real-time records from State & Central Legal Metrology Directorates under the Legal Metrology Act, 2009
+          </p>
+        </div>
+
+        <div class="stats-cards-row">
+          <!-- Stat 1: Registered Traders -->
+          <div class="stat-badge-card">
+            <div class="stat-icon-circle" style="background: #fff7ed; color: #ea580c;">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div class="stat-num">0+</div>
+            <div class="stat-label" data-i18n="stats.card1_label">Registered Traders</div>
+            <div class="stat-sub" data-i18n="stats.card1_sub">Across 36 States & UTs</div>
+          </div>
+
+          <!-- Stat 2: Instruments Registered -->
+          <div class="stat-badge-card">
+            <div class="stat-icon-circle" style="background: #eff6ff; color: #2563eb;">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/></svg>
+            </div>
+            <div class="stat-num">0+</div>
+            <div class="stat-label" data-i18n="stats.card2_label">Instruments Registered</div>
+            <div class="stat-sub" data-i18n="stats.card2_sub">Commercial Scales & Dispensers</div>
+          </div>
+
+          <!-- Stat 3: Certificates Issued -->
+          <div class="stat-badge-card">
+            <div class="stat-icon-circle" style="background: #ecfdf5; color: #16a34a;">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="m9 12 2 2 4-4"/></svg>
+            </div>
+            <div class="stat-num">0+</div>
+            <div class="stat-label" data-i18n="stats.card3_label">Certificates Issued</div>
+            <div class="stat-sub" data-i18n="stats.card3_sub">Digital QR Stamping Certificates</div>
+          </div>
+
+          <!-- Stat 4: Inspections Conducted -->
+          <div class="stat-badge-card">
+            <div class="stat-icon-circle" style="background: #fdf4ff; color: #9333ea;">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+            </div>
+            <div class="stat-num">0+</div>
+            <div class="stat-label" data-i18n="stats.card4_label">Inspections Conducted</div>
+            <div class="stat-sub" data-i18n="stats.card4_sub">Field Calibration Audits</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- India Gate Monument Illustration Column -->
+      <div class="stats-monument-col">
+        <svg viewBox="0 0 160 140" fill="none" xmlns="http://www.w3.org/2000/svg" class="india-gate-art-svg" aria-label="India Gate Monument Illustration">
+          <!-- Background Sun Glory -->
+          <circle cx="80" cy="70" r="56" fill="#fff7ed" stroke="#fed7aa" stroke-width="1.5" stroke-dasharray="3 3"/>
+          <!-- Top Cornice Layer 1 -->
+          <rect x="42" y="22" width="76" height="6" rx="1.5" fill="#ea580c"/>
+          <!-- Layer 2 -->
+          <rect x="46" y="28" width="68" height="5" fill="#f97316"/>
+          <!-- Inscription Band with INDIA text -->
+          <rect x="50" y="33" width="60" height="9" fill="#0b3558"/>
+          <text x="80" y="40" fill="#ffffff" font-family="sans-serif" font-size="5" font-weight="800" text-anchor="middle" letter-spacing="1.5">INDIA</text>
+          <!-- Main Arch Body -->
+          <rect x="48" y="42" width="64" height="74" fill="#fbbf24"/>
+          <rect x="48" y="42" width="64" height="74" fill="url(#gateGrad)" opacity="0.85"/>
+          <!-- Left Arch Pylon -->
+          <rect x="48" y="42" width="20" height="74" fill="#f59e0b"/>
+          <!-- Right Arch Pylon -->
+          <rect x="92" y="42" width="20" height="74" fill="#d97706"/>
+          <!-- Center Grand Archway Cutout -->
+          <path d="M68 116 V72 C68 62 92 62 92 72 V116 Z" fill="#ffffff" stroke="#b45309" stroke-width="1.5"/>
+          <path d="M72 116 V75 C72 68 88 68 88 75 V116 Z" fill="#fff7ed"/>
+          <!-- Amar Jawan Jyoti Memorial Plinth & Flame -->
+          <rect x="76" y="106" width="8" height="10" fill="#0b3558"/>
+          <circle cx="80" cy="103" r="3" fill="#ea580c"/>
+          <circle cx="80" cy="102" r="1.5" fill="#fef08a"/>
+          <!-- Base Plinth -->
+          <rect x="40" y="116" width="80" height="6" rx="1" fill="#78350f"/>
+          <rect x="34" y="122" width="92" height="4" rx="1" fill="#451a03"/>
+          <defs>
+            <linearGradient id="gateGrad" x1="48" y1="42" x2="112" y2="116" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#fef3c7"/>
+              <stop offset="1" stop-color="#d97706"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. How It Works Section (4-Step Process) -->
+  <section class="container section-how-it-works reveal-on-scroll">
+    <!-- Ashoka Chakra Background Watermark -->
+    <svg class="how-chakra-watermark" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="50" cy="50" r="46" stroke="#0b3558" stroke-width="4"/>
+      <circle cx="50" cy="50" r="8" fill="#0b3558"/>
+      <g stroke="#0b3558" stroke-width="1.8">
+        <line x1="50" y1="4" x2="50" y2="96"/>
+        <line x1="4" y1="50" x2="96" y2="50"/>
+        <line x1="17.5" y1="17.5" x2="82.5" y2="82.5"/>
+        <line x1="17.5" y1="82.5" x2="82.5" y2="17.5"/>
+        <line x1="27.3" y1="7.7" x2="72.7" y2="92.3"/>
+        <line x1="7.7" y1="27.3" x2="92.3" y2="72.7"/>
+        <line x1="7.7" y1="72.7" x2="92.3" y2="27.3"/>
+        <line x1="27.3" y1="92.3" x2="72.7" y2="7.7"/>
+      </g>
+    </svg>
+
+    <div class="how-header-row">
+      <div class="how-saffron-bar"></div>
+      <div>
+        <h2 class="how-title" data-i18n="howitworks.title">How It Works</h2>
+        <p class="how-subtitle" data-i18n="howitworks.subtitle">
+          Simple 4-step digital process for commercial instrument verification
+        </p>
+      </div>
+    </div>
+
+    <div class="how-steps-row">
+      <!-- Step 1 -->
+      <div class="how-step-card">
+        <div class="how-step-icon" style="background: #fff7ed; color: #ea580c;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+        </div>
+        <div style="font-size: 11.5px; font-weight: 800; color: #ea580c; text-transform: uppercase;">Step 1</div>
+        <h3 class="how-step-name" data-i18n="howitworks.step1_title">Apply Online</h3>
+        <p class="how-step-desc" data-i18n="howitworks.step1_desc">
+          Submit Form V with instrument specifications and calibration requirements.
+        </p>
+      </div>
+
+      <!-- Arrow Divider 1 -->
+      <div class="how-arrow-divider" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="how-step-card">
+        <div class="how-step-icon" style="background: #eff6ff; color: #2563eb;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        </div>
+        <div style="font-size: 11.5px; font-weight: 800; color: #2563eb; text-transform: uppercase;">Step 2</div>
+        <h3 class="how-step-name" data-i18n="howitworks.step2_title">Schedule Inspection</h3>
+        <p class="how-step-desc" data-i18n="howitworks.step2_desc">
+          Inspector assigned automatically. Date and fee receipt confirmed.
+        </p>
+      </div>
+
+      <!-- Arrow Divider 2 -->
+      <div class="how-arrow-divider" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="how-step-card">
+        <div class="how-step-icon" style="background: #f0fdfa; color: #0f766e;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+        </div>
+        <div style="font-size: 11.5px; font-weight: 800; color: #0f766e; text-transform: uppercase;">Step 3</div>
+        <h3 class="how-step-name" data-i18n="howitworks.step3_title">On-Site Calibration</h3>
+        <p class="how-step-desc" data-i18n="howitworks.step3_desc">
+          Standard weight verification and MPE tolerance inspection conducted.
+        </p>
+      </div>
+
+      <!-- Arrow Divider 3 -->
+      <div class="how-arrow-divider" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="how-step-card">
+        <div class="how-step-icon" style="background: #ecfdf5; color: #16a34a;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/></svg>
+        </div>
+        <div style="font-size: 11.5px; font-weight: 800; color: #16a34a; text-transform: uppercase;">Step 4</div>
+        <h3 class="how-step-name" data-i18n="howitworks.step4_title">Get Certificate</h3>
+        <p class="how-step-desc" data-i18n="howitworks.step4_desc">
+          Tamper-proof digital certificate with QR code issued instantly.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. Institutional Footer (5-Column Layout) -->
+  <footer class="gateway-footer" role="contentinfo">
+    <!-- Subtle Tricolor Accent Line at Top of Footer -->
+    <div class="tricolor-stripe" aria-hidden="true"></div>
+
+    <div class="footer-inner-content">
+      <div class="footer-grid">
+        <!-- Col 1: About & Departments -->
+        <div>
+          <div class="footer-title">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" aria-hidden="true"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/></svg>
+            <span data-i18n="brand.title">LEGAL MATRIX</span>
+          </div>
+          <p class="footer-desc" data-i18n="footer.summary">
+            National Legal Metrology Digital Ecosystem. Providing unified digital verification, statutory stamping records, and consumer protection across India.
+          </p>
+          <div class="footer-dept-list">
+            <span data-i18n="footer.dept_name">Department of Consumer Affairs</span><br>
+            <span data-i18n="footer.ministry_name">Ministry of Consumer Affairs, Food & Public Distribution</span><br>
+            <span data-i18n="footer.gov_name">Government of India</span>
+          </div>
+        </div>
+
+        <!-- Col 2: Digital Services -->
+        <div>
+          <div class="footer-heading" data-i18n="footer.sec_services">Digital Services</div>
+          <ul class="footer-links">
+            <li>
+              <a href="landing/dist/index.html">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
+                <span data-i18n="footer.link_public">Public Portal</span>
+              </a>
+            </li>
+            <li>
+              <a href="portal/pages/public/services.html">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/></svg>
+                <span data-i18n="footer.link_services">Services Directory</span>
+              </a>
+            </li>
+            <li>
+              <a href="portal/pages/public/verify-qr.html">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/></svg>
+                <span data-i18n="footer.link_verify">Certificate Verification</span>
+              </a>
+            </li>
+            <li>
+              <a href="portal/pages/public/track.html">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                <span data-i18n="footer.link_track">Application Tracking</span>
+              </a>
+            </li>
+            <li>
+              <a href="portal/pages/trader/register-instrument.html">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/></svg>
+                <span data-i18n="footer.link_formv">Form V Verification</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Institutional Links -->
+        <div>
+          <div class="footer-heading" data-i18n="footer.sec_links">Institutional Links</div>
+          <ul class="footer-links">
+            <li>
+              <a href="https://consumeraffairs.nic.in/" target="_blank" rel="noopener noreferrer">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/></svg>
+                <span data-i18n="footer.link_dept">Department of Consumer Affairs</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://india.gov.in/" target="_blank" rel="noopener noreferrer">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
+                <span data-i18n="footer.link_india_gov">National Portal of India</span>
+              </a>
+            </li>
+            <li>
+              <a href="portal/pages/public/privacy-policy.html">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                <span data-i18n="footer.link_privacy">Privacy Policy</span>
+              </a>
+            </li>
+            <li>
+              <a href="portal/pages/public/terms-and-conditions.html">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg>
+                <span data-i18n="footer.link_terms">Terms and Conditions</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Grievance & Help -->
+        <div>
+          <div class="footer-heading" data-i18n="footer.sec_help">Grievance & Help</div>
+          <ul class="footer-links">
+            <li>
+              <a href="tel:1800114000">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                <span data-i18n="footer.toll_free">Toll-Free: 1800-11-4000</span>
+              </a>
+            </li>
+            <li>
+              <a href="portal/pages/citizen/complaint.html">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/></svg>
+                <span data-i18n="footer.link_complaint">File Short-Weight Complaint</span>
+              </a>
+            </li>
+            <li>
+              <a href="portal/pages/auth/login.html">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/></svg>
+                <span data-i18n="footer.link_login">Departmental Officer Login</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Col 5: Stay Connected -->
+        <div>
+          <div class="footer-heading" data-i18n="footer.sec_stay_connected">Stay Connected</div>
+          <p style="font-size: 12px; color: #94a3b8; line-height: 1.5; margin-bottom: 12px;">
+            Follow official consumer awareness and legal metrology notifications.
+          </p>
+          <div class="footer-social-row">
+            <!-- Twitter / X -->
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="Twitter">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+            <!-- Facebook -->
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="Facebook">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <!-- YouTube -->
+            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="YouTube">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </a>
+            <!-- LinkedIn -->
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="LinkedIn">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Indian Architectural Skyline Silhouette -->
+    <div class="footer-skyline-wrap" aria-hidden="true">
+      <svg viewBox="0 0 1200 60" preserveAspectRatio="none" fill="#ffffff" class="footer-skyline-svg">
+        <!-- India Gate Center-Left -->
+        <path d="M 220 60 L 220 22 L 226 22 L 226 14 L 260 14 L 260 22 L 266 22 L 266 60 L 254 60 L 254 36 C 254 30 232 30 232 36 L 232 60 Z"/>
+        <rect x="224" y="11" width="38" height="3"/>
+        <rect x="229" y="8" width="28" height="3"/>
+        <!-- Red Fort Bastion (Left) -->
+        <path d="M 60 60 L 60 30 L 65 30 L 65 24 L 70 24 L 70 30 L 75 30 L 75 24 L 80 24 L 80 30 L 85 30 L 85 24 L 90 24 L 90 30 L 95 30 L 95 60 Z"/>
+        <!-- Qutub Minar Silhouette (Far Left) -->
+        <polygon points="150,60 156,60 154,12 152,12"/>
+        <line x1="151" y1="24" x2="155" y2="24" stroke="#072138" stroke-width="1"/>
+        <line x1="150" y1="38" x2="156" y2="38" stroke="#072138" stroke-width="1"/>
+        <!-- Sansad Bhavan (Indian Parliament) Colonnade & Dome -->
+        <ellipse cx="600" cy="58" rx="85" ry="14"/>
+        <rect x="525" y="32" width="150" height="4"/>
+        <rect x="532" y="36" width="3" height="22"/>
+        <rect x="544" y="36" width="3" height="22"/>
+        <rect x="556" y="36" width="3" height="22"/>
+        <rect x="568" y="36" width="3" height="22"/>
+        <rect x="580" y="36" width="3" height="22"/>
+        <rect x="592" y="36" width="3" height="22"/>
+        <rect x="604" y="36" width="3" height="22"/>
+        <rect x="616" y="36" width="3" height="22"/>
+        <rect x="628" y="36" width="3" height="22"/>
+        <rect x="640" y="36" width="3" height="22"/>
+        <rect x="652" y="36" width="3" height="22"/>
+        <rect x="664" y="36" width="3" height="22"/>
+        <path d="M 578 32 C 578 16 622 16 622 32 Z"/>
+        <!-- Rashtrapati Bhavan Dome (Right) -->
+        <path d="M 920 60 L 920 38 L 945 38 C 945 22 975 22 975 38 L 1000 38 L 1000 60 Z"/>
+        <rect x="940" y="36" width="40" height="3"/>
+        <rect x="958" y="16" width="4" height="6"/>
+        <circle cx="960" cy="15" r="2"/>
+        <!-- Supporting Base Line -->
+        <rect x="0" y="58" width="1200" height="2"/>
+      </svg>
+    </div>
+
+    <!-- Bottom Copyright Strip -->
+    <div class="container">
+      <div class="footer-bottom">
+        <div data-i18n="footer.bottom_initiative">
+          An official initiative under the Legal Metrology Act, 2009. Directorate of Legal Metrology, Department of Consumer Affairs, Government of India.
+        </div>
+        <div style="color: #cbd5e1;" data-i18n="footer.rights">
+          &copy; 2026 Legal Matrix. All Rights Reserved.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Scroll-To-Top Button -->
+  <button type="button" class="btn-scroll-top" id="btn-scroll-top" aria-label="Scroll to top of page">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
+  <script src="portal/js/animations.js"></script>
+  <script type="module">
+    import { HeroCarousel } from './portal/components/carousel.js';
+    import { getLanguage, setLanguage, applyLanguageToDOM, onLanguageChange } from './portal/i18n/i18n.js';
+
+    // 1. Initialize Hero Carousel
+    new HeroCarousel('hero-carousel-root');
+
+    // 2. Language Switcher Synchronization
+    const langSelect = document.getElementById('gateway-lang-select');
+    if (langSelect) {
+      langSelect.value = getLanguage();
+      langSelect.addEventListener('change', (e) => {
+        setLanguage(e.target.value);
+      });
+      onLanguageChange((lang) => {
+        if (langSelect.value !== lang) {
+          langSelect.value = lang;
+        }
+      });
+    }
+
+    // 3. Accessibility Text Resizer Controls
+    let currentZoom = 100;
+    const btnDec = document.getElementById('btn-text-decrease');
+    const btnReset = document.getElementById('btn-text-reset');
+    const btnInc = document.getElementById('btn-text-increase');
+    if (btnDec && btnReset && btnInc) {
+      btnDec.addEventListener('click', () => {
+        if (currentZoom > 85) {
+          currentZoom -= 5;
+          document.documentElement.style.fontSize = `${currentZoom}%`;
+        }
+      });
+      btnReset.addEventListener('click', () => {
+        currentZoom = 100;
+        document.documentElement.style.fontSize = '100%';
+      });
+      btnInc.addEventListener('click', () => {
+        if (currentZoom < 125) {
+          currentZoom += 5;
+          document.documentElement.style.fontSize = `${currentZoom}%`;
+        }
+      });
+    }
+
+    // 4. Initial Translation pass
+    applyLanguageToDOM();
+
+    // 5. Category Filter Toggle
+    const filterBtns = document.querySelectorAll('.category-pill-btn');
+    const secCitizen = document.getElementById('sec-cat-citizen');
+    const secTrader = document.getElementById('sec-cat-trader');
+    const secDept = document.getElementById('sec-cat-dept');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => {
+          b.classList.remove('active');
+          b.style.background = '#ffffff';
+          b.style.color = 'var(--india-blue)';
+          b.style.borderColor = '#cbd5e1';
+        });
+        btn.classList.add('active');
+        btn.style.background = 'var(--india-blue)';
+        btn.style.color = '#ffffff';
+        btn.style.borderColor = 'var(--india-blue)';
+
+        const target = btn.getAttribute('data-filter');
+        if (target === 'all') {
+          if (secCitizen) secCitizen.style.display = 'block';
+          if (secTrader) secTrader.style.display = 'block';
+          if (secDept) secDept.style.display = 'block';
+        } else if (target === 'citizen') {
+          if (secCitizen) secCitizen.style.display = 'block';
+          if (secTrader) secTrader.style.display = 'none';
+          if (secDept) secDept.style.display = 'none';
+        } else if (target === 'trader') {
+          if (secCitizen) secCitizen.style.display = 'none';
+          if (secTrader) secTrader.style.display = 'block';
+          if (secDept) secDept.style.display = 'none';
+        } else if (target === 'dept') {
+          if (secCitizen) secCitizen.style.display = 'none';
+          if (secTrader) secTrader.style.display = 'none';
+          if (secDept) secDept.style.display = 'block';
+        }
+      });
+    });
+
+    // 6. Navigation Active State Resolver
+    const currentPath = (window.location.pathname || '').toLowerCase();
+    const navLinks = document.querySelectorAll('.gateway-nav .nav-list a');
+    navLinks.forEach(link => {
+      const href = (link.getAttribute('href') || '').toLowerCase();
+      let isMatch = false;
+      if (href === '/' || href === '/index.html' || href === 'index.html') {
+        isMatch = currentPath === '/' || (currentPath.endsWith('/index.html') && !currentPath.includes('/landing/') && !currentPath.includes('/portal/'));
+      } else {
+        isMatch = currentPath.includes(href.replace(/^\//, ''));
+      }
+      if (isMatch) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+
+    // 7. Scroll-To-Top Button Handler
+    const btnScrollTop = document.getElementById('btn-scroll-top');
+    if (btnScrollTop) {
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+          btnScrollTop.style.display = 'flex';
+          btnScrollTop.style.opacity = '1';
+        } else {
+          btnScrollTop.style.opacity = '0';
+        }
+      });
+      btnScrollTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+  </script>
+</body>
+</html>

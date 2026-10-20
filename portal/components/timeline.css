@@ -1,0 +1,138 @@
+/* ==========================================================================
+   LEGAL MATRIX: APPLICATION TRACKING TIMELINE
+   Horizontal & Vertical Visual Progress
+   ========================================================================== */
+
+.tracking-timeline-h {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  position: relative;
+  margin: var(--space-6) 0;
+  padding: 0 var(--space-4);
+}
+
+.timeline-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  flex: 1;
+  text-align: center;
+}
+
+.timeline-step:not(:first-child)::before {
+  content: "";
+  position: absolute;
+  top: 14px;
+  right: 50%;
+  left: -50%;
+  height: 4px;
+  background-color: var(--color-border-subtle);
+  z-index: 1;
+}
+
+.timeline-step.is-done:not(:first-child)::before {
+  background-color: var(--color-success);
+}
+
+.timeline-step.is-current:not(:first-child)::before {
+  background: linear-gradient(to right, var(--color-success) 50%, var(--color-primary) 50%);
+}
+
+.timeline-node {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-bg-surface);
+  border: 3px solid var(--color-border-medium);
+  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  z-index: 2;
+  margin-bottom: var(--space-2);
+  transition: all var(--transition-fast);
+}
+
+.timeline-step.is-done .timeline-node {
+  background-color: var(--color-success);
+  border-color: var(--color-success);
+  color: var(--color-text-inverse);
+}
+
+.timeline-step.is-current .timeline-node {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-text-inverse);
+  box-shadow: 0 0 0 4px var(--color-primary-subtle);
+}
+
+.timeline-title {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-main);
+}
+
+.timeline-step.is-done .timeline-title {
+  color: var(--color-success-text);
+}
+
+.timeline-step.is-current .timeline-title {
+  color: var(--color-primary);
+}
+
+.timeline-date {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+/* Vertical Timeline for Mobile or Sidebar Widget */
+.tracking-timeline-v {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  position: relative;
+  padding-left: var(--space-6);
+}
+
+.tracking-timeline-v::before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  bottom: 10px;
+  left: 12px;
+  width: 2px;
+  background-color: var(--color-border-subtle);
+}
+
+.timeline-item-v {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  position: relative;
+}
+
+.timeline-bullet-v {
+  position: absolute;
+  left: -20px;
+  top: 2px;
+  width: 14px;
+  height: 14px;
+  border-radius: var(--radius-full);
+  background: var(--color-bg-surface);
+  border: 2px solid var(--color-border-medium);
+}
+
+.timeline-item-v.is-done .timeline-bullet-v {
+  background: var(--color-success);
+  border-color: var(--color-success);
+}
+
+.timeline-item-v.is-current .timeline-bullet-v {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-subtle);
+}

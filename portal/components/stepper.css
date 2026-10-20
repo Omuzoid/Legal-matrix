@@ -1,0 +1,108 @@
+/* ==========================================================================
+   LEGAL MATRIX: STEPPER COMPONENT
+   Visual multi-step wizard progress indicator
+   ========================================================================== */
+
+.stepper-container {
+  width: 100%;
+  margin-bottom: var(--space-8);
+  padding: var(--space-4) 0;
+}
+
+.stepper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  list-style: none;
+}
+
+.step-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  text-align: center;
+}
+
+/* Connecting Line */
+.step-item:not(:first-child)::before {
+  content: "";
+  position: absolute;
+  top: 18px;
+  right: 50%;
+  left: -50%;
+  height: 3px;
+  background-color: var(--color-border-subtle);
+  z-index: -1;
+  transition: background-color var(--transition-normal);
+}
+
+.step-item.is-completed::before,
+.step-item.is-active::before {
+  background-color: var(--color-success);
+}
+
+/* Step Circle */
+.step-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-bg-surface);
+  border: 2px solid var(--color-border-medium);
+  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-sm);
+  margin-bottom: var(--space-2);
+  transition: all var(--transition-fast);
+}
+
+/* Active Step */
+.step-item.is-active .step-circle {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-text-inverse);
+  box-shadow: 0 0 0 4px var(--color-primary-subtle);
+}
+
+/* Completed Step */
+.step-item.is-completed .step-circle {
+  background-color: var(--color-success);
+  border-color: var(--color-success);
+  color: var(--color-text-inverse);
+}
+
+/* Step Label */
+.step-label {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.step-item.is-active .step-label {
+  color: var(--color-primary);
+  font-weight: var(--font-weight-bold);
+}
+
+.step-item.is-completed .step-label {
+  color: var(--color-success-text);
+}
+
+/* Mobile Stepper (Stacked / Condensed) */
+@media (max-width: 639px) {
+  .step-label {
+    display: none;
+  }
+  .step-item.is-active .step-label {
+    display: block;
+    position: absolute;
+    top: 42px;
+    font-size: var(--font-size-xs);
+  }
+}

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy: Legal Matrix</title>
+  <link rel="icon" type="image/svg+xml" href="../../assets/icons/favicon.svg">
+  <link rel="stylesheet" href="../../css/variables.css">
+  <link rel="stylesheet" href="../../css/base.css">
+  <link rel="stylesheet" href="../../css/layout.css">
+  <link rel="stylesheet" href="../../components/button.css">
+  <link rel="stylesheet" href="../../components/card.css">
+  <style>
+    .policy-content-box {
+      background: #ffffff;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 32px;
+      margin-bottom: var(--space-8);
+      box-shadow: var(--shadow-sm);
+    }
+    .policy-content-box h2 {
+      font-size: 18px;
+      color: var(--india-blue);
+      margin-top: 24px;
+      margin-bottom: 8px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .policy-content-box h2:first-of-type {
+      margin-top: 0;
+    }
+    .policy-content-box p {
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--text-secondary);
+    }
+    .policy-content-box ul {
+      margin-left: 20px;
+      margin-bottom: var(--space-3);
+    }
+  </style>
+</head>
+<body>
+  <div id="app-header-container"></div>
+
+  <main id="main-content" class="container" style="padding-top: var(--space-6); flex-grow: 1;">
+    <div style="margin-bottom: var(--space-4);">
+      <h1 style="font-size: var(--font-size-2xl); margin-bottom: 4px; color: var(--india-blue); display: flex; align-items: center; gap: 8px;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span data-i18n="footer.privacy">Privacy Policy</span>
+      </h1>
+      <p style="margin: 0; color: var(--text-muted); font-size: 13px;">
+        National Legal Metrology Digital Services &bull; Statutory Privacy and Information Security Framework
+      </p>
+    </div>
+
+    <div class="policy-content-box">
+      <h2>1. Information We Collect</h2>
+      <p>Legal Matrix collects only the data necessary to provide legally mandated metrological verification, certificate generation, and consumer grievance processing:</p>
+      <ul>
+        <li><strong>Commercial Particulars:</strong> Trader trade name, shop address, GSTIN or commercial registration number, and proprietor contact details.</li>
+        <li><strong>Instrument Technical Specifications:</strong> Instrument category (scale, dispenser, meter), manufacturer make, model, capacity, verification scale division, and device serial numbers.</li>
+        <li><strong>Inspection Evidence:</strong> Observed calibration errors, Maximum Permissible Error tolerance checks, inspection location coordinates, and stamping seals.</li>
+        <li><strong>Consumer Grievance Particulars:</strong> Reporting establishment name, location, observed discrepancy, and optional citizen contact mobile number for SMS status updates.</li>
+      </ul>
+
+      <h2>2. How Information Is Used</h2>
+      <p>Collected information is processed solely for public interest and statutory enforcement:</p>
+      <ul>
+        <li>Scheduling official field verification visits by authorized Legal Metrology officers.</li>
+        <li>Validating observed calibration readings against legally prescribed tolerances under the Legal Metrology (General) Rules, 2011.</li>
+        <li>Generating tamper-evident digital certificates with QR validation codes.</li>
+        <li>Enabling public consumers to independently verify authenticity of trader certificates at retail counters.</li>
+      </ul>
+
+      <h2>3. Data Security</h2>
+      <p>We implement defense-in-depth principles in line with the Government of India Guidelines for Indian Government Websites (GIGW) and National Informatics Centre standards:</p>
+      <ul>
+        <li>Role-Based Access Control (RBAC) ensuring only authorized field inspectors and administrative officers access operational inspection queues.</li>
+        <li>Client-side input sanitization and cryptographic hashing for certificate transaction records.</li>
+        <li>Zero storage of sensitive account credentials in unencrypted browser storage.</li>
+      </ul>
+
+      <h2>4. Data Sharing and Disclosure</h2>
+      <p>Legal Matrix does not sell, lease, or commercialize any trader or citizen data. Information is disclosed strictly to authorized State Legal Metrology Directorates and Central Government authorities for statutory enforcement under the Legal Metrology Act, 2009.</p>
+
+      <h2>5. Cookies and Local Storage</h2>
+      <p>This portal utilizes local browser storage strictly for essential user experience functions:</p>
+      <ul>
+        <li>Saving in-progress multi-step form drafts to prevent data loss during network disruptions.</li>
+        <li>Managing authenticated session tokens. No third-party advertising or tracking cookies are employed.</li>
+      </ul>
+
+      <h2>6. Data Retention</h2>
+      <p>Official calibration records and stamped verification certificates are retained in the tamper-evident state ledger for the statutory validity period of the instrument (typically one to two years depending on instrument class) plus legal audit buffer requirements.</p>
+
+      <h2>7. User Rights</h2>
+      <p>Registered traders have the right to inspect their registered instrument records, download official digital certificates, and request formal correction of clerical errors through their designated district inspector.</p>
+
+      <h2>8. Contact Information</h2>
+      <p id="contact">For queries concerning legal metrology digital services or statutory standards, refer to:</p>
+      <div style="background: var(--surface-muted); padding: 14px 18px; border-radius: var(--radius-sm); font-size: 13px; border-left: 3px solid var(--india-saffron);">
+        <strong>Legal Metrology Division</strong><br>
+        Department of Consumer Affairs, Ministry of Consumer Affairs, Food & Public Distribution<br>
+        Government of India, Krishi Bhawan, New Delhi - 110001<br>
+        Official Portal: <a href="https://consumeraffairs.nic.in/" target="_blank" rel="noopener noreferrer" style="color: var(--india-blue); font-weight: 600;">https://consumeraffairs.nic.in/</a>
+      </div>
+
+      <h2>9. Policy Updates</h2>
+      <p>This policy may be amended to incorporate evolving standards, statutory notifications, or Central Government directives. All revisions will be published on this page with updated effective timestamps.</p>
+    </div>
+  </main>
+
+  <div id="app-footer-container"></div>
+
+  <script type="module">
+    import { injectHeader } from '../../layouts/header.js';
+    import { injectFooter } from '../../layouts/footer.js';
+    import { applyLanguageToDOM, onLanguageChange } from '../../i18n/i18n.js';
+
+    injectHeader('app-header-container');
+    injectFooter('app-footer-container');
+
+    applyLanguageToDOM();
+    onLanguageChange(() => applyLanguageToDOM());
+  </script>
+</body>
+</html>

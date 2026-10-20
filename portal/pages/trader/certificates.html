@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Legal Metrology Verification Certificate: Legal Matrix</title>
+  <link rel="icon" type="image/svg+xml" href="../../assets/icons/favicon.svg">
+  <link rel="stylesheet" href="../../css/variables.css">
+  <link rel="stylesheet" href="../../css/base.css">
+  <link rel="stylesheet" href="../../css/layout.css">
+  <link rel="stylesheet" href="../../components/button.css">
+  <link rel="stylesheet" href="../../components/card.css">
+  <style>
+    .cert-page-wrapper {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: var(--space-6) var(--space-4);
+      flex-grow: 1;
+    }
+    .certificate-frame {
+      background: #ffffff;
+      border: 8px double #0b3558;
+      border-radius: var(--radius-sm);
+      padding: var(--space-8);
+      position: relative;
+      box-shadow: var(--shadow-lg);
+      background-image: radial-gradient(circle at center, rgba(11, 53, 88, 0.03) 0%, transparent 75%);
+    }
+    .cert-heading-main {
+      font-size: 24px;
+      text-align: center;
+      letter-spacing: 0.5px;
+      color: var(--color-primary);
+      text-transform: uppercase;
+      margin-bottom: 2px;
+      font-weight: 800;
+    }
+    .cert-subheading {
+      text-align: center;
+      font-size: 13px;
+      color: var(--color-text-secondary);
+      margin-bottom: var(--space-6);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .cert-body-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+      align-items: center;
+    }
+    @media (min-width: 680px) {
+      .cert-body-grid {
+        grid-template-columns: 2fr 1fr;
+      }
+    }
+    .cert-details-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .cert-details-table td {
+      padding: 9px 0;
+      border-bottom: 1px solid var(--color-border-subtle);
+      font-size: 14px;
+    }
+    .cert-details-table td:first-child {
+      color: var(--color-text-secondary);
+      font-weight: 500;
+      width: 42%;
+    }
+    .cert-details-table td:last-child {
+      font-weight: 600;
+      color: var(--color-text-main);
+    }
+    .qr-box-cert {
+      border: 1px solid var(--color-border-medium);
+      border-radius: var(--radius-sm);
+      padding: var(--space-4);
+      text-align: center;
+      background: var(--color-bg-subtle);
+    }
+    .qr-code-img {
+      width: 130px;
+      height: 130px;
+      margin: 0 auto var(--space-2) auto;
+      background: #fff;
+      padding: 6px;
+      border: 1px solid var(--color-border-medium);
+      border-radius: 2px;
+    }
+    .cert-actions-bar {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-3);
+      margin-top: var(--space-6);
+      flex-wrap: wrap;
+    }
+
+    @media print {
+      body { background: #ffffff; }
+      #app-header-container, #app-footer-container, .cert-actions-bar, .app-sidebar {
+        display: none !important;
+      }
+      .certificate-frame {
+        box-shadow: none;
+        border: 4px double #000;
+        margin: 0;
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="app-header-container"></div>
+
+  <main id="main-content" class="cert-page-wrapper">
+    <div id="cert-view-container">
+      <!-- Loading indicator -->
+      <div style="text-align: center; padding: 48px 0;">
+        <div class="btn is-loading" style="width: 36px; height: 36px; margin: 0 auto;"></div>
+        <p style="margin-top: 14px; font-size: 14px; color: var(--color-text-secondary); font-weight: 600;">Loading verification certificate...</p>
+      </div>
+    </div>
+  </main>
+
+  <div id="app-footer-container"></div>
+
+  <script type="module">
+    import { injectHeader } from '../../layouts/header.js';
+    import { injectFooter } from '../../layouts/footer.js';
+    import { certificateService } from '../../services/certificateService.js';
+
+    injectHeader('app-header-container');
+    injectFooter('app-footer-container');
+
+    const container = document.getElementById('cert-view-container');
+    const urlParams = new URLSearchParams(window.location.search);
+    const certCode = urlParams.get('cert');
+
+    function renderEmptyState() {
+      container.innerHTML = `
+        <div style="text-align: center; padding: 48px 24px; background: #ffffff; border: 1.5px dashed var(--color-border-medium); border-radius: var(--radius-md); max-width: 680px; margin: 40px auto; box-shadow: var(--shadow-sm);">
+          <div style="width: 56px; height: 56px; border-radius: 50%; background: var(--color-primary-light); color: var(--color-primary); display: inline-flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><path d="m9 12 2 2 4-4"/></svg>
+          </div>
+          <h2 style="font-size: 20px; color: var(--color-primary); font-weight: 800; margin-bottom: 8px;">No Certificate Selected or Issued Yet</h2>
+          <p style="font-size: 14px; color: var(--color-text-secondary); max-width: 480px; margin: 0 auto 20px auto; line-height: 1.55;">
+            Official Legal Metrology stamping certificates are issued upon completion of physical calibration inspection and verification fee acknowledgment.
+          </p>
+          <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+            <a href="/portal/pages/public/verify-qr.html" class="btn btn-primary btn-sm">
+              Verify Certificate by QR
+            </a>
+            <a href="/portal/pages/trader/register-instrument.html" class="btn btn-outline btn-sm">
+              Register Instrument Form V
+            </a>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderCertificate(cert) {
+      container.innerHTML = `
+        <div class="certificate-frame" id="printable-certificate">
+          <div style="text-align: center; margin-bottom: var(--space-4);">
+            <svg width="44" height="44" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+              <rect width="48" height="48" rx="6" fill="#0b3558"/>
+              <rect x="10" y="38" width="28" height="3" rx="1" fill="#d97706"/>
+              <rect x="22.5" y="10" width="3" height="28" rx="1" fill="#ffffff"/>
+              <rect x="8" y="14" width="32" height="3" rx="1" fill="#ffffff"/>
+              <path d="M 6 26 Q 12 30 18 26 Z" fill="#d97706"/>
+              <path d="M 30 26 Q 36 30 42 26 Z" fill="#d97706"/>
+            </svg>
+            <div style="font-weight: 700; font-size: 13px; color: var(--color-primary); margin-top: 6px; text-transform: uppercase;">
+              ${cert.issuingAuthority || 'Department of Legal Metrology'}
+            </div>
+          </div>
+
+          <h1 class="cert-heading-main">Certificate of Verification</h1>
+          <div class="cert-subheading">Issued under Section 24 of the Legal Metrology Act, 2009</div>
+
+          <div class="cert-body-grid">
+            <div>
+              <table class="cert-details-table">
+                <tr>
+                  <td>Certificate Reference</td>
+                  <td><strong style="color: var(--color-primary);">${cert.certificateNumber}</strong></td>
+                </tr>
+                <tr>
+                  <td>Instrument Category</td>
+                  <td>${cert.instrument || 'Commercial Weighing Instrument'}</td>
+                </tr>
+                <tr>
+                  <td>Manufacturer Make & Model</td>
+                  <td>${cert.model || 'Standard'}</td>
+                </tr>
+                <tr>
+                  <td>Device Serial Number</td>
+                  <td>${cert.serialNumber || 'Stamped'}</td>
+                </tr>
+                <tr>
+                  <td>Registered Establishment</td>
+                  <td>${cert.owner || 'Licensed Commercial Trader'}</td>
+                </tr>
+                <tr>
+                  <td>Date of Verification</td>
+                  <td>${cert.issueDate || 'Recent'}</td>
+                </tr>
+                <tr>
+                  <td>Valid Until</td>
+                  <td>${cert.validUntil || 'Active'}</td>
+                </tr>
+                <tr>
+                  <td>Verification Status</td>
+                  <td><span class="badge badge-success">&#x2713; Stamped and Valid</span></td>
+                </tr>
+              </table>
+            </div>
+
+            <div class="qr-box-cert">
+              <div class="qr-code-img">
+                <svg viewBox="0 0 100 100" width="100%" height="100%">
+                  <rect width="100" height="100" fill="#ffffff"/>
+                  <rect x="5" y="5" width="28" height="28" fill="#0b3558"/>
+                  <rect x="9" y="9" width="20" height="20" fill="#ffffff"/>
+                  <rect x="13" y="13" width="12" height="12" fill="#0b3558"/>
+                  <rect x="67" y="5" width="28" height="28" fill="#0b3558"/>
+                  <rect x="71" y="9" width="20" height="20" fill="#ffffff"/>
+                  <rect x="75" y="13" width="12" height="12" fill="#0b3558"/>
+                  <rect x="5" y="67" width="28" height="28" fill="#0b3558"/>
+                  <rect x="9" y="71" width="20" height="20" fill="#ffffff"/>
+                  <rect x="13" y="75" width="12" height="12" fill="#0b3558"/>
+                  <rect x="40" y="8" width="6" height="6" fill="#0b3558"/>
+                  <rect x="52" y="8" width="6" height="6" fill="#0b3558"/>
+                  <rect x="40" y="40" width="8" height="8" fill="#0b3558"/>
+                  <rect x="54" y="40" width="6" height="6" fill="#0b3558"/>
+                  <rect x="68" y="40" width="6" height="6" fill="#0b3558"/>
+                  <rect x="80" y="40" width="8" height="8" fill="#0b3558"/>
+                  <rect x="40" y="54" width="6" height="6" fill="#0b3558"/>
+                  <rect x="52" y="60" width="8" height="8" fill="#0b3558"/>
+                  <rect x="70" y="70" width="10" height="10" fill="#0b3558"/>
+                </svg>
+              </div>
+              <div style="font-size: 12px; font-weight: 700; color: var(--color-primary);">Scan to Verify Stamping</div>
+              <div style="font-size: 11px; color: var(--color-text-muted); margin-top: 2px;">National Digital Metrology QR</div>
+            </div>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-top: var(--space-6); padding-top: var(--space-4); border-top: 1px solid var(--color-border-subtle); flex-wrap: wrap; gap: 12px;">
+            <div style="font-size: 12px; color: var(--color-text-secondary);">
+              <div>Statutory Verification Seal Number: <strong>${cert.stampSealNumber || 'OFFICIAL-STAMP'}</strong></div>
+              <div>Observed Error: <strong>${cert.observedError || '0.20 g'}</strong> (Permissible Limit: ${cert.mpeAllowed || '+/-0.50 g'})</div>
+            </div>
+            <div style="text-align: right;">
+              <div style="font-weight: 700; font-size: 13px; color: var(--color-primary);">Authorized Legal Metrology Officer</div>
+              <div style="font-size: 11px; color: var(--color-text-secondary);">Enforcement Wing, Directorate of Legal Metrology</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cert-actions-bar">
+          <button type="button" class="btn btn-primary btn-sm" onclick="window.print();">
+            Print Certificate
+          </button>
+          <a href="/portal/pages/public/verify-qr.html?cert=${encodeURIComponent(cert.certificateNumber)}" class="btn btn-secondary btn-sm">
+            Public Verification Screen &rarr;
+          </a>
+        </div>
+      `;
+    }
+
+    if (certCode) {
+      certificateService.getCertificate(certCode)
+        .then(data => {
+          if (data && data.certificateNumber) {
+            renderCertificate(data);
+          } else {
+            renderEmptyState();
+          }
+        })
+        .catch(() => renderEmptyState());
+    } else {
+      renderEmptyState();
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms and Conditions: Legal Matrix</title>
+  <link rel="icon" type="image/svg+xml" href="../../assets/icons/favicon.svg">
+  <link rel="stylesheet" href="../../css/variables.css">
+  <link rel="stylesheet" href="../../css/base.css">
+  <link rel="stylesheet" href="../../css/layout.css">
+  <link rel="stylesheet" href="../../components/button.css">
+  <link rel="stylesheet" href="../../components/card.css">
+  <style>
+    .terms-content-box {
+      background: #ffffff;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 32px;
+      margin-bottom: var(--space-8);
+      box-shadow: var(--shadow-sm);
+    }
+    .terms-content-box h2 {
+      font-size: 18px;
+      color: var(--india-blue);
+      margin-top: 24px;
+      margin-bottom: 8px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .terms-content-box h2:first-of-type {
+      margin-top: 0;
+    }
+    .terms-content-box p {
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--text-secondary);
+    }
+    .terms-content-box ul {
+      margin-left: 20px;
+      margin-bottom: var(--space-3);
+    }
+  </style>
+</head>
+<body>
+  <div id="app-header-container"></div>
+
+  <main id="main-content" class="container" style="padding-top: var(--space-6); flex-grow: 1;">
+    <div style="margin-bottom: var(--space-4);">
+      <h1 style="font-size: var(--font-size-2xl); margin-bottom: 4px; color: var(--india-blue); display: flex; align-items: center; gap: 8px;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        <span data-i18n="footer.terms">Terms & Conditions</span>
+      </h1>
+      <p style="margin: 0; color: var(--text-muted); font-size: 13px;">
+        National Legal Metrology Digital Services &bull; Statutory Framework: Legal Metrology Act, 2009
+      </p>
+    </div>
+
+    <div class="terms-content-box">
+      <h2>1. Use of Service</h2>
+      <p>Legal Matrix provides electronic facilitation for legal metrology verification, digital certificate generation, application tracking, and consumer grievance submission. Access to this platform is granted subject to strict compliance with these terms and applicable provisions of the Legal Metrology Act, 2009, and the Legal Metrology (General) Rules, 2011.</p>
+
+      <h2>2. User Responsibilities</h2>
+      <p>Users of this platform undertake that:</p>
+      <ul>
+        <li>All information provided regarding merchant identity, commercial premises, and instrument technical specifications is accurate, complete, and legally truthful.</li>
+        <li>Measuring instruments submitted for verification are maintained in clean condition and presented at the scheduled time with necessary manufacturer documentation.</li>
+        <li>No attempt will be made to alter or tamper with electronic seals, serial numbers, or certification outputs.</li>
+      </ul>
+
+      <h2>3. Service Availability</h2>
+      <p>While the system is architected for continuous public availability, the administration does not warrant uninterrupted service during scheduled maintenance windows, infrastructure updates, or unexpected network outages. Offline draft facilities are provided to protect user entries during transient connectivity issues.</p>
+
+      <h2>4. Application Processing and Stamping</h2>
+      <p>Online registration of an instrument does not constitute certification. Certification is concluded only after an authorized Legal Metrology Officer has performed physical verification using standard test weights, computed Maximum Permissible Error tolerance conformance, and affixed the requisite seal.</p>
+
+      <h2>5. Digital Certificates and QR Verification</h2>
+      <p>Certificates generated through Legal Matrix bear a unique verification identifier and digital QR token. Consumers and statutory enforcement personnel may scan this token to inspect live certificate status. A digital certificate becomes invalid immediately upon expiration of the statutory validity period or upon formal revocation by an enforcement officer.</p>
+
+      <h2>6. Prohibited Activities</h2>
+      <p>Users shall not:</p>
+      <ul>
+        <li>Submit fraudulent or fabricated measuring instrument serial numbers.</li>
+        <li>Impersonate an authorized Legal Metrology inspector, calibration officer, or administrative controller.</li>
+        <li>Introduce malicious software, automated extraction scripts, or automated load testing tools without authorization.</li>
+        <li>Mislead consumers using expired, copied, or forged verification certificates.</li>
+      </ul>
+
+      <h2>7. Intellectual Property and Institutional Marks</h2>
+      <p>The layout, software code, graphic tokens, and design elements of Legal Matrix belong to the project architects and contributing authorities. National emblems and official governmental references remain the protected property of the Government of India and the Ministry of Consumer Affairs, Food & Public Distribution.</p>
+
+      <h2>8. Statutory Disclaimers</h2>
+      <p>Official legal metrology verification and statutory compliance are administered under the Legal Metrology Act, 2009, and state enforcement directorates. The administration disclaims liability for commercial losses arising from delays in field inspection, trader non-compliance, or equipment failure during physical testing.</p>
+
+      <h2>9. Changes to Terms</h2>
+      <p>Terms and conditions may be updated periodically to reflect amendments in legal metrology rules, statutory fee schedules, or administrative procedures. Continued usage after modifications indicates acceptance of revised terms.</p>
+
+      <h2 id="guidelines">10. Official Metrology Guidelines and References</h2>
+      <p>Traders and manufacturers should consult official regulatory resources for complete statutory compliance:</p>
+      <ul>
+        <li>Legal Metrology Act, 2009 (Act No. 1 of 2010).</li>
+        <li>Legal Metrology (General) Rules, 2011.</li>
+        <li>Legal Metrology (Packaged Commodities) Rules, 2011.</li>
+        <li>Department of Consumer Affairs Official Portal: <a href="https://consumeraffairs.nic.in/" target="_blank" rel="noopener noreferrer" style="color: var(--india-blue); font-weight: 600;">https://consumeraffairs.nic.in/</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <div id="app-footer-container"></div>
+
+  <script type="module">
+    import { injectHeader } from '../../layouts/header.js';
+    import { injectFooter } from '../../layouts/footer.js';
+    import { applyLanguageToDOM, onLanguageChange } from '../../i18n/i18n.js';
+
+    injectHeader('app-header-container');
+    injectFooter('app-footer-container');
+
+    applyLanguageToDOM();
+    onLanguageChange(() => applyLanguageToDOM());
+  </script>
+</body>
+</html>

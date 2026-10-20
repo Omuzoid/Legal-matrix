@@ -1,0 +1,178 @@
+/* ==========================================================================
+   LEGAL MATRIX: BUTTON COMPONENTS
+   Government Portal Standard | 44px Touch Targets | Restrained 4px-6px Radius
+   ========================================================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: var(--touch-target-min);
+  padding: 8px 18px;
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.4;
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast), color var(--transition-fast);
+  white-space: nowrap;
+  user-select: none;
+}
+
+.btn:hover:not(:disabled):not(.is-disabled) {
+  transform: translateY(-2px);
+}
+
+.btn:active:not(:disabled):not(.is-disabled) {
+  transform: translateY(1px) scale(0.99);
+}
+
+.btn svg, .btn .btn-arrow, .btn .btn-icon {
+  transition: transform var(--transition-fast);
+}
+
+.btn:hover:not(:disabled):not(.is-disabled) svg:not(.btn-spin),
+.btn:hover:not(:disabled):not(.is-disabled) .btn-arrow {
+  transform: translateX(3px);
+}
+
+.btn:disabled, .btn.is-disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+  transform: none !important;
+}
+
+/* Primary Button (Government Navy) */
+.btn-primary {
+  background-color: var(--color-primary);
+  color: var(--color-text-inverse);
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-primary:hover:not(:disabled):not(.is-disabled) {
+  background-color: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
+  color: var(--color-text-inverse);
+  box-shadow: var(--shadow-btn-hover);
+}
+
+/* Secondary Button (Structured Light Blue) */
+.btn-secondary {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+  border-color: var(--color-primary-border);
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-primary-subtle);
+  color: var(--color-primary-hover);
+}
+
+/* Outlined Button */
+.btn-outline {
+  background-color: transparent;
+  color: var(--color-primary);
+  border-color: var(--color-border-dark);
+}
+
+.btn-outline:hover {
+  background-color: var(--color-bg-subtle);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+/* Accent Saffron Button */
+.btn-accent {
+  background-color: var(--color-accent-saffron);
+  color: #ffffff;
+  border-color: var(--color-accent-saffron);
+}
+
+.btn-accent:hover:not(:disabled):not(.is-disabled) {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #ffffff;
+  box-shadow: 0 6px 18px rgba(234, 88, 12, 0.28);
+}
+
+/* Danger Button */
+.btn-danger {
+  background-color: var(--color-danger);
+  color: var(--color-text-inverse);
+  border-color: var(--color-danger);
+}
+
+.btn-danger:hover:not(:disabled):not(.is-disabled) {
+  background-color: var(--color-danger-hover);
+  box-shadow: 0 4px 14px rgba(185, 28, 28, 0.24);
+}
+
+/* Success Button */
+.btn-success {
+  background-color: var(--color-success);
+  color: var(--color-text-inverse);
+  border-color: var(--color-success);
+}
+
+.btn-success:hover:not(:disabled):not(.is-disabled) {
+  background-color: var(--color-success-hover);
+  box-shadow: 0 4px 14px rgba(21, 128, 61, 0.24);
+}
+
+/* Button Sizing */
+.btn-sm {
+  min-height: 36px;
+  padding: 6px 12px;
+  font-size: var(--font-size-sm);
+}
+
+.btn-lg {
+  min-height: 46px;
+  padding: 10px 22px;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+}
+
+.btn-block {
+  width: 100%;
+}
+
+/* Loading Spinner on Button */
+.btn.is-loading {
+  position: relative;
+  color: transparent !important;
+  pointer-events: none;
+  transform: none !important;
+}
+
+.btn.is-loading::after {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: btn-spin 0.6s linear infinite;
+}
+
+.btn-secondary.is-loading::after, .btn-outline.is-loading::after {
+  border-top-color: var(--color-primary);
+}
+
+@keyframes btn-spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn, .btn:hover, .btn:active, .btn svg, .btn .btn-arrow, .btn .btn-icon {
+    transform: none !important;
+    transition: none !important;
+  }
+}

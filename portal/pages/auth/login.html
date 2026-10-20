@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login: Legal Matrix Official Portal</title>
+  <link rel="icon" type="image/svg+xml" href="../../assets/icons/favicon.svg">
+  <link rel="stylesheet" href="../../css/variables.css">
+  <link rel="stylesheet" href="../../css/base.css">
+  <link rel="stylesheet" href="../../css/layout.css">
+  <link rel="stylesheet" href="../../components/button.css">
+  <link rel="stylesheet" href="../../components/card.css">
+  <style>
+    .login-container {
+      max-width: 500px;
+      margin: var(--space-8) auto;
+      padding: 0 var(--space-4);
+      flex-grow: 1;
+    }
+    .login-box {
+      background: var(--color-bg-surface);
+      border: 1px solid var(--color-border-medium);
+      border-top: 4px solid var(--color-primary);
+      border-radius: var(--radius-sm);
+      padding: var(--space-6);
+      box-shadow: var(--shadow-md);
+    }
+    .role-tabs {
+      display: flex;
+      border-bottom: 2px solid var(--color-border-subtle);
+      margin-bottom: var(--space-5);
+    }
+    .role-tab-btn {
+      flex: 1;
+      padding: 10px 8px;
+      text-align: center;
+      background: transparent;
+      border: none;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--color-text-secondary);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+      transition: all var(--transition-fast);
+    }
+    .role-tab-btn.active {
+      color: var(--color-primary);
+      border-bottom-color: var(--color-primary);
+      background: var(--color-bg-subtle);
+    }
+  </style>
+</head>
+<body>
+  <div id="app-header-container"></div>
+
+  <main id="main-content" class="login-container">
+    <div style="text-align: center; margin-bottom: var(--space-5);">
+      <h1 style="font-size: var(--font-size-2xl); margin-bottom: 4px;" data-i18n="auth.portal_title">Departmental & Trader Login</h1>
+      <p style="margin: 0; color: var(--color-text-secondary); font-size: 13px;" data-i18n="auth.portal_subtitle">
+        Authentication portal for registered traders, field inspectors, and administrators.
+      </p>
+    </div>
+
+    <div class="login-box">
+      <!-- Institutional Role Selection Tabs -->
+      <div class="role-tabs" role="tablist" aria-label="Portal User Role">
+        <button type="button" class="role-tab-btn active" data-role="TRADER" role="tab" aria-selected="true" data-i18n="auth.tab_trader">
+          Trader / Merchant
+        </button>
+        <button type="button" class="role-tab-btn" data-role="INSPECTOR" role="tab" aria-selected="false" data-i18n="auth.tab_inspector">
+          Field Inspector
+        </button>
+        <button type="button" class="role-tab-btn" data-role="ADMIN" role="tab" aria-selected="false" data-i18n="auth.tab_admin">
+          Administrator
+        </button>
+      </div>
+
+      <div style="background: var(--india-blue-subtle); border: 1px solid #bae6fd; padding: 8px 12px; border-radius: 4px; font-size: 12px; color: var(--india-blue); margin-bottom: 16px;" data-i18n="auth.citizen_notice">
+        Note for General Citizens: An account is not required to verify certificates or report consumer grievances. Use the public verification portal directly.
+      </div>
+
+      <form id="login-form" novalidate>
+        <div style="margin-bottom: var(--space-4);">
+          <label for="login-identifier" id="identifier-label">Registered Mobile Number or Email</label>
+          <input 
+            type="text" 
+            id="login-identifier" 
+            placeholder="e.g., 9876543210 or official email" 
+            required
+            style="font-size: 14px;"
+          >
+          <span class="form-hint" id="identifier-hint">Enter your mobile number registered with Legal Metrology.</span>
+        </div>
+
+        <div style="margin-bottom: var(--space-5);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-1);">
+            <label for="login-password" style="margin-bottom: 0;" data-i18n="auth.password">Password</label>
+            <a href="javascript:void(0)" onclick="alert('Password reset link sent to registered mobile/email.');" style="font-size: 12px;" data-i18n="auth.forgot_password">Forgot password?</a>
+          </div>
+          <input 
+            type="password" 
+            id="login-password" 
+            placeholder="••••••••••••" 
+            required
+            style="font-size: 14px;"
+          >
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block" id="btn-login-submit" style="background-color: var(--india-blue); color: #ffffff; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; gap: 8px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+          <span data-i18n="auth.btn_login">Sign In to Portal</span>
+        </button>
+
+        <div style="text-align: center; margin-top: var(--space-4); font-size: 13px; color: var(--color-text-secondary); border-top: 1px solid var(--color-border-subtle); padding-top: 14px;">
+          <a href="/portal/pages/trader/register-instrument.html" data-i18n="auth.new_merchant">New merchant? Register Instrument Application</a>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <div id="app-footer-container"></div>
+
+  <script type="module">
+    import { injectHeader } from '../../layouts/header.js';
+    import { injectFooter } from '../../layouts/footer.js';
+    import { authService } from '../../services/authService.js';
+    import { validator } from '../../utils/validator.js';
+    import { t, applyLanguageToDOM, onLanguageChange } from '../../i18n/i18n.js';
+
+    injectHeader('app-header-container');
+    injectFooter('app-footer-container');
+
+    const roleTabBtns = document.querySelectorAll('.role-tab-btn');
+    let selectedRole = 'TRADER';
+
+    const idLabel = document.getElementById('identifier-label');
+    const idHint = document.getElementById('identifier-hint');
+
+    applyLanguageToDOM();
+    onLanguageChange(() => {
+      applyLanguageToDOM();
+      updateRoleTabs();
+    });
+
+    // Preset query role if passed
+    const urlParams = new URLSearchParams(window.location.search);
+    const roleParam = urlParams.get('role');
+    if (roleParam) {
+      selectedRole = roleParam.toUpperCase();
+      updateRoleTabs();
+    }
+
+    roleTabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        selectedRole = btn.dataset.role;
+        updateRoleTabs();
+      });
+    });
+
+    function updateRoleTabs() {
+      roleTabBtns.forEach(btn => {
+        const isMatch = btn.dataset.role === selectedRole;
+        btn.classList.toggle('active', isMatch);
+        btn.setAttribute('aria-selected', isMatch ? 'true' : 'false');
+      });
+
+      if (selectedRole === 'INSPECTOR') {
+        idLabel.textContent = t('auth.id_inspector', 'Inspector Government ID / Email');
+        idHint.textContent = t('auth.hint_inspector', 'Official state enforcement officer credentials.');
+      } else if (selectedRole === 'ADMIN') {
+        idLabel.textContent = t('auth.id_admin', 'Administrative Controller ID');
+        idHint.textContent = t('auth.hint_admin', 'Central or State Directorate administrative access.');
+      } else {
+        idLabel.textContent = t('auth.id_trader', 'Registered Mobile Number or Email');
+        idHint.textContent = t('auth.hint_trader', 'Enter your mobile number registered with Legal Metrology.');
+      }
+    }
+
+    updateRoleTabs();
+
+    const form = document.getElementById('login-form');
+    const submitBtn = document.getElementById('btn-login-submit');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const idInput = document.getElementById('login-identifier');
+      const passInput = document.getElementById('login-password');
+
+      let isValid = true;
+      if (!validator.isNotEmpty(idInput.value)) {
+        validator.markField(idInput, false, t('val.field_required', 'Please enter your registered ID or email'));
+        isValid = false;
+      } else {
+        validator.markField(idInput, true);
+      }
+
+      if (!validator.isNotEmpty(passInput.value)) {
+        validator.markField(passInput, false, t('val.field_required', 'Please enter your password'));
+        isValid = false;
+      } else {
+        validator.markField(passInput, true);
+      }
+
+      if (!isValid) return;
+
+      submitBtn.classList.add('is-loading');
+
+      try {
+        await authService.login(selectedRole, idInput.value, passInput.value);
+
+        if (selectedRole === 'INSPECTOR') {
+          window.location.href = '/portal/pages/inspector/dashboard.html';
+        } else if (selectedRole === 'ADMIN') {
+          window.location.href = '/portal/pages/admin/dashboard.html';
+        } else {
+          window.location.href = '/portal/pages/trader/dashboard.html';
+        }
+      } catch (err) {
+        alert(err.userMessage || t('state.error_generic', 'Login failed. Please verify your credentials.'));
+      } finally {
+        submitBtn.classList.remove('is-loading');
+      }
+    });
+  </script>
+</body>
+</html>

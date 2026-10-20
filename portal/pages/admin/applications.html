@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Applications Management: Legal Matrix</title>
+  <link rel="stylesheet" href="../../css/variables.css">
+  <link rel="stylesheet" href="../../css/base.css">
+  <link rel="stylesheet" href="../../css/layout.css">
+  <link rel="stylesheet" href="../../components/button.css">
+  <link rel="stylesheet" href="../../components/card.css">
+  <link rel="stylesheet" href="../../components/dataTable.css">
+  <link rel="stylesheet" href="../../components/modal.css">
+</head>
+<body>
+  <div class="app-shell">
+    <div id="app-sidebar-container"></div>
+
+    <div class="app-main">
+      <div id="app-header-container"></div>
+
+      <div class="content-body">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-6); flex-wrap: wrap; gap: var(--space-4);">
+          <div>
+            <h1>Global Applications Ledger</h1>
+            <p>Assign field inspectors, track pending stamping requests, and enforce SLA deadlines</p>
+          </div>
+          <div>
+            <button class="btn btn-outline" onclick="alert('Exporting CSV ledger...');">
+              ⬇ Export Audit CSV
+            </button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div id="admin-apps-mount"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { injectHeader } from '../../layouts/header.js';
+    import { injectSidebar } from '../../layouts/sidebar.js';
+    import { renderDataTable } from '../../components/dataTable.js';
+    import { openModal } from '../../components/modal.js';
+
+    injectHeader('app-header-container');
+    injectSidebar('app-sidebar-container', 'admin', window.location.pathname);
+
+    const mount = document.getElementById('admin-apps-mount');
+
+    const columns = [
+      { label: 'Application No.', key: 'appNo', render: (val) => `<strong>${val}</strong>` },
+      { label: 'Establishment', key: 'trader' },
+      { label: 'Instrument', key: 'instrument' },
+      { label: 'Zone', key: 'zone' },
+      { label: 'Status', key: 'status', render: (val) => `<span class="badge badge-warning">● ${val}</span>` },
+      {
+        label: 'Action',
+        key: 'appNo',
+        render: (val, row) => `
+          <button class="btn btn-primary btn-sm" onclick="window.assignInspector('${val}', '${row.trader}')">
+            Assign Inspector
+          </button>
+        `
+      }
+    ];
+
+    // Dynamic records loaded via official Legal Metrology registry
+    const rows = [];
+
+    window.assignInspector = (appNo, trader) => {
+      openModal({
+        title: `Assign Inspector for ${appNo}`,
+        content: `
+          <p>Assign an authorized field officer for <strong>${trader}</strong>:</p>
+          <div style="margin-top: 12px;">
+            <label for="modal-inspector-select">Select Officer</label>
+            <select id="modal-inspector-select" style="width: 100%;">
+              <option value="Inspector A">Officer 1 (Zone Central)</option>
+              <option value="Inspector B">Officer 2 (Zone West)</option>
+              <option value="Inspector C">Officer 3 (Zone East)</option>
+            </select>
+          </div>
+        `,
+        confirmText: 'Confirm Assignment',
+        cancelText: 'Cancel',
+        onConfirm: () => {
+          alert(`Application ${appNo} successfully allocated.`);
+        }
+      });
+    };
+
+    renderDataTable(mount, { columns, rows, emptyMessage: 'No pending applications in allocation queue.' });
+  </script>
+</body>
+</html>

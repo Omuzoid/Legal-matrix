@@ -1,0 +1,102 @@
+/* ==========================================================================
+   LEGAL MATRIX: ACCESSIBLE TOAST NOTIFICATIONS
+   ========================================================================== */
+
+.toast-container {
+  position: fixed;
+  bottom: var(--space-6);
+  right: var(--space-6);
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  pointer-events: none;
+}
+
+@media (max-width: 639px) {
+  .toast-container {
+    left: var(--space-4);
+    right: var(--space-4);
+    bottom: var(--space-4);
+  }
+}
+
+.toast {
+  pointer-events: auto;
+  min-width: 280px;
+  max-width: 420px;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border-subtle);
+  transform: translateY(16px);
+  opacity: 0;
+  transition: transform 260ms cubic-bezier(0.2, 0.7, 0.3, 1), opacity 260ms cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+
+.toast.is-visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.toast.is-hiding {
+  transform: translateY(10px);
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toast {
+    transform: none !important;
+    transition: opacity 100ms ease !important;
+  }
+}
+
+.toast-success {
+  border-left: 5px solid var(--color-success);
+}
+
+.toast-error {
+  border-left: 5px solid var(--color-danger);
+}
+
+.toast-info {
+  border-left: 5px solid var(--color-info);
+}
+
+.toast-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: var(--font-size-sm);
+  flex-shrink: 0;
+}
+
+.toast-success .toast-icon {
+  background: var(--color-success-bg);
+  color: var(--color-success);
+}
+
+.toast-error .toast-icon {
+  background: var(--color-danger-bg);
+  color: var(--color-danger);
+}
+
+.toast-info .toast-icon {
+  background: var(--color-info-bg);
+  color: var(--color-info);
+}
+
+.toast-message {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-main);
+  flex-grow: 1;
+}

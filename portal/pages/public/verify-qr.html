@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Certificate Verification: Legal Matrix</title>
+  <link rel="icon" type="image/svg+xml" href="../../assets/icons/favicon.svg">
+  <link rel="stylesheet" href="../../css/variables.css">
+  <link rel="stylesheet" href="../../css/base.css">
+  <link rel="stylesheet" href="../../css/layout.css">
+  <link rel="stylesheet" href="../../components/button.css">
+  <link rel="stylesheet" href="../../components/card.css">
+  <style>
+    .verify-container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: var(--space-6) var(--space-4);
+      flex-grow: 1;
+    }
+    .verify-search-card {
+      background: #ffffff;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: var(--space-6);
+      margin-bottom: var(--space-6);
+      box-shadow: var(--shadow-sm);
+    }
+    .search-input-group {
+      display: flex;
+      gap: var(--space-2);
+      margin-top: var(--space-2);
+    }
+    @media (max-width: 560px) {
+      .search-input-group {
+        flex-direction: column;
+      }
+    }
+    .cert-details-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: var(--space-4) 0;
+    }
+    .cert-details-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border-subtle);
+      font-size: 14px;
+    }
+    .cert-details-table td:first-child {
+      color: var(--text-secondary);
+      font-weight: 600;
+      width: 40%;
+      background: var(--surface-muted);
+    }
+    .cert-details-table td:last-child {
+      font-weight: 600;
+      color: var(--text);
+    }
+    .empty-state-box {
+      border: 2px dashed var(--border);
+      border-radius: var(--radius-md);
+      padding: var(--space-10) var(--space-6);
+      text-align: center;
+      background: #ffffff;
+      margin-top: var(--space-4);
+    }
+  </style>
+</head>
+<body>
+  <div id="app-header-container"></div>
+
+  <main id="main-content" class="verify-container">
+    <div style="margin-bottom: var(--space-5);">
+      <h1 style="font-size: var(--font-size-2xl); margin-bottom: 4px; color: var(--india-blue); display: flex; align-items: center; gap: 8px;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><path d="m9 12 2 2 4-4"/></svg>
+        <span data-i18n="nav.verify">Verify Legal Metrology Certificate</span>
+      </h1>
+      <p style="margin: 0; color: var(--text-secondary); font-size: 14px;" data-i18n="services.card1.desc">
+        Public verification portal for weights and measures stamping certificates issued under the Legal Metrology Act, 2009.
+      </p>
+    </div>
+
+    <!-- Search / QR Entry Box -->
+    <div class="verify-search-card">
+      <label for="cert-input" style="font-weight: 700; color: var(--india-blue); font-size: 14px; display: block; margin-bottom: 6px;" data-i18n="quicksearch.subtitle">
+        Enter Certificate Number or Scan QR Code Token
+      </label>
+      <div class="search-input-group">
+        <input 
+          type="text" 
+          id="cert-input" 
+          placeholder="Enter certificate number (e.g., CERT-2026-4401)"
+          data-i18n-placeholder="quicksearch.placeholder_cert"
+          style="font-size: 15px; font-weight: 500; height: 44px; padding: 0 14px; border: 1.5px solid var(--border); border-radius: var(--radius-sm); flex-grow: 1; box-sizing: border-box;"
+        >
+        <button type="button" class="btn btn-primary" id="btn-search-cert" style="background-color: var(--india-blue); color: #ffffff; min-height: 44px; display: inline-flex; align-items: center; gap: 6px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <span data-i18n="btn.verify">Verify Certificate</span>
+        </button>
+      </div>
+      </div>
+      <div style="margin-top: 10px;">
+        <span style="font-size: 12px; color: var(--text-muted);" data-i18n="carousel.slide2.desc">Scan the physical QR sticker displayed on the retail instrument or enter the certificate number above.</span>
+      </div>
+    </div>
+
+    <!-- Verification Result Mount Point -->
+    <div id="verify-result-area">
+      <!-- Default Empty State -->
+      <div class="empty-state-box">
+        <div style="width: 52px; height: 52px; background: var(--india-blue-subtle); border-radius: var(--radius-sm); display: inline-flex; align-items: center; justify-content: center; margin-bottom: 12px; color: var(--india-blue);">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+          </svg>
+        </div>
+        <h2 style="font-size: 17px; color: var(--india-blue); margin-bottom: 6px; font-weight: 700;" data-i18n="cert.awaiting_title">Awaiting Certificate Input</h2>
+        <p style="font-size: 13px; color: var(--text-muted); max-width: 460px; margin: 0 auto; line-height: 1.5;" data-i18n="cert.awaiting_desc">
+          Enter the official verification number stamped on the certificate, or scan the QR code affixed to the measuring device to retrieve authentic government verification records.
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <div id="app-footer-container"></div>
+
+  <script type="module">
+    import { injectHeader } from '../../layouts/header.js';
+    import { injectFooter } from '../../layouts/footer.js';
+    import { certificateService } from '../../services/certificateService.js';
+    import { t, applyLanguageToDOM, onLanguageChange } from '../../i18n/i18n.js';
+
+    injectHeader('app-header-container');
+    injectFooter('app-footer-container');
+
+    const resultArea = document.getElementById('verify-result-area');
+    const certInput = document.getElementById('cert-input');
+    const searchBtn = document.getElementById('btn-search-cert');
+    let lastVerifiedCert = null;
+
+    applyLanguageToDOM();
+    onLanguageChange(() => {
+      applyLanguageToDOM();
+      if (lastVerifiedCert) {
+        performVerification(lastVerifiedCert);
+      }
+    });
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const initialCert = urlParams.get('cert');
+    if (initialCert) {
+      certInput.value = initialCert;
+      performVerification(initialCert);
+    }
+
+    searchBtn?.addEventListener('click', () => {
+      const code = certInput.value.trim();
+      if (code) {
+        performVerification(code);
+      } else {
+        alert(t('val.cert_required', 'Please enter your certificate number.'));
+      }
+    });
+
+    certInput?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        const code = certInput.value.trim();
+        if (code) performVerification(code);
+      }
+    });
+
+    async function performVerification(certNumber) {
+      lastVerifiedCert = certNumber;
+      resultArea.innerHTML = `
+        <div style="text-align: center; padding: 48px 0; background: #fff; border: 1.5px solid var(--border); border-radius: 6px;">
+          <div class="btn is-loading" style="width: 36px; height: 36px; margin: 0 auto;"></div>
+          <p style="margin-top: 14px; font-size: 14px; color: var(--text-secondary); font-weight: 600;">${t('cert.querying', 'Querying official Legal Metrology registry...')}</p>
+        </div>
+      `;
+
+      try {
+        const data = await certificateService.verifyByNumberOrQr(certNumber);
+
+        resultArea.innerHTML = `
+          <div class="card" style="border-top: 4px solid var(--india-green); box-shadow: var(--shadow-md);">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span class="badge" style="background: var(--india-green-light); color: var(--india-green-dark); border: 1px solid var(--india-green-border); font-size: 13px; padding: 5px 12px; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; border-radius: 4px;">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span>${t('cert.verified_badge', 'CERTIFICATE VERIFIED')}</span>
+                </span>
+                <div style="font-size: 12px; color: var(--text-muted);">${t('cert.directorate', 'Directorate of Legal Metrology')}</div>
+              </div>
+              <div style="font-size: 13px; font-weight: 700; color: var(--india-blue); background: var(--india-blue-subtle); padding: 4px 10px; border-radius: 4px;">
+                ${t('cert.status_valid', 'Status: STATUTORILY VALID')}
+              </div>
+            </div>
+
+            <table class="cert-details-table">
+              <tr>
+                <td>${t('cert.number', 'Certificate Number')}</td>
+                <td><strong>${data.certificateNumber}</strong></td>
+              </tr>
+              <tr>
+                <td>${t('cert.instrument_type', 'Instrument Type')}</td>
+                <td>${data.instrument}</td>
+              </tr>
+              <tr>
+                <td>${t('cert.establishment', 'Registered Establishment')}</td>
+                <td>${data.owner}</td>
+              </tr>
+              <tr>
+                <td>${t('cert.premises', 'Premises Address')}</td>
+                <td>${data.address || data.location}</td>
+              </tr>
+              <tr>
+                <td>${t('cert.issue_date', 'Issue Date')}</td>
+                <td>${data.issueDate}</td>
+              </tr>
+              <tr>
+                <td>${t('cert.validity', 'Statutory Validity Period')}</td>
+                <td>${t('cert.valid_until', 'Valid Until')} ${data.validUntil}</td>
+              </tr>
+              <tr>
+                <td>${t('cert.authority', 'Issuing Authority')}</td>
+                <td>${data.issuingAuthority}</td>
+              </tr>
+            </table>
+
+            <div style="background: var(--india-green-light); border: 1px solid var(--india-green-border); border-radius: 4px; padding: 12px 14px; font-size: 13px; color: var(--india-green-dark); display: flex; align-items: center; gap: 8px;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <span>${t('cert.statutory_note', 'This certificate is statutorily registered and conforms to calibration standards under Legal Metrology General Rules, 2011.')}</span>
+            </div>
+
+            <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; flex-wrap: wrap;">
+              <button type="button" class="btn btn-outline btn-sm" onclick="window.print();" style="display: inline-flex; align-items: center; gap: 6px;">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect width="12" height="8" x="6" y="14"/></svg>
+                <span>${t('cert.btn_print', 'Print Verification Receipt')}</span>
+              </button>
+              <button type="button" class="btn btn-primary btn-sm" id="btn-verify-another" style="background-color: var(--india-blue); color: #ffffff; display: inline-flex; align-items: center; gap: 6px;">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                <span>${t('cert.btn_another', 'Verify Another Certificate')}</span>
+              </button>
+            </div>
+          </div>
+        `;
+
+        document.getElementById('btn-verify-another')?.addEventListener('click', () => {
+          certInput.value = '';
+          certInput.focus();
+        });
+      } catch (err) {
+        resultArea.innerHTML = `
+          <div class="card" style="border-top: 4px solid var(--india-saffron); text-align: center; padding: 36px 20px; box-shadow: var(--shadow-md);">
+            <div style="width: 52px; height: 52px; border-radius: 4px; background: var(--india-saffron-light); color: var(--india-saffron-dark); display: flex; align-items: center; justify-content: center; margin: 0 auto 16px auto; border: 1px solid var(--india-saffron-border);">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            </div>
+            <h2 style="font-size: 20px; color: var(--india-blue); margin-bottom: 6px; font-weight: 700;">${t('cert.error_title', 'Certificate Could Not Be Verified')}</h2>
+            <p style="color: var(--text-secondary); max-width: 500px; margin: 0 auto 16px auto; font-size: 14px; line-height: 1.5;">
+              ${err.userMessage || t('state.error_cert', "We couldn't verify this certificate.")}
+            </p>
+            <div style="background: var(--surface-muted); padding: 10px 16px; border-radius: 4px; display: inline-block; font-size: 13px; color: var(--text); margin-bottom: 20px;">
+              ${t('cert.queried_code', 'Queried Code')}: <strong>${certNumber}</strong>
+            </div>
+
+            <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+              <a href="/portal/pages/citizen/complaint.html" class="btn btn-sm" style="background-color: var(--india-saffron); color: #ffffff; display: inline-flex; align-items: center; gap: 6px;">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/></svg>
+                <span>${t('cert.btn_report', 'Report Unverified Instrument')}</span>
+              </a>
+              <button type="button" class="btn btn-outline btn-sm" id="btn-retry-cert" style="display: inline-flex; align-items: center; gap: 6px;">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                <span>${t('cert.btn_retry', 'Check Number and Re-try')}</span>
+              </button>
+            </div>
+          </div>
+        `;
+
+        document.getElementById('btn-retry-cert')?.addEventListener('click', () => {
+          certInput.focus();
+        });
+      }
+    }
+  </script>
+</body>
+</html>

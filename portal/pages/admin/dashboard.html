@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Control Center: Legal Matrix</title>
+  <link rel="icon" type="image/svg+xml" href="../../assets/icons/favicon.svg">
+  <link rel="stylesheet" href="../../css/variables.css">
+  <link rel="stylesheet" href="../../css/base.css">
+  <link rel="stylesheet" href="../../css/layout.css">
+  <link rel="stylesheet" href="../../components/button.css">
+  <link rel="stylesheet" href="../../components/card.css">
+  <style>
+    .admin-banner {
+      background: var(--color-bg-surface);
+      border: 1px solid var(--color-border-medium);
+      border-radius: var(--radius-sm);
+      padding: var(--space-5);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--space-6);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .overview-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+    }
+    @media (min-width: 900px) {
+      .overview-grid {
+        grid-template-columns: 2fr 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <div id="app-sidebar-container"></div>
+
+    <div class="app-main">
+      <div id="app-header-container"></div>
+
+      <div class="content-body">
+        <div class="admin-banner">
+          <div>
+            <div style="font-size: 11px; text-transform: uppercase; color: var(--color-text-muted); font-weight: 600;">
+              Directorate of Legal Metrology &bull; Central Control
+            </div>
+            <h1 style="font-size: var(--font-size-2xl); margin: 2px 0 0 0;">
+              Administrative Command Center
+            </h1>
+            <p style="margin: 2px 0 0 0; color: var(--color-text-secondary); font-size: 13px;">
+              State and zonal enforcement monitoring, inspector assignments, and statutory audit ledger
+            </p>
+          </div>
+          <div>
+            <span class="badge badge-success">● Service Gateway Active</span>
+          </div>
+        </div>
+
+        <!-- Real Overview Grid with Honest Data Architecture -->
+        <div class="overview-grid">
+          <!-- Left: Verification Processing Ledger -->
+          <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; border-bottom: 1px solid var(--color-border-subtle); padding-bottom: 10px;">
+              <h2 style="font-size: 16px; color: var(--color-primary); margin: 0;">
+                Active Verification Pipeline
+              </h2>
+              <span class="badge badge-info">Real-Time Operational Queue</span>
+            </div>
+
+            <!-- Authentic Data State Display -->
+            <div style="border: 1px dashed var(--color-border-medium); border-radius: 4px; padding: 36px 20px; text-align: center; background: var(--color-bg-subtle);">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="1.5" style="margin-bottom: 8px;" aria-hidden="true">
+                <rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/>
+              </svg>
+              <h3 style="font-size: 15px; color: var(--color-text-main); margin-bottom: 4px;">
+                Pipeline Ready for Live Data Ingestion
+              </h3>
+              <p style="font-size: 13px; color: var(--color-text-muted); max-width: 460px; margin: 0 auto 16px auto;">
+                Statistical metrics and monthly trend distributions will automatically populate as live applications are processed through designated district inspection officers.
+              </p>
+              <div style="display: flex; gap: 8px; justify-content: center;">
+                <a href="/portal/pages/admin/applications.html" class="btn btn-primary btn-sm">
+                  View Applications Roster
+                </a>
+                <a href="/portal/pages/admin/inspectors.html" class="btn btn-outline btn-sm">
+                  Inspectors Allocation
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Administrative Quick Actions -->
+          <div class="card">
+            <h2 style="font-size: 16px; color: var(--color-primary); margin-bottom: 14px; border-bottom: 1px solid var(--color-border-subtle); padding-bottom: 10px;">
+              Enforcement Quick Links
+            </h2>
+
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+              <a href="/portal/pages/admin/applications.html" class="btn btn-outline btn-sm" style="justify-content: flex-start; gap: 8px;">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                <span>Applications Ledger</span>
+              </a>
+              <a href="/portal/pages/admin/inspectors.html" class="btn btn-outline btn-sm" style="justify-content: flex-start; gap: 8px;">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                <span>Field Inspectors Roster</span>
+              </a>
+              <a href="/portal/pages/admin/complaints.html" class="btn btn-outline btn-sm" style="justify-content: flex-start; gap: 8px;">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                <span>Consumer Grievances Triage</span>
+              </a>
+              <a href="/portal/pages/admin/audit-log.html" class="btn btn-outline btn-sm" style="justify-content: flex-start; gap: 8px;">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                <span>Tamper-Evident System Audit Trail</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { injectHeader } from '../../layouts/header.js';
+    import { injectSidebar } from '../../layouts/sidebar.js';
+    import { applyLanguageToDOM, onLanguageChange } from '../../i18n/i18n.js';
+
+    injectHeader('app-header-container');
+    injectSidebar('app-sidebar-container', 'admin', window.location.pathname);
+
+    applyLanguageToDOM();
+    onLanguageChange(() => applyLanguageToDOM());
+  </script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Applications: Legal Matrix</title>
+  <link rel="stylesheet" href="../../css/variables.css">
+  <link rel="stylesheet" href="../../css/base.css">
+  <link rel="stylesheet" href="../../css/layout.css">
+  <link rel="stylesheet" href="../../components/button.css">
+  <link rel="stylesheet" href="../../components/card.css">
+  <link rel="stylesheet" href="../../components/dataTable.css">
+</head>
+<body>
+  <div class="app-shell">
+    <div id="app-sidebar-container"></div>
+
+    <div class="app-main">
+      <div id="app-header-container"></div>
+
+      <div class="content-body">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-6); flex-wrap: wrap; gap: var(--space-4);">
+          <div>
+            <h1>My Applications</h1>
+            <p>List of all weighing and measuring instruments submitted for verification</p>
+          </div>
+          <a href="/portal/pages/trader/register-instrument.html" class="btn btn-primary">
+            + Register New Instrument
+          </a>
+        </div>
+
+        <!-- Filter & Search Bar -->
+        <div style="background: var(--color-bg-surface); padding: var(--space-4); border-radius: var(--radius-lg); border: 1px solid var(--color-border-subtle); display: flex; gap: var(--space-3); margin-bottom: var(--space-6); flex-wrap: wrap;">
+          <input type="search" id="app-search-input" placeholder="Search by Application No, Instrument, or Serial..." style="flex: 1; min-width: 240px;">
+          <select id="status-filter" style="width: auto; min-width: 160px;">
+            <option value="ALL">All Statuses</option>
+            <option value="SCHEDULED">Scheduled</option>
+            <option value="IN_PROGRESS">In Progress</option>
+            <option value="COMPLETED">Completed</option>
+          </select>
+        </div>
+
+        <!-- Data Table Container -->
+        <div id="applications-table-mount"></div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { injectHeader } from '../../layouts/header.js';
+    import { injectSidebar } from '../../layouts/sidebar.js';
+    import { applicationService } from '../../services/applicationService.js';
+    import { renderDataTable } from '../../components/dataTable.js';
+
+    injectHeader('app-header-container');
+    injectSidebar('app-sidebar-container', 'trader', window.location.pathname);
+
+    const mount = document.getElementById('applications-table-mount');
+    const searchInput = document.getElementById('app-search-input');
+    const statusFilter = document.getElementById('status-filter');
+
+    let allApps = [];
+
+    const columns = [
+      { label: 'Application No.', key: 'applicationNumber', render: (val) => `<strong>${val}</strong>` },
+      { label: 'Instrument', key: 'instrumentTypeName' },
+      { label: 'Serial Number', key: 'serialNumber' },
+      { label: 'Applied Date', key: 'appliedOn' },
+      { 
+        label: 'Status', 
+        key: 'status', 
+        render: (val, row) => `<span class="badge ${val === 'COMPLETED' ? 'badge-success' : 'badge-warning'}">● ${row.statusTitle || val}</span>` 
+      },
+      {
+        label: 'Action',
+        key: 'applicationNumber',
+        render: (val) => `<a href="/portal/pages/public/track.html?app=${val}" class="btn btn-outline btn-sm">Track &rarr;</a>`
+      }
+    ];
+
+    async function loadData() {
+      try {
+        allApps = await applicationService.getApplications();
+        renderFiltered();
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    function renderFiltered() {
+      const q = searchInput.value.toLowerCase().trim();
+      const st = statusFilter.value;
+
+      const filtered = allApps.filter(app => {
+        const matchesQuery = !q || 
+          app.applicationNumber.toLowerCase().includes(q) ||
+          app.instrumentTypeName.toLowerCase().includes(q) ||
+          app.serialNumber.toLowerCase().includes(q);
+
+        const matchesStatus = st === 'ALL' || app.status === st;
+
+        return matchesQuery && matchesStatus;
+      });
+
+      renderDataTable(mount, {
+        columns,
+        rows: filtered,
+        emptyMessage: 'No applications found matching your criteria.'
+      });
+    }
+
+    searchInput.addEventListener('input', renderFiltered);
+    statusFilter.addEventListener('change', renderFiltered);
+
+    loadData();
+  </script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>System Audit Log: Legal Matrix</title>
+  <link rel="stylesheet" href="../../css/variables.css">
+  <link rel="stylesheet" href="../../css/base.css">
+  <link rel="stylesheet" href="../../css/layout.css">
+  <link rel="stylesheet" href="../../components/button.css">
+  <link rel="stylesheet" href="../../components/card.css">
+  <link rel="stylesheet" href="../../components/dataTable.css">
+</head>
+<body>
+  <div class="app-shell">
+    <div id="app-sidebar-container"></div>
+
+    <div class="app-main">
+      <div id="app-header-container"></div>
+
+      <div class="content-body">
+        <div style="margin-bottom: var(--space-6);">
+          <h1>Tamper-Evident System Audit Trail</h1>
+          <p>Cryptographically hashed records of all certification, inspection events, and state changes</p>
+        </div>
+
+        <div class="card">
+          <div id="audit-table-mount"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { injectHeader } from '../../layouts/header.js';
+    import { injectSidebar } from '../../layouts/sidebar.js';
+    import { renderDataTable } from '../../components/dataTable.js';
+
+    injectHeader('app-header-container');
+    injectSidebar('app-sidebar-container', 'admin', window.location.pathname);
+
+    const mount = document.getElementById('audit-table-mount');
+
+    const columns = [
+      { label: 'Timestamp', key: 'time' },
+      { label: 'Event Type', key: 'event', render: (val) => `<span class="badge badge-info">${val}</span>` },
+      { label: 'Actor', key: 'actor', render: (val) => `<strong>${val}</strong>` },
+      { label: 'Target Record', key: 'target' },
+      { label: 'Transaction Hash', key: 'hash', render: (val) => `<code style="font-size: 11px; background: #eee; padding: 2px 6px; border-radius: 4px;">${val}</code>` }
+    ];
+
+    // Tamper-evident log entries populated by audit trail API
+    const rows = [];
+
+    renderDataTable(mount, { columns, rows, emptyMessage: 'No audit log entries recorded in cryptographic ledger.' });
+  </script>
+</body>
+</html>

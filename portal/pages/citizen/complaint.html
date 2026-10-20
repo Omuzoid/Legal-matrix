@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consumer Grievance Reporting: Legal Matrix</title>
+  <link rel="icon" type="image/svg+xml" href="../../assets/icons/favicon.svg">
+  <link rel="stylesheet" href="../../css/variables.css">
+  <link rel="stylesheet" href="../../css/base.css">
+  <link rel="stylesheet" href="../../css/layout.css">
+  <link rel="stylesheet" href="../../components/button.css">
+  <link rel="stylesheet" href="../../components/card.css">
+  <style>
+    .complaint-wrapper {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: var(--space-6) var(--space-4);
+      flex-grow: 1;
+    }
+    .issue-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: var(--space-3);
+      margin-bottom: var(--space-6);
+    }
+    .issue-choice-card {
+      border: 1px solid var(--color-border-medium);
+      border-radius: var(--radius-sm);
+      padding: var(--space-4) var(--space-2);
+      text-align: center;
+      background: var(--color-bg-surface);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .issue-choice-card:hover {
+      border-color: var(--color-danger);
+      background: var(--color-danger-bg);
+    }
+    .issue-choice-card.is-active {
+      border-color: var(--color-danger);
+      background: var(--color-danger-bg);
+      box-shadow: 0 0 0 2px var(--color-danger);
+    }
+    .issue-icon-svg {
+      color: var(--color-danger);
+      margin-bottom: var(--space-2);
+    }
+    .issue-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--color-text-main);
+    }
+  </style>
+</head>
+<body>
+  <div id="app-header-container"></div>
+
+  <main id="main-content" class="complaint-wrapper">
+    <div id="complaint-form-view">
+      <div style="margin-bottom: var(--space-5);">
+        <h1 style="font-size: var(--font-size-2xl); margin-bottom: 4px;" data-i18n="grievance.title">Consumer Grievance Reporting</h1>
+        <p style="margin: 0; color: var(--color-text-secondary); font-size: 14px;" data-i18n="grievance.subtitle">
+          National grievance portal for reporting inaccurate weights, unverified commercial scales, or tampered meters under Section 15 of the Legal Metrology Act, 2009.
+        </p>
+      </div>
+
+      <form id="complaint-form" novalidate>
+        <label style="font-size: 14px; font-weight: 700; margin-bottom: 8px;" data-i18n="grievance.step1">1. Select Nature of Metrological Violation</label>
+        <div class="issue-grid" role="radiogroup" aria-label="Issue category">
+          <div class="issue-choice-card is-active" data-type="WRONG_WEIGHING" role="radio" aria-checked="true">
+            <div class="issue-icon-svg">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/></svg>
+            </div>
+            <div class="issue-label" data-i18n="grievance.type_short_weight">Inaccurate Weight</div>
+          </div>
+
+          <div class="issue-choice-card" data-type="INCORRECT_MEASUREMENT" role="radio" aria-checked="false">
+            <div class="issue-icon-svg">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.4 2.4 0 0 1 0-3.4l2.6-2.6a2.4 2.4 0 0 1 3.4 0Z"/><path d="m14.5 12.5 2-2"/><path d="m11.5 9.5 2-2"/><path d="m8.5 6.5 2-2"/></svg>
+            </div>
+            <div class="issue-label" data-i18n="grievance.type_measure">Incorrect Measure</div>
+          </div>
+
+          <div class="issue-choice-card" data-type="SUSPICIOUS_CERTIFICATE" role="radio" aria-checked="false">
+            <div class="issue-icon-svg">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="m15.48 13.93 2.52 7.07-6-3-6 3 2.52-7.07"/></svg>
+            </div>
+            <div class="issue-label" data-i18n="grievance.type_unverified">Unstamped / Fake Seal</div>
+          </div>
+
+          <div class="issue-choice-card" data-type="SHOP_ISSUE" role="radio" aria-checked="false">
+            <div class="issue-icon-svg">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+            </div>
+            <div class="issue-label" data-i18n="grievance.type_display">Obscured Display</div>
+          </div>
+
+          <div class="issue-choice-card" data-type="OTHER" role="radio" aria-checked="false">
+            <div class="issue-icon-svg">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            </div>
+            <div class="issue-label" data-i18n="grievance.type_other">Other Issue</div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom: var(--space-5);">
+          <div style="margin-bottom: var(--space-4);">
+            <label for="shop-name" data-i18n="grievance.establishment_name">Commercial Establishment / Retail Shop Name</label>
+            <input type="text" id="shop-name" placeholder="e.g., Grocery store, fuel outlet, or vendor trade name" data-i18n-placeholder="grievance.establishment_name" required>
+          </div>
+
+          <div style="margin-bottom: var(--space-4);">
+            <label for="shop-address" data-i18n="grievance.incident_location">Establishment Location / Market Address</label>
+            <input type="text" id="shop-address" placeholder="e.g., Shop number, street, city, district" data-i18n-placeholder="grievance.incident_location" required>
+          </div>
+
+          <div style="margin-bottom: var(--space-4);">
+            <label for="complaint-desc" data-i18n="grievance.details">Particulars of Observed Discrepancy</label>
+            <textarea id="complaint-desc" rows="3" placeholder="Describe the incident (e.g., scale display was obscured from customer view, or weight charged exceeded weighed goods)." data-i18n-placeholder="grievance.details" required></textarea>
+            <span class="form-hint" data-i18n="grievance.hint_details">Provide clear factual details to assist the field inspection officer.</span>
+          </div>
+
+          <div>
+            <label for="contact-phone" data-i18n="form.mobile">Citizen Mobile Number (For Official Status Updates)</label>
+            <input type="tel" id="contact-phone" placeholder="e.g., 9876543210" data-i18n-placeholder="form.mobile" required>
+            <span class="form-hint" data-i18n="grievance.hint_phone">Used strictly for SMS tracking notifications and inspection findings.</span>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-danger btn-lg btn-block" id="btn-submit-complaint" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          <span data-i18n="grievance.btn_submit">Submit Grievance to Legal Metrology Cell</span>
+        </button>
+      </form>
+    </div>
+
+    <!-- Grievance Success View -->
+    <div id="complaint-success-view" style="display: none;">
+      <div class="card" style="text-align: center; padding: 40px var(--space-6); border-top: 4px solid var(--color-success);">
+        <div style="width: 56px; height: 56px; border-radius: 4px; background: var(--color-success-bg); color: var(--color-success); font-size: 28px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px auto; border: 1px solid var(--color-success-border);">
+          ✓
+        </div>
+        <h2 style="font-size: 22px; color: var(--color-success-text); margin-bottom: 6px;" data-i18n="grievance.success_title">
+          Grievance Acknowledged and Registered
+        </h2>
+        <p style="color: var(--color-text-secondary); max-width: 520px; margin: 0 auto 16px auto; font-size: 14px;" data-i18n="grievance.success_desc">
+          Your report has been logged with the District Legal Metrology Enforcement Cell. An authorized inspector will be dispatched to inspect and test the measuring equipment.
+        </p>
+
+        <div style="background: var(--color-bg-subtle); padding: 12px 20px; border-radius: 4px; display: inline-block; margin-bottom: 24px; border: 1px solid var(--color-border-medium);">
+          <div style="font-size: 12px; color: var(--color-text-muted); text-transform: uppercase;" data-i18n="grievance.docket_number">Official Grievance Reference:</div>
+          <div id="success-ref-num" style="font-size: 22px; font-weight: 700; color: var(--color-primary); letter-spacing: 1px; margin-top: 2px;">
+            CMP-2026-XXXX
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+          <a href="/portal/pages/public/services.html" class="btn btn-primary btn-sm" data-i18n="grievance.btn_return">
+            Return to Online Services
+          </a>
+          <button type="button" class="btn btn-outline btn-sm" onclick="window.location.reload();" data-i18n="grievance.btn_another">
+            Submit Another Report
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div id="app-footer-container"></div>
+
+  <script type="module">
+    import { injectHeader } from '../../layouts/header.js';
+    import { injectFooter } from '../../layouts/footer.js';
+    import { complaintService } from '../../services/complaintService.js';
+    import { validator } from '../../utils/validator.js';
+    import { t, applyLanguageToDOM, onLanguageChange } from '../../i18n/i18n.js';
+
+    injectHeader('app-header-container');
+    injectFooter('app-footer-container');
+
+    applyLanguageToDOM();
+    onLanguageChange(() => applyLanguageToDOM());
+
+    const issueCards = document.querySelectorAll('.issue-choice-card');
+    let selectedIssueType = 'WRONG_WEIGHING';
+
+    issueCards.forEach(card => {
+      card.addEventListener('click', () => {
+        issueCards.forEach(c => {
+          c.classList.remove('is-active');
+          c.setAttribute('aria-checked', 'false');
+        });
+        card.classList.add('is-active');
+        card.setAttribute('aria-checked', 'true');
+        selectedIssueType = card.dataset.type;
+      });
+    });
+
+    const form = document.getElementById('complaint-form');
+    const submitBtn = document.getElementById('btn-submit-complaint');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const shopName = document.getElementById('shop-name');
+      const shopAddress = document.getElementById('shop-address');
+      const desc = document.getElementById('complaint-desc');
+      const phone = document.getElementById('contact-phone');
+
+      let isValid = true;
+      if (!validator.isNotEmpty(shopName.value)) {
+        validator.markField(shopName, false, t('val.field_required', 'Please enter establishment or shop name'));
+        isValid = false;
+      } else {
+        validator.markField(shopName, true);
+      }
+
+      if (!validator.isNotEmpty(shopAddress.value)) {
+        validator.markField(shopAddress, false, t('val.field_required', 'Please enter location address'));
+        isValid = false;
+      } else {
+        validator.markField(shopAddress, true);
+      }
+
+      if (!validator.isNotEmpty(desc.value)) {
+        validator.markField(desc, false, t('val.field_required', 'Please describe observed discrepancy'));
+        isValid = false;
+      } else {
+        validator.markField(desc, true);
+      }
+
+      if (!validator.isValidPhone(phone.value)) {
+        validator.markField(phone, false, t('val.mobile_invalid', 'Please enter a valid 10-digit mobile number'));
+        isValid = false;
+      } else {
+        validator.markField(phone, true);
+      }
+
+      if (!isValid) return;
+
+      submitBtn.classList.add('is-loading');
+
+      try {
+        const res = await complaintService.submitComplaint({
+          issueType: selectedIssueType,
+          shopName: shopName.value,
+          address: shopAddress.value,
+          description: desc.value,
+          contactPhone: phone.value
+        });
+
+        document.getElementById('complaint-form-view').style.display = 'none';
+        document.getElementById('complaint-success-view').style.display = 'block';
+        document.getElementById('success-ref-num').textContent = res.complaintNumber;
+        applyLanguageToDOM();
+      } catch (err) {
+        alert(err.userMessage || t('state.error_generic', 'Could not submit grievance. Please try again.'));
+      } finally {
+        submitBtn.classList.remove('is-loading');
+      }
+    });
+  </script>
+</body>
+</html>

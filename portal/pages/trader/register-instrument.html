@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register Instrument Application: Legal Matrix</title>
+  <link rel="icon" type="image/svg+xml" href="../../assets/icons/favicon.svg">
+  <link rel="stylesheet" href="../../css/variables.css">
+  <link rel="stylesheet" href="../../css/base.css">
+  <link rel="stylesheet" href="../../css/layout.css">
+  <link rel="stylesheet" href="../../components/button.css">
+  <link rel="stylesheet" href="../../components/card.css">
+  <link rel="stylesheet" href="../../components/stepper.css">
+  <style>
+    .wizard-container {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: var(--space-4) var(--space-2);
+      flex-grow: 1;
+    }
+    .instrument-type-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-3);
+      margin: var(--space-5) 0;
+    }
+    @media (min-width: 560px) {
+      .instrument-type-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (min-width: 768px) {
+      .instrument-type-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    .instrument-card {
+      border: 1px solid var(--color-border-medium);
+      border-radius: var(--radius-sm);
+      padding: var(--space-5) var(--space-3);
+      text-align: center;
+      background: var(--color-bg-surface);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 130px;
+    }
+    .instrument-card:hover {
+      border-color: var(--color-primary);
+      box-shadow: var(--shadow-sm);
+    }
+    .instrument-card.is-selected {
+      border-color: var(--color-primary);
+      background-color: var(--color-primary-light);
+      box-shadow: 0 0 0 2px var(--color-primary);
+    }
+    .instrument-icon-svg {
+      color: var(--color-primary);
+      margin-bottom: var(--space-2);
+    }
+    .instrument-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--color-primary);
+    }
+    .wizard-action-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: var(--space-6);
+      padding-top: var(--space-4);
+      border-top: 1px solid var(--color-border-subtle);
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <div id="app-sidebar-container"></div>
+
+    <div class="app-main">
+      <div id="app-header-container"></div>
+
+      <div class="content-body">
+        <div class="wizard-container">
+          <div style="margin-bottom: var(--space-4);">
+            <div style="font-size: 11px; text-transform: uppercase; color: var(--color-text-muted); font-weight: 600;">
+              Form V &bull; Stamping of Weights and Measures
+            </div>
+            <h1 style="font-size: var(--font-size-2xl); margin: 2px 0 0 0;">
+              Application for Instrument Verification
+            </h1>
+            <p style="margin: 2px 0 0 0; color: var(--color-text-secondary); font-size: 13px;">
+              Apply under Rule 14 of the Legal Metrology (General) Rules, 2011 for official verification and stamping.
+            </p>
+          </div>
+
+          <!-- Stepper Progress Bar -->
+          <div id="stepper-mount"></div>
+
+          <!-- Wizard Form Container -->
+          <div id="wizard-form-box" class="card" style="padding: var(--space-6);">
+            <!-- Step 1: Instrument Category -->
+            <div id="step-pane-1" class="wizard-pane">
+              <span class="badge badge-info">Step 1 of 5</span>
+              <h2 style="font-size: 18px; margin-top: 4px;">Select Measuring Instrument Category</h2>
+              <p style="font-size: 13px; color: var(--color-text-secondary); margin-bottom: 0;">
+                Select the equipment type requiring initial or periodic verification.
+              </p>
+
+              <div class="instrument-type-grid" role="radiogroup" aria-label="Instrument categories">
+                <div class="instrument-card is-selected" data-type="WEIGHING_SCALE" data-name="Commercial Weighing Scale" role="radio" aria-checked="true">
+                  <div class="instrument-icon-svg">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/></svg>
+                  </div>
+                  <div class="instrument-title">Commercial Weighing Scale</div>
+                </div>
+
+                <div class="instrument-card" data-type="FUEL_DISPENSER" data-name="Fuel Dispensing Pump" role="radio" aria-checked="false">
+                  <div class="instrument-icon-svg">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 22h12"/><path d="M4 9h10"/><path d="M14 22V4a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v18"/><path d="M14 13h2a2 2 0 0 1 2 2v2a2 2 0 0 0 2 2h0a2 2 0 0 0 2-2V9.83a2 2 0 0 0-.59-1.42L18 5"/></svg>
+                  </div>
+                  <div class="instrument-title">Fuel Dispenser</div>
+                </div>
+
+                <div class="instrument-card" data-type="MEASURING_METER" data-name="Flow or Volume Meter" role="radio" aria-checked="false">
+                  <div class="instrument-icon-svg">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m14 10-4 4"/><circle cx="12" cy="12" r="2"/></svg>
+                  </div>
+                  <div class="instrument-title">Measuring Meter</div>
+                </div>
+
+                <div class="instrument-card" data-type="WEIGHBRIDGE" data-name="Heavy Weighbridge" role="radio" aria-checked="false">
+                  <div class="instrument-icon-svg">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 17h4V5H2v12h3"/><path d="M20 17h2v-3.34a4 4 0 0 0-1.17-2.83L19 9h-5v8h1"/><circle cx="7.5" cy="17.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg>
+                  </div>
+                  <div class="instrument-title">Industrial Weighbridge</div>
+                </div>
+
+                <div class="instrument-card" data-type="PACKAGING_MACHINE" data-name="Automatic Packaging Scale" role="radio" aria-checked="false">
+                  <div class="instrument-icon-svg">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
+                  </div>
+                  <div class="instrument-title">Packaging Machine</div>
+                </div>
+
+                <div class="instrument-card" data-type="OTHER" data-name="Specialized Instrument" role="radio" aria-checked="false">
+                  <div class="instrument-icon-svg">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+                  </div>
+                  <div class="instrument-title">Other Instrument</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 2: Technical Specifications -->
+            <div id="step-pane-2" class="wizard-pane" style="display: none;">
+              <span class="badge badge-info">Step 2 of 5</span>
+              <h2 style="font-size: 18px; margin-top: 4px;">Technical Specifications of Instrument</h2>
+              <p style="font-size: 13px; color: var(--color-text-secondary);">
+                Details stamped on the device nameplate or manufacturer certificate.
+              </p>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); margin-top: var(--space-4);">
+                <div>
+                  <label for="inst-brand">Manufacturer / Brand Name <span style="color: var(--color-danger);">*</span></label>
+                  <input type="text" id="inst-brand" placeholder="e.g., Eagle Electronics" required>
+                </div>
+                <div>
+                  <label for="inst-model">Model Identification <span style="color: var(--color-danger);">*</span></label>
+                  <input type="text" id="inst-model" placeholder="e.g., DWS-30" required>
+                </div>
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); margin-top: var(--space-4);">
+                <div>
+                  <label for="inst-capacity">Maximum Capacity (Max) <span style="color: var(--color-danger);">*</span></label>
+                  <input type="text" id="inst-capacity" placeholder="e.g., 30 kg or 50 Litres" required>
+                </div>
+                <div>
+                  <label for="inst-serial">Device Serial Number <span style="color: var(--color-danger);">*</span></label>
+                  <input type="text" id="inst-serial" placeholder="e.g., SN-10928-2024" required>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 3: Establishment Particulars -->
+            <div id="step-pane-3" class="wizard-pane" style="display: none;">
+              <span class="badge badge-info">Step 3 of 5</span>
+              <h2 style="font-size: 18px; margin-top: 4px;">Establishment & Premises Location</h2>
+              <p style="font-size: 13px; color: var(--color-text-secondary);">
+                Address where the instrument is installed for field inspection visit.
+              </p>
+
+              <div style="margin-top: var(--space-4);">
+                <label for="shop-proprietor">Proprietor / Authorized Signatory Name <span style="color: var(--color-danger);">*</span></label>
+                <input type="text" id="shop-proprietor" placeholder="Full legal name" required>
+              </div>
+
+              <div style="margin-top: var(--space-4);">
+                <label for="shop-name-input">Commercial Establishment / Firm Name <span style="color: var(--color-danger);">*</span></label>
+                <input type="text" id="shop-name-input" placeholder="Registered trading name" required>
+              </div>
+
+              <div style="margin-top: var(--space-4);">
+                <label for="shop-address-input">Premises Address for Field Verification <span style="color: var(--color-danger);">*</span></label>
+                <input type="text" id="shop-address-input" placeholder="Shop number, street, market, town, district" required>
+              </div>
+            </div>
+
+            <!-- Step 4: Summary & Declaration -->
+            <div id="step-pane-4" class="wizard-pane" style="display: none;">
+              <span class="badge badge-info">Step 4 of 5</span>
+              <h2 style="font-size: 18px; margin-top: 4px;">Review Application & Statutory Declaration</h2>
+              <p style="font-size: 13px; color: var(--color-text-secondary);">
+                Verify your particulars before formal electronic submission.
+              </p>
+
+              <div style="background: var(--color-bg-subtle); border-radius: 4px; padding: 16px; margin: 16px 0; border: 1px solid var(--color-border-subtle);">
+                <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+                  <tr style="border-bottom: 1px solid var(--color-border-subtle);">
+                    <td style="padding: 6px 0; color: var(--color-text-secondary); width: 40%;">Instrument Category</td>
+                    <td style="padding: 6px 0; font-weight: 600;" id="review-type">Weighing Scale</td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid var(--color-border-subtle);">
+                    <td style="padding: 6px 0; color: var(--color-text-secondary);">Brand, Model & Serial</td>
+                    <td style="padding: 6px 0; font-weight: 600;" id="review-model">-</td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid var(--color-border-subtle);">
+                    <td style="padding: 6px 0; color: var(--color-text-secondary);">Premises Location</td>
+                    <td style="padding: 6px 0; font-weight: 600;" id="review-shop">-</td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 6px 0; color: var(--color-text-secondary);">Statutory Verification Fee</td>
+                    <td style="padding: 6px 0; font-weight: 700; color: var(--color-primary);">As per State Metrology Schedule</td>
+                  </tr>
+                </table>
+              </div>
+
+              <div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.5; background: #fffbeb; padding: 10px 14px; border: 1px solid #fde68a; border-radius: 4px;">
+                <strong>Declaration:</strong> I hereby declare that the instrument described above is maintained in proper working order and will be presented for test before the authorized Legal Metrology Officer.
+              </div>
+            </div>
+
+            <!-- Step 5: Submission Success -->
+            <div id="step-pane-5" class="wizard-pane" style="display: none; text-align: center;">
+              <div style="width: 56px; height: 56px; border-radius: 4px; background: var(--color-success-bg); color: var(--color-success); font-size: 28px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px auto; border: 1px solid var(--color-success-border);">
+                ✓
+              </div>
+              <h2 style="font-size: 22px; color: var(--color-success-text); margin-bottom: 6px;">
+                Application Submitted Successfully
+              </h2>
+              <p style="color: var(--color-text-secondary); max-width: 500px; margin: 0 auto 16px auto; font-size: 14px;">
+                Your application has been registered in the Legal Metrology verification ledger.
+              </p>
+
+              <div style="background: var(--color-bg-subtle); padding: 14px 20px; border-radius: 4px; display: inline-block; margin-bottom: 24px; border: 1px solid var(--color-border-medium);">
+                <div style="font-size: 12px; color: var(--color-text-muted); text-transform: uppercase;">Application Reference Number:</div>
+                <div id="new-app-number" style="font-size: 22px; font-weight: 700; color: var(--color-primary); letter-spacing: 1px; margin-top: 2px;">
+                  LM-2026-XXXXX
+                </div>
+              </div>
+
+              <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+                <a id="track-new-app-btn" href="/portal/pages/public/track.html" class="btn btn-primary btn-sm">
+                  Track Application Status
+                </a>
+                <a href="/portal/pages/trader/dashboard.html" class="btn btn-outline btn-sm">
+                  Return to Workspace
+                </a>
+              </div>
+            </div>
+
+            <!-- Wizard Bottom Action Bar -->
+            <div class="wizard-action-bar" id="wizard-buttons">
+              <button type="button" class="btn btn-outline btn-sm" id="btn-wizard-back" style="visibility: hidden; display: inline-flex; align-items: center; gap: 6px;">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                <span>Previous Step</span>
+              </button>
+              <div style="display: flex; gap: 8px;">
+                <button type="button" class="btn btn-outline btn-sm" id="btn-save-draft" style="display: inline-flex; align-items: center; gap: 6px;">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                  <span>Save Draft</span>
+                </button>
+                <button type="button" class="btn btn-primary btn-sm" id="btn-wizard-next" style="display: inline-flex; align-items: center; gap: 6px;">
+                  <span>Next Step</span>
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { injectHeader } from '../../layouts/header.js';
+    import { injectSidebar } from '../../layouts/sidebar.js';
+    import { renderStepper } from '../../components/stepper.js';
+    import { applicationService } from '../../services/applicationService.js';
+    import { draftStorage } from '../../utils/storage.js';
+    import { showToast } from '../../components/toast.js';
+    import { t, applyLanguageToDOM, onLanguageChange } from '../../i18n/i18n.js';
+
+    injectHeader('app-header-container');
+    injectSidebar('app-sidebar-container', 'trader', window.location.pathname);
+
+    function getSteps() {
+      return [
+        { label: t('wizard.step1', 'Category') },
+        { label: t('wizard.step2', 'Specifications') },
+        { label: t('wizard.step3', 'Premises') },
+        { label: t('wizard.step4', 'Declaration') },
+        { label: t('wizard.step5', 'Confirmation') }
+      ];
+    }
+
+    let currentStep = 0;
+    const stepperMount = document.getElementById('stepper-mount');
+    const btnBack = document.getElementById('btn-wizard-back');
+    const btnNext = document.getElementById('btn-wizard-next');
+    const btnDraft = document.getElementById('btn-save-draft');
+    const wizardButtons = document.getElementById('wizard-buttons');
+
+    applyLanguageToDOM();
+    renderStepper(stepperMount, getSteps(), currentStep);
+
+    onLanguageChange(() => {
+      applyLanguageToDOM();
+      renderStepper(stepperMount, getSteps(), currentStep);
+      updateButtonLabels();
+    });
+
+    const instrumentCards = document.querySelectorAll('.instrument-card');
+    let selectedInstrument = { type: 'WEIGHING_SCALE', name: 'Commercial Weighing Scale' };
+
+    instrumentCards.forEach(card => {
+      card.addEventListener('click', () => {
+        instrumentCards.forEach(c => {
+          c.classList.remove('is-selected');
+          c.setAttribute('aria-checked', 'false');
+        });
+        card.classList.add('is-selected');
+        card.setAttribute('aria-checked', 'true');
+        selectedInstrument = {
+          type: card.dataset.type,
+          name: card.dataset.name
+        };
+      });
+    });
+
+    function updateButtonLabels() {
+      btnDraft.textContent = t('wizard.btn_draft', 'Save Draft');
+      btnBack.textContent = t('wizard.btn_prev', '← Previous Step');
+      if (currentStep === 3) {
+        btnNext.textContent = t('wizard.btn_submit', 'Submit Formal Application ✓');
+      } else if (currentStep < 3) {
+        btnNext.textContent = t('wizard.btn_next', 'Next Step →');
+      }
+    }
+
+    function showStep(index) {
+      currentStep = index;
+      renderStepper(stepperMount, getSteps(), currentStep);
+
+      for (let i = 1; i <= 5; i++) {
+        const pane = document.getElementById(`step-pane-${i}`);
+        if (pane) pane.style.display = (i === index + 1) ? 'block' : 'none';
+      }
+
+      btnBack.style.visibility = index === 0 ? 'hidden' : 'visible';
+
+      if (index === 3) {
+        btnNext.textContent = t('wizard.btn_submit', 'Submit Formal Application ✓');
+        document.getElementById('review-type').textContent = selectedInstrument.name;
+        document.getElementById('review-model').textContent = `${document.getElementById('inst-brand').value || 'Unspecified'} ${document.getElementById('inst-model').value || ''} (Serial: ${document.getElementById('inst-serial').value || 'Pending'})`;
+        document.getElementById('review-shop').textContent = `${document.getElementById('shop-name-input').value || 'Premises'}, ${document.getElementById('shop-address-input').value || ''}`;
+      } else if (index === 4) {
+        wizardButtons.style.display = 'none';
+      } else {
+        btnNext.textContent = t('wizard.btn_next', 'Next Step →');
+      }
+    }
+
+    btnNext.addEventListener('click', async () => {
+      if (currentStep === 1) {
+        const brand = document.getElementById('inst-brand').value.trim();
+        const model = document.getElementById('inst-model').value.trim();
+        const cap = document.getElementById('inst-capacity').value.trim();
+        const ser = document.getElementById('inst-serial').value.trim();
+        if (!brand || !model || !cap || !ser) {
+          alert(t('wizard.fill_specs', 'Please fill all mandatory technical specifications.'));
+          return;
+        }
+      }
+
+      if (currentStep === 2) {
+        const prop = document.getElementById('shop-proprietor').value.trim();
+        const shop = document.getElementById('shop-name-input').value.trim();
+        const addr = document.getElementById('shop-address-input').value.trim();
+        if (!prop || !shop || !addr) {
+          alert(t('wizard.fill_premises', 'Please provide complete establishment and location details.'));
+          return;
+        }
+      }
+
+      if (currentStep < 3) {
+        showStep(currentStep + 1);
+      } else if (currentStep === 3) {
+        btnNext.classList.add('is-loading');
+        try {
+          const res = await applicationService.createApplication({
+            instrumentType: selectedInstrument.type,
+            instrumentTypeName: selectedInstrument.name,
+            brand: document.getElementById('inst-brand').value,
+            model: document.getElementById('inst-model').value,
+            serialNumber: document.getElementById('inst-serial').value,
+            capacity: document.getElementById('inst-capacity').value,
+            traderName: document.getElementById('shop-name-input').value,
+            address: document.getElementById('shop-address-input').value
+          });
+
+          document.getElementById('new-app-number').textContent = res.applicationNumber;
+          document.getElementById('track-new-app-btn').href = `/portal/pages/public/track.html?app=${res.applicationNumber}`;
+          draftStorage.clearDraft('instrument_registration');
+          showStep(4);
+        } catch {
+          alert(t('state.error_generic', 'Submission failed. Please try again.'));
+        } finally {
+          btnNext.classList.remove('is-loading');
+        }
+      }
+    });
+
+    btnBack.addEventListener('click', () => {
+      if (currentStep > 0) showStep(currentStep - 1);
+    });
+
+    btnDraft.addEventListener('click', () => {
+      draftStorage.saveDraft('instrument_registration', {
+        selectedInstrument,
+        brand: document.getElementById('inst-brand').value,
+        model: document.getElementById('inst-model').value,
+        serial: document.getElementById('inst-serial').value,
+        shop: document.getElementById('shop-name-input').value
+      });
+      showToast(t('wizard.draft_saved', 'Application draft saved locally.'), 'info');
+    });
+
+    updateButtonLabels();
+  </script>
+</body>
+</html>
